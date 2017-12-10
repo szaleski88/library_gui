@@ -1,10 +1,13 @@
 package com.sda.components;
 
+import java.util.List;
+
 public class Uzytkownik implements  Comparable<Uzytkownik>{
 
     private String imie;
     private String nazwisko;
     private Adres adres;
+    private List<Ksiazka> wypozyczoneKsiazki;
 
 
     public Uzytkownik(String imie, String nazwisko, Adres adres) {
@@ -28,6 +31,22 @@ public class Uzytkownik implements  Comparable<Uzytkownik>{
 
     public void setNazwisko(String nazwisko) {
         this.nazwisko = nazwisko;
+    }
+
+    public Adres getAdres() {
+        return adres;
+    }
+
+    public void setAdres(Adres adres) {
+        this.adres = adres;
+    }
+
+    public void setWypozyczoneKsiazki(List<Ksiazka> wypozyczoneKsiazki) {
+        this.wypozyczoneKsiazki = wypozyczoneKsiazki;
+    }
+
+    public List<Ksiazka> getWypozyczoneKsiazki() {
+        return wypozyczoneKsiazki;
     }
 
     @Override
