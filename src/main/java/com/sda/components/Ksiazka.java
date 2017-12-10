@@ -1,14 +1,17 @@
 package com.sda.components;
 
-public class Ksiazka {
+public class Ksiazka implements Comparable<Ksiazka>{
 
     private String Tytul;
-    private String Autor;
-    private String RokWydania;
+    private String autorImie;
+    private String autorNazwisko;
+    private int RokWydania;
+    boolean dostepna;
 
-    public Ksiazka(String tytul, String autor, String rokWydania) {
+    public Ksiazka(String tytul, String autorImie, String autorNazwisko, int rokWydania) {
         Tytul = tytul;
-        Autor = autor;
+        this.autorImie = autorImie;
+        this.autorNazwisko = autorNazwisko;
         RokWydania = rokWydania;
     }
 
@@ -20,20 +23,32 @@ public class Ksiazka {
         Tytul = tytul;
     }
 
-    public String getAutor() {
-        return Autor;
+    public String getAutorImie() {
+        return autorImie;
     }
 
-    public void setAutor(String autor) {
-        Autor = autor;
+    public void setAutorImie(String autorImie) {
+        this.autorImie = autorImie;
     }
 
-    public String getRokWydania() {
+    public String getAutorNazwisko() {
+        return autorNazwisko;
+    }
+
+    public void setAutorNazwisko(String autorNazwisko) {
+        this.autorNazwisko = autorNazwisko;
+    }
+
+    public int getRokWydania() {
         return RokWydania;
     }
 
-    public void setRokWydania(String rokWydania) {
+    public void setRokWydania(int rokWydania) {
         RokWydania = rokWydania;
+    }
+
+    public void setDostepna(boolean dostepna) {
+        this.dostepna = dostepna;
     }
 
     @Override
@@ -43,26 +58,46 @@ public class Ksiazka {
 
         Ksiazka ksiazka = (Ksiazka) o;
 
+        if (RokWydania != ksiazka.RokWydania) return false;
         if (!Tytul.equals(ksiazka.Tytul)) return false;
-        if (!Autor.equals(ksiazka.Autor)) return false;
-        return RokWydania.equals(ksiazka.RokWydania);
+        return autorNazwisko.equals(ksiazka.autorNazwisko);
     }
 
     @Override
     public int hashCode() {
         int result = Tytul.hashCode();
-        result = 31 * result + Autor.hashCode();
-        result = 31 * result + RokWydania.hashCode();
+        result = 31 * result + autorNazwisko.hashCode();
+        result = 31 * result + autorImie.hashCode();
+        result = 31 * result + RokWydania;
         return result;
     }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Ksiazka{");
-        sb.append("Tytul='").append(Tytul).append('\'');
-        sb.append(", Autor='").append(Autor).append('\'');
-        sb.append(", RokWydania='").append(RokWydania).append('\'');
-        sb.append('}');
+        final StringBuilder sb = new StringBuilder(autorNazwisko);
+        sb.append(" ").append(autorImie);
+        sb.append(", \"").append(Tytul).append("\"");
+        sb.append(", ").append(RokWydania);
         return sb.toString();
+    }
+
+    @Override
+    public int compareTo(Ksiazka o) {
+
+        if (this.equals(o) ) return 0;
+        if (this.autorNazwisko.equals(o.getAutorNazwisko())
+            && this.autorImie.equals(getAutorImie())
+            && this.Tytul.equals(o.getTytul())) return 0;
+
+        if ( autorNazwisko.equals(o.getAutorNazwisko()) ) {
+            if (autorImie.equals(o.getAutorImie())) {
+                return Tytul.compareToIgnoreCase(o.Tytul);
+            } else {
+                return autorImie.compareToIgnoreCase(autorNazwisko);
+            }
+
+        }
+
+        return autorNazwisko.compareToIgnoreCase(o.getAutorNazwisko());
     }
 }
