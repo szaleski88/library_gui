@@ -1,6 +1,6 @@
 package com.sda.sortowanie;
 
-import com.sda.components.Ksiazka;
+import com.sda.model.Ksiazka;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,24 +55,5 @@ public class SortowanieSzybkie implements com.sda.sortowanie.Sortowanie {
         return wyniki;
     }
 
-    // TESTOWANIE KODU
-    public static void main(String[] args) {
-        List<Ksiazka> ksiazki = new ArrayList<>();
-        ksiazki.add(new Ksiazka("tytul1", "Henryk", "Sienkiewicz", 1989));
-        ksiazki.add(new Ksiazka("tytul2", "Boleslaw", "Prus", 1989));
-        ksiazki.add(new Ksiazka("tytul3", "Mariola", "Siekiera",  1989));
-        ksiazki.add(new Ksiazka("tytul1", "Henryk",  "Walezy",1989));
-        ksiazki.add(new Ksiazka("tytul4", "Adam", "Sienkiewicz",1989));
-        ksiazki.add(new Ksiazka("tytul5", "Dominik", "Dobry",1989));
-        ksiazki.add(new Ksiazka("tytul6", "Emil", "Czop", 1989));
 
-        Sortowanie s = new SortowanieSzybkie();
-        ksiazki = s.sortuj(ksiazki);
-
-
-        for (Ksiazka ksiazka :  ksiazki) {
-            System.out.println(ksiazka);
-        }
-
-    }
 }

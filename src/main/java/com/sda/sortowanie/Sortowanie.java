@@ -1,6 +1,6 @@
 package com.sda.sortowanie;
 
-import com.sda.components.Ksiazka;
+import com.sda.model.Ksiazka;
 
 import java.util.List;
 

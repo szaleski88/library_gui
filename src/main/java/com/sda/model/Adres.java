@@ -1,4 +1,4 @@
-package com.sda.components;
+package com.sda.model;
 
 public class Adres implements Comparable<Adres>{
 
