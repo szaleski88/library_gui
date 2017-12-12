@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  * KONSTRUKTOR DO WCZYTYWANIA DANYCH Z PLIKU
- * Tytul
+ * tytul
  * autorImie
  * autorNazwisko
  * rokWydania
@@ -18,13 +18,13 @@ import java.util.UUID;
 public class Ksiazka implements Comparable<Ksiazka>{
 
     @XmlElement(name = "tytul", required = true)
-    private String Tytul;
+    private String tytul;
 
     @XmlElement(name = "rok_wydania", required = true)
-    private int RokWydania;
+    private int rokWydania;
 
     @XmlElement(name = "dostepna", required = true)
-    private boolean Dostepna;
+    private boolean dostepna;
 
     @XmlElement(name = "ID", required = true)
     private String ID;
@@ -38,9 +38,9 @@ public class Ksiazka implements Comparable<Ksiazka>{
     public Ksiazka(){}
 
     public Ksiazka(String tytul, int rokWydania, boolean dostepna, String ID, Autor autor, Gatunek gatunek) {
-        this.Tytul = tytul;
-        this.RokWydania = rokWydania;
-        this.Dostepna = dostepna;
+        this.tytul = tytul;
+        this.rokWydania = rokWydania;
+        this.dostepna = dostepna;
         this.ID = ID;
         this.autor = autor;
         this.gatunek = gatunek;
@@ -48,26 +48,26 @@ public class Ksiazka implements Comparable<Ksiazka>{
 
     public Ksiazka(String tytul, String autorImie, String autorNazwisko, int rokWydania, Gatunek gatunek) {
         this.ID = UUID.randomUUID().toString();
-        this.Tytul = tytul;
+        this.tytul = tytul;
         this.autor = new Autor(autorImie, autorNazwisko);
-        this.RokWydania = rokWydania;
+        this.rokWydania = rokWydania;
         this.gatunek = gatunek;
     }
 
 
 
     public Ksiazka(String tytul, String autorImie, String autorNazwisko, int rokWydania, boolean dostepna, Gatunek gatunek, String ID) {
-        this.Tytul = tytul;
+        this.tytul = tytul;
 
         this.autor = new Autor(autorImie, autorNazwisko );
-        this.RokWydania = rokWydania;
-        this.Dostepna = dostepna;
+        this.rokWydania = rokWydania;
+        this.dostepna = dostepna;
         this.ID = ID;
         this.gatunek = gatunek;
     }
 
     public String getTytul() {
-        return Tytul;
+        return tytul;
     }
 
     public String getID() {
@@ -83,16 +83,16 @@ public class Ksiazka implements Comparable<Ksiazka>{
     }
 
     public int getRokWydania() {
-        return RokWydania;
+        return rokWydania;
     }
 
 
     public boolean getDostepna() {
-        return Dostepna;
+        return dostepna;
     }
 
     public void setDostepna(boolean dostepna) {
-        Dostepna = dostepna;
+        this.dostepna = dostepna;
     }
 
     public void setAutor(Autor autor) {
@@ -106,26 +106,26 @@ public class Ksiazka implements Comparable<Ksiazka>{
 
         Ksiazka ksiazka = (Ksiazka) o;
 
-        if (RokWydania != ksiazka.RokWydania) return false;
-        if (!Tytul.equals(ksiazka.Tytul)) return false;
+        if (rokWydania != ksiazka.rokWydania) return false;
+        if (!tytul.equals(ksiazka.tytul)) return false;
         return autor.getNazwisko().equals(ksiazka.autor.getNazwisko());
     }
 
     @Override
     public int hashCode() {
-        int result = Tytul.hashCode();
+        int result = tytul.hashCode();
         result = 31 * result + autor.getNazwisko().hashCode();
         result = 31 * result + autor.getImie().hashCode();
-        result = 31 * result + RokWydania;
+        result = 31 * result + rokWydania;
         return result;
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer(""+autor);
-        sb.append(", \'").append(Tytul).append('\'');
+        sb.append(", \'").append(tytul).append('\'');
         sb.append(", ").append(gatunek);
-        sb.append("; ").append(RokWydania);
+        sb.append("; ").append(rokWydania);
         return sb.toString();
     }
 

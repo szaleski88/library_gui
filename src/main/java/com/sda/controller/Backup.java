@@ -30,7 +30,6 @@ public class Backup {
 
     }
 
-
     private void zapisKsiazek(Biblioteka biblioteka) {
         Ksiazki ksiazki = new Ksiazki(biblioteka);
 
@@ -84,6 +83,7 @@ public class Backup {
         for (Ksiazka ks : ksiazki.getKsiazki()) {
             biblioteka.dodajKsiazke(ks);
         }
+
 
     }
 

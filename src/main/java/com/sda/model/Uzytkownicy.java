@@ -8,20 +8,20 @@ import java.util.List;
 @XmlRootElement(name="uzytkownicy")
 public class Uzytkownicy{
     @XmlElements(@XmlElement( name="uzytkownik"))
-    private List<Uzytkownik> Uzytkownicy;
+    private List<Uzytkownik> uzytkownicy;
 
     public Uzytkownicy(){
     }
 
     public Uzytkownicy(Biblioteka b){
-        this.Uzytkownicy = b.getListaUzytkownikow();
+        this.uzytkownicy = b.getListaUzytkownikow();
     }
 
     public List<Uzytkownik> getUzytkownicy() {
-        return Uzytkownicy;
+        return uzytkownicy;
     }
 
     public void setUzytkownicy(List<Uzytkownik> uzytkownicy) {
-        this.Uzytkownicy = uzytkownicy;
+        this.uzytkownicy = uzytkownicy;
     }
 }

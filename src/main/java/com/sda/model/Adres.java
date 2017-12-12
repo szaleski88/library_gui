@@ -60,15 +60,6 @@ public class Adres implements Comparable<Adres>{
 
     }
 
-//    @Override
-//    public String toString() {
-//        return "Adres{" +
-//                "ulica='" + ulica + '\'' +
-//                ", numerBudynku=" + numerBudynku +
-//                ", miejscowosc='" + miejscowosc + '\'' +
-//                '}';
-//    }
-
 
     @Override
     public String toString() {

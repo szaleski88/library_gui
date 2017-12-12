@@ -41,4 +41,7 @@ public class Biblioteka {
     public List<Wpis> getRejestrWypozyczen() {
         return rejestrWypozyczen;
     }
+
+
+
 }
