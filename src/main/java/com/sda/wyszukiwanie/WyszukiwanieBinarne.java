@@ -1,12 +1,15 @@
 package com.sda.wyszukiwanie;
 
 
+import com.sda.controller.Backup;
+import com.sda.controller.ZarzadzanieBiblioteka;
 import com.sda.model.Autor;
 import com.sda.model.Biblioteka;
 import com.sda.model.Ksiazka;
 import com.sda.sortowanie.Sortowanie;
 import com.sda.sortowanie.SortowanieSzybkie;
 
+import javax.xml.bind.JAXBException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
     private List<Ksiazka> trafienia = new ArrayList<>();
 
 
-    public WyszukiwanieBinarne(Biblioteka biblioreka) {
+    public WyszukiwanieBinarne(Biblioteka biblioteka) {
 //        this.wszystkieKsiazki = sortowanie.sortuj(ksiazki);
         this.biblioteka = biblioteka;
     }
@@ -42,7 +45,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
             else break;
         }
 
-        for (int i = pierwszyTraf -1 ; i > 0; i--) {
+        for (int i = pierwszyTraf - 1 ; i >= 0; i--) {
             if (wszystkieKsiazki.get(i).getTytul().equalsIgnoreCase(tytul)) trafienia.add(wszystkieKsiazki.get(i));
             else break;
         }
@@ -98,11 +101,22 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
 
 
 
-//    public int szukaj(int liczba) {
-//        return szukaj(liczba, tablicaDoPrzeszukania);
-//    }
-
+    // MODUL TESTUJACY
     public static void main(String[] args) {
-        int[] tablica = {5,16,1231,56,754,32,6,90,11,2,10};
+        Biblioteka biblioteka = new Biblioteka();
+        ZarzadzanieBiblioteka zb = new ZarzadzanieBiblioteka(biblioteka);
+        Backup b = new Backup();
+
+        try {
+            b.odczytKsiazek(biblioteka);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        System.out.println(biblioteka.getListaKsiazek().size());
+        WyszukiwanieBinarne wb = new WyszukiwanieBinarne(biblioteka);
+
+        List<Ksiazka> ksiazki = wb.szukajTytul("pan tadeusz");
+
+
     }
 }
