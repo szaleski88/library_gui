@@ -50,4 +50,9 @@ public class Wpis {
     public void setDataZwrotu(LocalDate dataZwrotu) {
         this.dataZwrotu = dataZwrotu;
     }
+
+
+    public Ksiazka getKsiazka() {
+        return ksiazka;
+    }
 }
