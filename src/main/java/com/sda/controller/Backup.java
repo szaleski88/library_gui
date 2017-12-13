@@ -121,6 +121,7 @@ public class Backup {
         for (Ksiazka ks : biblioteka.getListaKsiazek()){
             System.out.println(ks);
         }
+        System.out.println("DUPA");
     }
 
 }
