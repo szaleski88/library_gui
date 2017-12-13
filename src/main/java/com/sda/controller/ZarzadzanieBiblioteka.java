@@ -38,7 +38,9 @@ public class ZarzadzanieBiblioteka {
         }
     }
 
-    //wyszukajPoTytule(String tytul);
+    public void wyszukajPoTytule(String tytul){
+
+    }
 
     //wyszukajPoAutorze(Autor autor);
 

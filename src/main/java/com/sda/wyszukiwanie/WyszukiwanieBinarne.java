@@ -36,7 +36,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
     public List<Ksiazka> szukajTytul(String tytul) {
         // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
         this.wszystkieKsiazki = sortowanie.sortuj(biblioteka.getListaKsiazek());
-        int pierwszyTraf = szukajTytulu(tytul, wszystkieKsiazki);
+        int pierwszyTraf = szukajTytuluRekurencyjnie(tytul, wszystkieKsiazki);
         if (pierwszyTraf == -1) return trafienia;
 
         trafienia.add(wszystkieKsiazki.get(pierwszyTraf));
@@ -52,21 +52,61 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
         return trafienia;
     }
 
-
-    @Override
-    public List<Ksiazka> szukajAutora(Autor autor) {
-        return null;
-    }
-
     @Override
     public List<Ksiazka> szukajAutora(String imie, String nazwisko) {
-        return null;
+        // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
+        Autor autor = new Autor(imie, nazwisko);
+        this.wszystkieKsiazki = sortowanie.sortuj(biblioteka.getListaKsiazek());
+        int pierwszyTraf = szukajAutoraRekurencyjnie(autor, wszystkieKsiazki);
+        if (pierwszyTraf == -1) return trafienia;
+
+        trafienia.add(wszystkieKsiazki.get(pierwszyTraf));
+        for (int i = pierwszyTraf + 1; i < wszystkieKsiazki.size(); i++) {
+            if (wszystkieKsiazki.get(i).getAutor().equals(autor)) trafienia.add(wszystkieKsiazki.get(i));
+            else break;
+        }
+
+        for (int i = pierwszyTraf - 1 ; i >= 0; i--) {
+            if (wszystkieKsiazki.get(i).getAutor().equals(autor)) trafienia.add(wszystkieKsiazki.get(i));
+            else break;
+        }
+        return trafienia;
     }
 
 
+    private int szukajAutoraRekurencyjnie(Autor autor, List<Ksiazka> ksiazki) {
+        if (ksiazki==null || ksiazki.size() == 0) return -1;
+        int przesuniecie = 0;
+        int szukanaLiczba;
+        int index = ksiazki.size() / 2;
 
+        if ( ksiazki.get(index).getAutor().equals(autor) ) {
+            return index;
+        } else if ( ksiazki.get(index).getAutor().compareTo(autor) < 0 ) {
+            List<Ksiazka> lewa = new ArrayList<>();
 
-    public int szukajTytulu(String tytul, List<Ksiazka> ksiazki) {
+            for (int i = 0; i < index ; i++) {
+                lewa.add(i, ksiazki.get(i));
+            }
+
+            szukanaLiczba = szukajAutoraRekurencyjnie(autor, lewa);
+        } else {
+            List<Ksiazka> prawa = new ArrayList<>();
+
+            // NOWOSC!
+            for (int i = index + 1, j = 0; i < ksiazki.size() ; i++, j++ ) {
+                prawa.add(j, ksiazki.get(i));
+            }
+            przesuniecie = index + 1;
+            szukanaLiczba = szukajAutoraRekurencyjnie(autor, prawa);
+            if ( szukanaLiczba != -1 ) {
+                szukanaLiczba += przesuniecie;
+            }
+        }
+        return szukanaLiczba;
+    }
+
+    private int szukajTytuluRekurencyjnie(String tytul, List<Ksiazka> ksiazki) {
 
         if (ksiazki==null || ksiazki.size() == 0) return -1;
         int przesuniecie = 0;
@@ -79,19 +119,19 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
             List<Ksiazka> lewa = new ArrayList<>();
 
             for (int i = 0; i < index ; i++) {
-                lewa.set(i, ksiazki.get(i));
+                lewa.add(i, ksiazki.get(i));
             }
 
-            szukanaLiczba = szukajTytulu(tytul, lewa);
+            szukanaLiczba = szukajTytuluRekurencyjnie(tytul, lewa);
         } else {
             List<Ksiazka> prawa = new ArrayList<>();
 
             // NOWOSC!
             for (int i = index + 1, j = 0; i < ksiazki.size() ; i++, j++ ) {
-                prawa.set(j, ksiazki.get(i));
+                prawa.add(j, ksiazki.get(i));
             }
             przesuniecie = index + 1;
-            szukanaLiczba = szukajTytulu(tytul, prawa);
+            szukanaLiczba = szukajTytuluRekurencyjnie(tytul, prawa);
             if ( szukanaLiczba != -1 ) {
                 szukanaLiczba += przesuniecie;
             }
@@ -100,11 +140,10 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
     }
 
 
-
     // MODUL TESTUJACY
     public static void main(String[] args) {
+
         Biblioteka biblioteka = new Biblioteka();
-        ZarzadzanieBiblioteka zb = new ZarzadzanieBiblioteka(biblioteka);
         Backup b = new Backup();
 
         try {
@@ -115,8 +154,12 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
         System.out.println(biblioteka.getListaKsiazek().size());
         WyszukiwanieBinarne wb = new WyszukiwanieBinarne(biblioteka);
 
-        List<Ksiazka> ksiazki = wb.szukajTytul("pan tadeusz");
+        List<Ksiazka> ksiazki = wb.szukajTytul("harry potter");
+        List<Ksiazka> autorzy = wb.szukajAutora("Adam", "Mickiewicz");
 
+        for (Ksiazka ksiazka : autorzy){
+            System.out.println(ksiazka.getAutor());
+        }
 
     }
 }

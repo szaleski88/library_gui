@@ -14,8 +14,6 @@ public interface Wyszukiwanie {
      * @return
      */
     List<Ksiazka> szukajTytul(String tytul);
-    List<Ksiazka> szukajAutora(Autor autor);
     List<Ksiazka> szukajAutora(String imie, String nazwisko);
-
 
 }

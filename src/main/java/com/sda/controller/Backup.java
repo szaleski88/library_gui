@@ -9,6 +9,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
 public class Backup {
 
 
-    private void zapisUzytkownikow(Biblioteka biblioteka) {
+    public void zapisUzytkownikow(Biblioteka biblioteka) {
 
         Uzytkownicy uzytkownicy = new Uzytkownicy(biblioteka);
 
@@ -30,7 +32,7 @@ public class Backup {
 
     }
 
-    private void zapisKsiazek(Biblioteka biblioteka) {
+    public void zapisKsiazek(Biblioteka biblioteka) {
         Ksiazki ksiazki = new Ksiazki(biblioteka);
 
         try {
@@ -40,7 +42,7 @@ public class Backup {
         }
     }
 
-    private void zapisDoPliku(Object o ) throws JAXBException{
+    public void zapisDoPliku(Object o ) throws JAXBException{
         String[] parts = o.getClass().toString().toLowerCase().split("\\.");
 
         File file = new File (String.format(".\\%s.xml", parts[parts.length-1] ));
@@ -56,9 +58,17 @@ public class Backup {
 
     }
 
-    private void odczytUzytkownikow(Biblioteka biblioteka) throws JAXBException {
+    public void odczytUzytkownikow(Biblioteka biblioteka) throws JAXBException {
 
-        File file = new File ("./uzytkownicy.xml");
+        File file = new File("./uzytkownicy.xml");
+        if(!file.exists())
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         JAXBContext jaxbContext = JAXBContext.newInstance(Uzytkownicy.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -72,7 +82,7 @@ public class Backup {
         }
     }
 
-    private void odczytKsiazek(Biblioteka biblioteka) throws JAXBException {
+    public void odczytKsiazek(Biblioteka biblioteka) throws JAXBException {
 
         File file = new File ("./ksiazki.xml");
         JAXBContext jaxbContext = JAXBContext.newInstance(Ksiazki.class);
@@ -94,6 +104,9 @@ public class Backup {
 
 
         biblioteka.dodajKsiazke(new Ksiazka("Pan Tadeusz", "Adam", "Mickiewicz", 2007, Gatunek.POEZJA ));
+        biblioteka.dodajKsiazke(new Ksiazka("Pan Tadeusz", "Adam", "Mickiewicz", 2008, Gatunek.HORROR ));
+        biblioteka.dodajKsiazke(new Ksiazka("Pan Tadeusz", "Wieslaw", "Gabka", 2007, Gatunek.POEZJA ));
+        biblioteka.dodajKsiazke(new Ksiazka("Pan Tadeusz", "Adam", "Mickiewicz", 2007, Gatunek.POEZJA ));
         biblioteka.dodajKsiazke(new Ksiazka("Harry Potter", "J.K.", "Rowling", 2017, Gatunek.SCIFI ));
 
 
@@ -101,10 +114,7 @@ public class Backup {
             // wyświetlenie na out
 
         Backup b = new Backup();
-        b.odczytUzytkownikow(biblioteka);
-        b.odczytKsiazek(biblioteka);
         b.zapisKsiazek(biblioteka);
-        b.zapisUzytkownikow(biblioteka);
         System.out.println(biblioteka.getListaUzytkownikow().size());
         System.out.println(biblioteka.getListaKsiazek().size());
 

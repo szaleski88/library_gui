@@ -54,4 +54,22 @@ public class Autor implements Comparable<Autor>{
         return this.getNazwisko().compareToIgnoreCase(o.getNazwisko());
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Autor autor = (Autor) o;
+
+        if (!imie.equalsIgnoreCase(autor.imie)) return false;
+        return nazwisko.equalsIgnoreCase(autor.nazwisko);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = imie.hashCode();
+        result = 31 * result + nazwisko.hashCode();
+        return result;
+    }
 }
