@@ -33,10 +33,10 @@ public class Backup {
     }
 
     public void zapisRejestru(Biblioteka biblioteka) {
-        Ksiazki ksiazki = new Ksiazki(biblioteka);
+        Wpisy wpisy = new Wpisy(biblioteka);
 
         try {
-            zapisDoPliku(ksiazki);
+            zapisDoPliku(wpisy);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -108,7 +108,20 @@ public class Backup {
 
     }
 
+    public void odczytRejestru(Biblioteka biblioteka) throws JAXBException {
 
+        File file = new File ("./wpisy.xml");
+        JAXBContext jaxbContext = JAXBContext.newInstance(Wpisy.class);
+
+        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        Wpisy wpisy = (Wpisy) jaxbUnmarshaller.unmarshal(file);
+
+        for (Wpis wp : wpisy.getWpisy()) {
+            biblioteka.dodajWpis(wp);
+        }
+
+
+    }
     public static void main(String[] args) throws JAXBException {
 
         Biblioteka biblioteka = new Biblioteka();

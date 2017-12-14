@@ -43,5 +43,7 @@ public class Biblioteka {
     }
 
 
-
+    public void dodajWpis(Wpis wp) {
+        rejestrWypozyczen.add(wp);
+    }
 }
