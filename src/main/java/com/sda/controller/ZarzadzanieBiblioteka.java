@@ -1,19 +1,26 @@
 package com.sda.controller;
 
 import com.sda.model.*;
+import com.sda.wyszukiwanie.WyszukiwanieBinarne;
 
+import javax.xml.bind.JAXBException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ZarzadzanieBiblioteka {
 
     private static Biblioteka biblioteka;
 
+
     public ZarzadzanieBiblioteka(Biblioteka biblio){
+
         biblioteka = biblio;
     }
-    public static void dodajKsiazkeDoBiblioteki(Ksiazka ksiazka){
+
+    private static void dodajKsiazkeDoBiblioteki(Ksiazka ksiazka){
+
         biblioteka.dodajKsiazke(ksiazka);
     }
 
@@ -27,8 +34,18 @@ public class ZarzadzanieBiblioteka {
         biblioteka.getRejestrWypozyczen().add(wpis);
     }
 
-    public void zwrocKsiazke(Ksiazka ksiazka){
-
+    public void zwrocKsiazke(Ksiazka ksiazka, Uzytkownik uzytkownik){
+        Optional<Wpis> rejWyp = biblioteka.getRejestrWypozyczen().stream()
+                .filter(wpis -> wpis.getKsiazka().equals(ksiazka) && wpis.getUzytkownik().equals(uzytkownik) && !wpis.getKsiazka()
+                        .getDostepna()).findFirst();
+        if ( rejWyp.isPresent()) {
+            Wpis wpis = rejWyp.get();
+            wpis.setDataZwrotu(LocalDate.now());
+            wpis.getKsiazka().setDostepna(true);
+            System.out.println("Ksiazka: {" + ksiazka.toString() + "} została pomyślnie zwrócona!");
+        } else {
+            System.out.println("WYSTĄPIL JAKIS BLAD!!!");
+        }
     }
 
     public void wyswietlListeKsiazek() {
@@ -39,18 +56,22 @@ public class ZarzadzanieBiblioteka {
     }
 
     public void wyszukajPoTytule(String tytul){
+        WyszukiwanieBinarne wb = new WyszukiwanieBinarne(biblioteka);
+        List<Ksiazka> ksiazkiTytul = wb.szukajTytul(tytul);
 
     }
 
-    //wyszukajPoAutorze(Autor autor);
-
-    //wyszukajPoAutorze(String imie, String nazwisko);
+    public void wyszukajPoAutorze(String imie, String nazwisko){
+        WyszukiwanieBinarne wb = new WyszukiwanieBinarne(biblioteka);
+        List<Ksiazka> ksiazkiAutora = wb.szukajAutora(imie, nazwisko);
+    }
 
     public static void  dodajUzytkownika(Uzytkownik uzytkownik){
         biblioteka.dodajUzytkownika(uzytkownik);
     }
 
     public static void dodajUzytkownika(String imie, String nazwisko, Plec plec){
+        // sprawdzenie czy uzytkownik juz istnieje?
         biblioteka.dodajUzytkownika(new Uzytkownik(imie, nazwisko, plec));
     }
 
@@ -81,4 +102,22 @@ public class ZarzadzanieBiblioteka {
     }
 
 
+    public static void main(String[] args) {
+
+        Biblioteka biblioteka = new Biblioteka();
+        Backup b = new Backup();
+        ZarzadzanieBiblioteka zb = new ZarzadzanieBiblioteka(biblioteka);
+
+        try {
+            b.odczytKsiazek(biblioteka);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+        zb.dodajKsiazkeDoBiblioteki(new Ksiazka("Dziewczyna z pociągu", "Maria", "Konopnicka", 2016, Gatunek.THRILLER));
+        zb.dodajKsiazkeDoBiblioteki(new Ksiazka("Nad Niemnem", "Eliza", "Orzeszkowa", 2016, Gatunek.HORROR));
+
+
+
+    }
 }
