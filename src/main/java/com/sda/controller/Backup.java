@@ -87,9 +87,6 @@ public class Backup {
 
         for (Uzytkownik uz : uzytkownicy.getUzytkownicy()) {
             biblioteka.dodajUzytkownika(uz);
-
-            System.out.println(uz.getImie());
-            System.out.println(uz.getNazwisko());
         }
     }
 
@@ -129,14 +126,31 @@ public class Backup {
             // wyświetlenie na out
 
         Backup b = new Backup();
-        b.zapisKsiazek(biblioteka);
-        System.out.println(biblioteka.getListaUzytkownikow().size());
-        System.out.println(biblioteka.getListaKsiazek().size());
 
-        for (Ksiazka ks : biblioteka.getListaKsiazek()){
-            System.out.println(ks);
-        }
-        System.out.println("DUPA");
+        /*
+        biblioteka.dodajUzytkownika(new Uzytkownik("Stefan", "Mikrut", Plec.MEZCZYZNA));
+        biblioteka.dodajUzytkownika(new Uzytkownik("Mariola", "Kowalska", Plec.KOBIETA));
+        biblioteka.dodajUzytkownika(new Uzytkownik("Krzysztof", "Różalski", Plec.MEZCZYZNA));
+        biblioteka.dodajUzytkownika(new Uzytkownik("Katarzyna", "Kowalec", Plec.KOBIETA));
+
+        b.zapisUzytkownikow(biblioteka);
+        */
+
+        b.odczytKsiazek(biblioteka);
+        b.odczytUzytkownikow(biblioteka);
+        ZarzadzanieBiblioteka zb = new ZarzadzanieBiblioteka(biblioteka);
+
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(12), biblioteka.getListaUzytkownikow().get(1));
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(112), biblioteka.getListaUzytkownikow().get(2));
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(132), biblioteka.getListaUzytkownikow().get(0));
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(2), biblioteka.getListaUzytkownikow().get(3));
+
+        zb.wyswietlWypozyczoneKsiazki();
+
+
+
+
+
     }
 
 }

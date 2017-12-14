@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<fx:root prefHeight="655.0" prefWidth="891.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sda.gui.GUI">
+   <children>
+      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="619.0" prefWidth="866.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Przegladaj">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+          <Tab text="Szukaj">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="14.0" layoutY="14.0" prefHeight="576.0" prefWidth="838.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="5.0" prefWidth="80.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="320.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="64.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="318.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="161.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints maxHeight="110.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="220.0" minHeight="0.0" prefHeight="13.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="451.0" minHeight="10.0" prefHeight="438.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Button id="ButtonSzukajTytulu" fx:id="ButtonSzukajTytulu" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Szukaj Tytulu" GridPane.columnIndex="4" />
+                              <Button id="ButtonSzukajAutora" fx:id="ButtonSzukajAutora" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Szukaj Autora" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="88.0" text="Tytuł:" GridPane.halignment="RIGHT" />
+                              <TextField id="TextLineTytulKsiazki" prefHeight="25.0" prefWidth="613.0" promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+                              <TextField id="TextLineImieAutora" prefHeight="25.0" prefWidth="311.0" promptText="Imie Autora" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField id="TextLineNazwiskoAutora" promptText="Nazwisko Autora" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="98.0" text="Label:" GridPane.rowIndex="1" />
+                              <TableView id="tabelaSzukaj" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="C1" />
+                                  <TableColumn prefWidth="75.0" text="C2" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Wypozycz">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Zwroc">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Zarzadzaj Uzytkownikami">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="14.0" layoutY="14.0" prefHeight="561.0" prefWidth="838.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="174.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="0.0" prefWidth="31.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="236.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Dane użytkownika:" />
+                              <TextField promptText="Imie" GridPane.columnIndex="1" />
+                              <TextField promptText="Nazwisko" GridPane.columnIndex="3" />
+                              <Button mnemonicParsing="false" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="6" />
+                              <ChoiceBox prefWidth="150.0" GridPane.columnIndex="4" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="Zarzadzaj Ksiazkami">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</fx:root>
