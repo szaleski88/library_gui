@@ -8,19 +8,19 @@ import java.util.List;
 public class Ksiazki{
 
     @XmlElements(@XmlElement(name="ksiazka"))
-    private List<Ksiazka> Ksiazki;
+    private List<Ksiazka> ksiazki;
 
     public Ksiazki(){}
 
     public Ksiazki(Biblioteka b){
-        this.Ksiazki = b.getListaKsiazek();
+        this.ksiazki = b.getListaKsiazek();
     }
 
     public List<Ksiazka> getKsiazki() {
-        return Ksiazki;
+        return ksiazki;
     }
 
     public void setKsiazki(List<Ksiazka> ksiazki) {
-        this.Ksiazki = ksiazki;
+        this.ksiazki = ksiazki;
     }
 }

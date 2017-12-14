@@ -32,6 +32,17 @@ public class Backup {
 
     }
 
+    public void zapisRejestru(Biblioteka biblioteka) {
+        Ksiazki ksiazki = new Ksiazki(biblioteka);
+
+        try {
+            zapisDoPliku(ksiazki);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public void zapisKsiazek(Biblioteka biblioteka) {
         Ksiazki ksiazki = new Ksiazki(biblioteka);
 
@@ -101,15 +112,6 @@ public class Backup {
     public static void main(String[] args) throws JAXBException {
 
         Biblioteka biblioteka = new Biblioteka();
-
-
-        biblioteka.dodajKsiazke(new Ksiazka("Pan Tadeusz", "Adam", "Mickiewicz", 2007, Gatunek.POEZJA ));
-        biblioteka.dodajKsiazke(new Ksiazka("Pan Tadeusz", "Adam", "Mickiewicz", 2008, Gatunek.HORROR ));
-        biblioteka.dodajKsiazke(new Ksiazka("Pan Tadeusz", "Wieslaw", "Gabka", 2007, Gatunek.POEZJA ));
-        biblioteka.dodajKsiazke(new Ksiazka("Pan Tadeusz", "Adam", "Mickiewicz", 2007, Gatunek.POEZJA ));
-        biblioteka.dodajKsiazke(new Ksiazka("Harry Potter", "J.K.", "Rowling", 2017, Gatunek.SCIFI ));
-
-
 
             // wyświetlenie na out
 
