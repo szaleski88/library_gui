@@ -138,16 +138,16 @@ public class Backup {
         Backup b = new Backup();
 
 
-        biblioteka.dodajUzytkownika(new Uzytkownik("Stefan", "Mikrut", Plec.MEZCZYZNA));
-        biblioteka.dodajUzytkownika(new Uzytkownik("Mariola", "Kowalska", Plec.KOBIETA));
-        biblioteka.dodajUzytkownika(new Uzytkownik("Krzysztof", "Różalski", Plec.MEZCZYZNA));
-        biblioteka.dodajUzytkownika(new Uzytkownik("Katarzyna", "Kowalec", Plec.KOBIETA));
-
-        b.zapisUzytkownikow(biblioteka);
-
-
+//        biblioteka.dodajUzytkownika(new Uzytkownik("Stefan", "Mikrut", Plec.MEZCZYZNA));
+//        biblioteka.dodajUzytkownika(new Uzytkownik("Mariola", "Kowalska", Plec.KOBIETA));
+//        biblioteka.dodajUzytkownika(new Uzytkownik("Krzysztof", "Różalski", Plec.MEZCZYZNA));
+//        biblioteka.dodajUzytkownika(new Uzytkownik("Katarzyna", "Kowalec", Plec.KOBIETA));
+//
+//        b.zapisUzytkownikow(biblioteka);
+//
+//
         b.odczytKsiazek(biblioteka);
-        //b.odczytUzytkownikow(biblioteka);
+        b.odczytUzytkownikow(biblioteka);
         ZarzadzanieBiblioteka zb = new ZarzadzanieBiblioteka(biblioteka);
 
         zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(12), biblioteka.getListaUzytkownikow().get(1));

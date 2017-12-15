@@ -57,10 +57,8 @@ public class Uzytkownik implements  Comparable<Uzytkownik>{
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Uzytkownik{");
-        sb.append("imie='").append(imie).append('\'');
-        sb.append(", nazwisko='").append(nazwisko).append('\'');
-        sb.append('}');
+        final StringBuffer sb = new StringBuffer(imie);
+        sb.append(" ").append(nazwisko);
         return sb.toString();
     }
 

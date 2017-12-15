@@ -188,7 +188,7 @@ public class KontrolerGUI {
 
     @FXML
     public void szukajWypozyczonych() {
-        zb.getWypozyczoneKsiazki();
+        wypelnijWypozyczone(zb.getWypozyczoneKsiazki());
 
     }
 

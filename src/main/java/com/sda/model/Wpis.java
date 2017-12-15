@@ -83,4 +83,12 @@ public class Wpis {
     public Ksiazka getKsiazka() {
         return ksiazka;
     }
+
+    public String getTytul() {
+        return tytul;
+    }
+
+    public void setTytul(String tytul) {
+        this.tytul = tytul;
+    }
 }
