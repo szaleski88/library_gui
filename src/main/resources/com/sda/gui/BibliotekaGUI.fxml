@@ -12,11 +12,6 @@
    <children>
       <TabPane layoutX="14.0" layoutY="14.0" prefHeight="619.0" prefWidth="866.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-            <Tab text="Przegladaj">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
           <Tab text="Szukaj">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -65,7 +60,45 @@
           </Tab>
             <Tab text="Zwroc">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="6.0" layoutY="8.0" prefHeight="573.0" prefWidth="853.0">
+                          <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="179.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" prefWidth="31.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="183.0" minWidth="10.0" prefWidth="183.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="145.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="102.0" minWidth="10.0" prefWidth="73.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="200.0" minWidth="10.0" prefWidth="200.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.0" minWidth="10.0" prefWidth="16.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TableView fx:id="tabelaWypozyczone" prefHeight="377.0" prefWidth="706.0" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
+                                <columns>
+                                  <TableColumn fx:id="kolumnaUzytkownikWypozyczony" prefWidth="231.0" text="Uzytkownik" />
+                                    <TableColumn fx:id="kolumnaAutorWypozyczony" minWidth="0.0" prefWidth="183.0" text="Autor" />
+                                    <TableColumn fx:id="kolumnaTytulWypozyczony" prefWidth="219.0" text="Tytul" />
+                                  <TableColumn fx:id="kolumnaDataWypozyczenia" prefWidth="113.0" text="Data Wypozyczenia" />
+                                </columns>
+                              </TableView>
+                              <Button fx:id="buttonZwrocKsiazki" mnemonicParsing="false" onAction="#zwrocZaznaczoneKsiazki" prefHeight="25.0" prefWidth="200.0" text="Zwróć Zaznaczone" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                              <Button fx:id="buttonWypozyczoneUzytkownika" mnemonicParsing="false" onAction="#szukajWypozyczonychUzytkownika" text="Szukaj po uzytkowniku" GridPane.columnIndex="3" />
+                              <TextField fx:id="textFieldImieWypozyczajacego" promptText="Imię użytkownika" />
+                              <TextField fx:id="textFieldNazwiskoWypozyczajacego" prefHeight="25.0" prefWidth="196.0" promptText="Nazwisko Uzytkownika" GridPane.columnIndex="2" />
+                              <Button fx:id="buttonWszystkieWypozyczone" mnemonicParsing="false" onAction="#szukajWypozyczonych" prefWidth="200.0" text="WSZYSTKIE WYPOZYCZONE" GridPane.columnIndex="5" />
+                           </children>
+                        </GridPane>
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Zarzadzaj Uzytkownikami">
@@ -93,7 +126,7 @@
                               <Label text="Dane użytkownika:" />
                               <TextField fx:id="textFieldImieUzytkownika" promptText="Imie" GridPane.columnIndex="1" />
                               <TextField fx:id="textFieldNazwiskoUzytkownika" promptText="Nazwisko" GridPane.columnIndex="3" />
-                              <Button fx:id="buttonDodajUzytkownika" mnemonicParsing="false" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="6" />
+                              <Button fx:id="buttonDodajUzytkownika" mnemonicParsing="false" onAction="#dodajUzytkownika" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="6" />
                               <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="plec:" GridPane.columnIndex="4">
                                <items>
                                    <FXCollections fx:factory="observableArrayList">

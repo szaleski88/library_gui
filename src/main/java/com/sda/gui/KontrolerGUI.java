@@ -8,12 +8,14 @@ import com.sda.wyszukiwanie.WyszukiwanieBinarne;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.soap.Text;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -54,6 +56,16 @@ public class KontrolerGUI {
     @FXML
     private TableColumn<Ksiazka, Boolean> kolumnaStatus;
     @FXML
+    private TableColumn<Wpis, Autor> kolumnaAutorWypozyczony;
+    @FXML
+    private TableColumn<Wpis, Uzytkownik> kolumnaUzytkownikWypozyczony;
+    @FXML
+    private TableColumn<Wpis, LocalDate> kolumnaDataWypozyczenia;
+    @FXML
+    private TableColumn<Wpis, String> kolumnaTytulWypozyczony;
+    @FXML
+    private TableView<Wpis> tabelaWypozyczone;
+    @FXML
     private ComboBox<String> comboBox;
 
     public KontrolerGUI() {
@@ -70,25 +82,6 @@ public class KontrolerGUI {
         zb.wyswietlListeKsiazek();
 //        dropDown.getItems().addAll(Plec.values());
         // tableSetup();
-    }
-
-    private void tableSetup(){
-        kolumnaAutor.setCellValueFactory(
-                new PropertyValueFactory<Ksiazka, Autor>("autor")
-        );
-        kolumnaTytul.setCellValueFactory(
-                new PropertyValueFactory<Ksiazka, String>("tytul")
-        );
-        kolumnaRokWydania.setCellValueFactory(
-                new PropertyValueFactory<Ksiazka, Integer>("rokWydania")
-        );
-        kolumnaGatunek.setCellValueFactory(
-                new PropertyValueFactory<Ksiazka, Gatunek>("gatunek")
-        );
-        kolumnaStatus.setCellValueFactory(
-                new PropertyValueFactory<Ksiazka, Boolean>("dostepna")
-        );
-
     }
 
    @FXML
@@ -143,6 +136,18 @@ public class KontrolerGUI {
 
     }
 
+    @FXML
+    private void dodajUzytkownika(){
+        Uzytkownik uzytkownik = new Uzytkownik(textFieldImieUzytkownika.getText().trim(),
+                                                textFieldNazwiskoUzytkownika.getText().trim(),
+                                                Plec.valueOf(comboBox.getValue().toUpperCase()));
+        biblioteka.dodajUzytkownika(uzytkownik);
+
+        textFieldImieUzytkownika.setText("");
+        textFieldNazwiskoUzytkownika.setText("");
+        System.out.println(uzytkownik);
+    }
+
 
     private void zwrocKsiazki(){
         ObservableList<Ksiazka> ksiazka, ksiazki;
@@ -152,4 +157,42 @@ public class KontrolerGUI {
 //        ksiazka.forEach(coszrob);
 
      }
+
+    @FXML
+    public void zwrocZaznaczoneKsiazki() {
+    }
+
+    @FXML
+    public void szukajWypozyczonychUzytkownika() {
+    }
+
+    @FXML
+    public void szukajWypozyczonych() {
+
+    }
+
+    private void wypelnijWypozyczone(List<Wpis> wpisy) {
+        textFieldNazwiskoAutora.setText("");
+        textFieldImieAutora.setText("");
+        textFieldTytul.setText("");
+
+        ObservableList<Wpis> data = FXCollections.observableArrayList(wpisy);
+
+        kolumnaAutorWypozyczony.setCellValueFactory(
+                new PropertyValueFactory<>("autor")
+        );
+        kolumnaTytulWypozyczony.setCellValueFactory(
+                new PropertyValueFactory<>("tytul")
+        );
+        kolumnaDataWypozyczenia.setCellValueFactory(
+                new PropertyValueFactory("dataWypozyczenia")
+        );
+        kolumnaUzytkownikWypozyczony.setCellValueFactory(
+                new PropertyValueFactory("uzytkownik")
+        );
+
+        tabelaWypozyczone.setItems(data);
+
+
+    }
 }

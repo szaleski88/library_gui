@@ -11,12 +11,16 @@ public class Wpis {
     private Uzytkownik uzytkownik;
     private LocalDate dataWypozyczenia;
     private LocalDate dataZwrotu;
+    private Autor autor;
+    private String tytul;
 
     public Wpis(Ksiazka ksiazka, Uzytkownik uzytkownik, LocalDate dataWypozyczenia, LocalDate dataZwrotu) {
         this.ksiazka = ksiazka;
         this.uzytkownik = uzytkownik;
         this.dataWypozyczenia = dataWypozyczenia;
+        this.autor = ksiazka.getAutor();
         this.dataZwrotu = dataZwrotu;
+        this.tytul = ksiazka.getTytul();
     }
 
     public String getIdKsiazki() {
@@ -51,6 +55,13 @@ public class Wpis {
         this.dataZwrotu = dataZwrotu;
     }
 
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
+    }
 
     public Ksiazka getKsiazka() {
         return ksiazka;
