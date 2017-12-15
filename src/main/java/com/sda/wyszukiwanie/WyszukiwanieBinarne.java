@@ -11,6 +11,8 @@ import com.sda.sortowanie.SortowanieSzybkie;
 
 import javax.xml.bind.JAXBException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class WyszukiwanieBinarne implements Wyszukiwanie {
@@ -35,7 +37,15 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
     @Override
     public List<Ksiazka> szukajTytul(String tytul) {
         // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
-        this.wszystkieKsiazki = sortowanie.sortuj(biblioteka.getListaKsiazek());
+        //this.wszystkieKsiazki = sortowanie.sortuj(biblioteka.getListaKsiazek());
+        this.wszystkieKsiazki = biblioteka.getListaKsiazek();
+
+        this.wszystkieKsiazki.sort((a, b) -> {
+            String tytul1 = a.getTytul();
+            String tytul2 = b.getTytul();
+            return tytul1.compareToIgnoreCase(tytul2);
+        });
+
         int pierwszyTraf = szukajTytuluRekurencyjnie(tytul, wszystkieKsiazki);
         if (pierwszyTraf == -1) return trafienia;
 
@@ -154,11 +164,11 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
         System.out.println(biblioteka.getListaKsiazek().size());
         WyszukiwanieBinarne wb = new WyszukiwanieBinarne(biblioteka);
 
-        List<Ksiazka> ksiazki = wb.szukajTytul("harry potter");
-        List<Ksiazka> autorzy = wb.szukajAutora("Adam", "Mickiewicz");
+        List<Ksiazka> ksiazki = wb.szukajTytul("Domowy Pan");
+        //List<Ksiazka> autorzy = wb.szukajAutora("Adam", "Mickiewicz");
 
-        for (Ksiazka ksiazka : autorzy){
-            System.out.println(ksiazka.getAutor());
+        for (Ksiazka ksiazka : ksiazki){
+            System.out.println(ksiazka);
         }
 
     }

@@ -21,10 +21,10 @@ public class Ksiazka implements Comparable<Ksiazka>{
     private String tytul;
 
     @XmlElement(name = "rok_wydania", required = true)
-    private int rokWydania;
+    private Integer rokWydania;
 
     @XmlElement(name = "dostepna", required = true)
-    private boolean dostepna;
+    private Boolean dostepna;
 
     @XmlElement(name = "ID", required = true)
     private String ID;
@@ -82,16 +82,16 @@ public class Ksiazka implements Comparable<Ksiazka>{
         return autor;
     }
 
-    public int getRokWydania() {
+    public Integer getRokWydania() {
         return rokWydania;
     }
 
 
-    public boolean getDostepna() {
+    public Boolean getDostepna() {
         return dostepna;
     }
 
-    public void setDostepna(boolean dostepna) {
+    public void setDostepna(Boolean dostepna) {
         this.dostepna = dostepna;
     }
 
