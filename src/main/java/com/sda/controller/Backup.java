@@ -149,13 +149,16 @@ public class Backup {
         b.odczytKsiazek(biblioteka);
         b.odczytUzytkownikow(biblioteka);
         ZarzadzanieBiblioteka zb = new ZarzadzanieBiblioteka(biblioteka);
+        Uzytkownik uzytkownik = new Uzytkownik("Sebastian", "Zaleski", Plec.MEZCZYZNA);
+        biblioteka.dodajUzytkownika(uzytkownik);
 
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(12), biblioteka.getListaUzytkownikow().get(1));
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(112), biblioteka.getListaUzytkownikow().get(2));
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(132), biblioteka.getListaUzytkownikow().get(0));
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(2), biblioteka.getListaUzytkownikow().get(3));
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(44), uzytkownik);
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(57), uzytkownik);
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(111), uzytkownik);
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(178), uzytkownik);
 
         zb.wyswietlWypozyczoneKsiazki();
+        b.zapisUzytkownikow(biblioteka);
         b.zapisRejestru(biblioteka);
 
 

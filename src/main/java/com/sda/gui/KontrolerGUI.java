@@ -5,7 +5,7 @@ import com.sda.controller.ZarzadzanieBiblioteka;
 import com.sda.model.*;
 import com.sda.sortowanie.SortowanieSzybkie;
 import com.sda.wyszukiwanie.WyszukiwanieBinarne;
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +14,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.xml.bind.JAXBException;
-import javax.xml.soap.Text;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -215,5 +214,12 @@ public class KontrolerGUI {
         tabelaWypozyczone.setItems(data);
 
 
+    }
+
+    public void shutdown() {
+        backup.zapisRejestru(biblioteka);
+        backup.zapisUzytkownikow(biblioteka);
+        backup.zapisKsiazek(biblioteka);
+        Platform.exit();
     }
 }
