@@ -48,10 +48,10 @@ public class Autor implements Comparable<Autor>{
     @Override
     public int compareTo(Autor o) {
         if (this.equals(o)) return 0;
-        if (this.getNazwisko().equalsIgnoreCase(o.getNazwisko())) {
-            return this.getImie().compareToIgnoreCase(o.getImie());
+        if (this.getImie().equalsIgnoreCase(o.getImie())) {
+            return this.getNazwisko().compareToIgnoreCase(o.getNazwisko());
         }
-        return this.getNazwisko().compareToIgnoreCase(o.getNazwisko());
+        return this.getImie().compareToIgnoreCase(o.getImie());
 
     }
 
