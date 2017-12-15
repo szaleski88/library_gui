@@ -52,6 +52,7 @@ public class Ksiazka implements Comparable<Ksiazka>{
         this.autor = new Autor(autorImie, autorNazwisko);
         this.rokWydania = rokWydania;
         this.gatunek = gatunek;
+        this.dostepna = true;
     }
 
 

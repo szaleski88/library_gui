@@ -26,7 +26,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
     private List<Ksiazka> wszystkieKsiazki;
     private Biblioteka biblioteka;
     private Sortowanie sortowanie = new SortowanieSzybkie();
-    private List<Ksiazka> trafienia = new ArrayList<>();
+    private List<Ksiazka> trafienia;
 
 
     public WyszukiwanieBinarne(Biblioteka biblioteka) {
@@ -38,6 +38,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
     public List<Ksiazka> szukajTytul(String tytul) {
         // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
         //this.wszystkieKsiazki = sortowanie.sortuj(biblioteka.getListaKsiazek());
+        this.trafienia = new ArrayList<>();
         this.wszystkieKsiazki = biblioteka.getListaKsiazek();
 
         this.wszystkieKsiazki.sort((a, b) -> {
@@ -65,6 +66,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
     @Override
     public List<Ksiazka> szukajAutora(String imie, String nazwisko) {
         // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
+        this.trafienia = new ArrayList<>();
         Autor autor = new Autor(imie, nazwisko);
         this.wszystkieKsiazki = sortowanie.sortuj(biblioteka.getListaKsiazek());
         int pierwszyTraf = szukajAutoraRekurencyjnie(autor, wszystkieKsiazki);

@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.xml.bind.JAXBException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -94,7 +95,8 @@ public class KontrolerGUI {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        zb.wyswietlWypozyczoneKsiazki();
+
+
 //        zb.wyswietlListeKsiazek();
 //        dropDown.getItems().addAll(Plec.values());
         // tableSetup();
@@ -105,12 +107,10 @@ public class KontrolerGUI {
 
        String tytul = textFieldTytul.getText();
        System.out.println(tytul);
-       List<Ksiazka> listaKsiazke = wyszukaj.szukajTytul(tytul);
-       System.out.println(listaKsiazke.size());
-       //for (Ksiazka ksiazka :  listaKsiazke) {
-       //    System.out.println(ksiazka);
-       //}
-       wyswietlWyniki(listaKsiazke);
+       List<Ksiazka> listaKsiazek = new ArrayList<>();
+       listaKsiazek = wyszukaj.szukajTytul(tytul);
+
+       wyswietlWyniki(listaKsiazek);
    }
 
     @FXML
@@ -139,16 +139,19 @@ public class KontrolerGUI {
                 new PropertyValueFactory<>("tytul")
         );
         kolumnaRokWydania.setCellValueFactory(
-                new PropertyValueFactory<Ksiazka, Integer>("rokWydania")
+                new PropertyValueFactory("rokWydania")
         );
         kolumnaGatunek.setCellValueFactory(
-                new PropertyValueFactory<Ksiazka, Gatunek>("gatunek")
+                new PropertyValueFactory("gatunek")
         );
         kolumnaStatus.setCellValueFactory(
-                new PropertyValueFactory<Ksiazka, Boolean>("dostepna")
+                new PropertyValueFactory("dostepna")
         );
 
         tabelaSzukaj.setItems(data);
+        tabelaSzukaj.getSelectionModel().setSelectionMode(
+                SelectionMode.SINGLE
+        );
 
     }
 
@@ -165,17 +168,14 @@ public class KontrolerGUI {
     }
 
 
-    private void zwrocKsiazki(){
-        ObservableList<Ksiazka> ksiazka, ksiazki;
-        ksiazki = tabelaSzukaj.getItems();
-        ksiazka = tabelaSzukaj.getSelectionModel().getSelectedItems();
-
-//        ksiazka.forEach(coszrob);
-
-     }
-
     @FXML
     public void zwrocZaznaczoneKsiazki() {
+        List<Wpis> wpisy = tabelaWypozyczone.getSelectionModel().getSelectedItems();
+        for (Wpis wpis : wpisy) {
+            wpis.setDataZwrotu(LocalDate.now());
+            wpis.getKsiazka().setDostepna(true);
+            System.out.println("Pomyślnie zwrócono ksiązkę: " + wpis.getKsiazka().getTytul());
+        }
     }
 
     @FXML
@@ -192,9 +192,6 @@ public class KontrolerGUI {
     }
 
     private void wypelnijWypozyczone(List<Wpis> wpisy) {
-        textFieldNazwiskoAutora.setText("");
-        textFieldImieAutora.setText("");
-        textFieldTytul.setText("");
 
         ObservableList<Wpis> data = FXCollections.observableArrayList(wpisy);
 
@@ -212,6 +209,10 @@ public class KontrolerGUI {
         );
 
         tabelaWypozyczone.setItems(data);
+        tabelaWypozyczone.getSelectionModel().setSelectionMode(
+                SelectionMode.MULTIPLE
+        );
+
 
 
     }

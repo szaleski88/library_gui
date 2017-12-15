@@ -156,6 +156,10 @@ public class Backup {
         zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(57), uzytkownik);
         zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(111), uzytkownik);
         zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(178), uzytkownik);
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(11), biblioteka.getListaUzytkownikow().get(0));
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(17), biblioteka.getListaUzytkownikow().get(0));
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(100), biblioteka.getListaUzytkownikow().get(2));
+        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(101), biblioteka.getListaUzytkownikow().get(3));
 
         zb.wyswietlWypozyczoneKsiazki();
         b.zapisUzytkownikow(biblioteka);
