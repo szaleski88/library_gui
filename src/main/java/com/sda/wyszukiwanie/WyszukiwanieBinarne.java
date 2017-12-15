@@ -92,7 +92,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
 
         if ( ksiazki.get(index).getAutor().equals(autor) ) {
             return index;
-        } else if ( ksiazki.get(index).getAutor().compareTo(autor) < 0 ) {
+        } else if ( ksiazki.get(index).getAutor().compareTo(autor) > 0 ) {
             List<Ksiazka> lewa = new ArrayList<>();
 
             for (int i = 0; i < index ; i++) {
