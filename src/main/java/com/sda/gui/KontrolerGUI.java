@@ -54,7 +54,7 @@ public class KontrolerGUI {
     @FXML
     private TableColumn<Ksiazka, Boolean> kolumnaStatus;
     @FXML
-    private ChoiceBox dropDown;
+    private ComboBox<String> comboBox;
 
     public KontrolerGUI() {
         biblioteka = new Biblioteka();
@@ -68,6 +68,7 @@ public class KontrolerGUI {
             e.printStackTrace();
         }
         zb.wyswietlListeKsiazek();
+//        dropDown.getItems().addAll(Plec.values());
         // tableSetup();
     }
 

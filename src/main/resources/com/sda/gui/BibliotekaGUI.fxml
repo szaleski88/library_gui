@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.collections.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
 
 <AnchorPane prefHeight="655.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sda.gui.KontrolerGUI">
    <children>
@@ -92,7 +94,14 @@
                               <TextField fx:id="textFieldImieUzytkownika" promptText="Imie" GridPane.columnIndex="1" />
                               <TextField fx:id="textFieldNazwiskoUzytkownika" promptText="Nazwisko" GridPane.columnIndex="3" />
                               <Button fx:id="buttonDodajUzytkownika" mnemonicParsing="false" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="6" />
-                              <ChoiceBox fx:id="dropDown" prefWidth="150.0" GridPane.columnIndex="4" />
+                              <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="plec:" GridPane.columnIndex="4">
+                               <items>
+                                   <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="Kobieta" />
+                                       <String fx:value="Mezczyzna" />
+                                   </FXCollections>
+                               </items>
+                              </ComboBox>
                            </children>
                         </GridPane>
                      </children>
