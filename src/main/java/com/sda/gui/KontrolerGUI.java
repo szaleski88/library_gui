@@ -2,20 +2,14 @@ package com.sda.gui;
 
 import com.sda.controller.Backup;
 import com.sda.controller.ZarzadzanieBiblioteka;
-import com.sda.model.Autor;
-import com.sda.model.Biblioteka;
-import com.sda.model.Gatunek;
-import com.sda.model.Ksiazka;
+import com.sda.model.*;
 import com.sda.sortowanie.SortowanieSzybkie;
 import com.sda.wyszukiwanie.WyszukiwanieBinarne;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import javax.xml.bind.JAXBException;
@@ -59,7 +53,8 @@ public class KontrolerGUI {
     private TableColumn<Ksiazka, Integer> kolumnaRokWydania;
     @FXML
     private TableColumn<Ksiazka, Boolean> kolumnaStatus;
-
+    @FXML
+    private ChoiceBox dropDown;
 
     public KontrolerGUI() {
         biblioteka = new Biblioteka();
@@ -112,6 +107,7 @@ public class KontrolerGUI {
     private void szukajAutora(){
         String imie = textFieldImieAutora.getText();
         String nazwisko = textFieldNazwiskoAutora.getText();
+        System.out.println(imie + " " + nazwisko);
         List<Ksiazka> listaKsiazke = wyszukaj.szukajAutora(imie, nazwisko);
         System.out.println("Znaleziomo: " + listaKsiazke.size());
         wyswietlWyniki(listaKsiazke);
@@ -119,9 +115,11 @@ public class KontrolerGUI {
 
 
     private void wyswietlWyniki(List<Ksiazka> listaKsiazek){
-        textFieldNazwiskoAutora.clear();
-        textFieldImieAutora.clear();
-        textFieldTytul.clear();
+
+        textFieldNazwiskoAutora.setText("");
+        textFieldImieAutora.setText("");
+        textFieldTytul.setText("");
+
         ObservableList<Ksiazka> data = FXCollections.observableArrayList(listaKsiazek);
 
         kolumnaAutor.setCellValueFactory(
@@ -141,10 +139,7 @@ public class KontrolerGUI {
         );
 
         tabelaSzukaj.setItems(data);
-//        for (Ksiazka ksiazka : listaKsiazek) {
-//            Ksiazka ksiazka =
-//            tabelaSzukaj.getItems().add(ksiazka);
-//        }
+
     }
 
 
