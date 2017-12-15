@@ -3,15 +3,30 @@ package com.sda.model;
 import com.sda.model.Ksiazka;
 import com.sda.model.Uzytkownik;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name="wpis")
 public class Wpis {
 
+    @XmlElement(name = "ksiazka", required = true)
     private Ksiazka ksiazka;
+    @XmlElement(name = "uzytkownik", required = true)
     private Uzytkownik uzytkownik;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    @XmlElement(name = "dataWypozyczenia", required = true)
     private LocalDate dataWypozyczenia;
+    @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+    @XmlElement(name = "dataZwrotu", required = true)
     private LocalDate dataZwrotu;
+    @XmlElement(name = "autor", required = true)
     private Autor autor;
+    @XmlElement(name = "tytul", required = true)
     private String tytul;
 
     public Wpis(){}
