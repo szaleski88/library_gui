@@ -6,8 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<fx:root prefHeight="655.0" prefWidth="891.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sda.gui.GUI">
+<AnchorPane prefHeight="655.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sda.gui.KontrolerGUI">
    <children>
       <TabPane layoutX="14.0" layoutY="14.0" prefHeight="619.0" prefWidth="866.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -35,17 +34,20 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button id="ButtonSzukajTytulu" fx:id="ButtonSzukajTytulu" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Szukaj Tytulu" GridPane.columnIndex="4" />
-                              <Button id="ButtonSzukajAutora" fx:id="ButtonSzukajAutora" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Szukaj Autora" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Button id="buttonSzukajTytulu" fx:id="buttonSzukajTytulu" mnemonicParsing="false" onAction="#szukajTytulu" prefHeight="25.0" prefWidth="150.0" text="Szukaj Tytulu" GridPane.columnIndex="4" />
+                              <Button id="buttonSzukajAutora" fx:id="buttonSzukajAutora" mnemonicParsing="false" onAction="#szukajAutora" prefHeight="25.0" prefWidth="150.0" text="Szukaj Autora" GridPane.columnIndex="4" GridPane.rowIndex="1" />
                               <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="88.0" text="Tytuł:" GridPane.halignment="RIGHT" />
-                              <TextField id="TextLineTytulKsiazki" prefHeight="25.0" prefWidth="613.0" promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.columnSpan="3" />
-                              <TextField id="TextLineImieAutora" prefHeight="25.0" prefWidth="311.0" promptText="Imie Autora" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField id="TextLineNazwiskoAutora" promptText="Nazwisko Autora" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <TextField id="textLineTytulKsiazki" fx:id="textFieldTytul" prefHeight="25.0" prefWidth="613.0" promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+                              <TextField id="textLineImieAutora" fx:id="textFieldImieAutora" prefHeight="25.0" prefWidth="311.0" promptText="Imie Autora" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField id="textLineNazwiskoAutora" fx:id="textFieldNazwiskoAutora" promptText="Nazwisko Autora" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                               <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="98.0" text="Label:" GridPane.rowIndex="1" />
-                              <TableView id="tabelaSzukaj" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                              <TableView fx:id="tabelaSzukaj" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
                                 <columns>
-                                  <TableColumn prefWidth="75.0" text="C1" />
-                                  <TableColumn prefWidth="75.0" text="C2" />
+                                  <TableColumn fx:id="kolumnaTytul" prefWidth="150.0" text="Tytul" />
+                                  <TableColumn fx:id="kolumnaAutor" minWidth="0.0" prefWidth="151.0" text="Autor" />
+                                    <TableColumn fx:id="kolumnaGatunek" minWidth="0.0" prefWidth="156.0" text="Gatunek" />
+                                    <TableColumn fx:id="kolumnaRokWydania" prefWidth="106.0" text="Rok Wydania" />
+                                    <TableColumn fx:id="kolumnaStatus" prefWidth="74.0" text="Status" />
                                 </columns>
                               </TableView>
                            </children>
@@ -87,10 +89,10 @@
                           </rowConstraints>
                            <children>
                               <Label text="Dane użytkownika:" />
-                              <TextField promptText="Imie" GridPane.columnIndex="1" />
-                              <TextField promptText="Nazwisko" GridPane.columnIndex="3" />
-                              <Button mnemonicParsing="false" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="6" />
-                              <ChoiceBox prefWidth="150.0" GridPane.columnIndex="4" />
+                              <TextField fx:id="textFieldImieUzytkownika" promptText="Imie" GridPane.columnIndex="1" />
+                              <TextField fx:id="textFieldNazwiskoUzytkownika" promptText="Nazwisko" GridPane.columnIndex="3" />
+                              <Button fx:id="buttonDodajUzytkownika" mnemonicParsing="false" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="6" />
+                              <ChoiceBox fx:id="dropDown" prefWidth="150.0" GridPane.columnIndex="4" />
                            </children>
                         </GridPane>
                      </children>
@@ -105,4 +107,4 @@
         </tabs>
       </TabPane>
    </children>
-</fx:root>
+</AnchorPane>
