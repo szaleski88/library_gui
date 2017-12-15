@@ -100,6 +100,22 @@ public class ZarzadzanieBiblioteka {
             System.out.println(i+". " + wypozyczoneUzytkownika.get(i));
         }
     }
+    public static List<Wpis> getWypozyczoneKsiazki() {
+
+        return biblioteka.getRejestrWypozyczen().stream()
+                .filter(wpis -> !wpis.getKsiazka().getDostepna())
+                .collect(Collectors.toList());
+    }
+
+    public static List<Wpis> getWypozyczonePrzezUzytkownika(String imie, String nazwisko){
+
+        List<Wpis> rejestr = biblioteka.getRejestrWypozyczen();
+
+
+        return rejestr.stream().filter(wpis -> wpis.getUzytkownik().getImie().equalsIgnoreCase(imie) &&
+                wpis.getUzytkownik().getNazwisko().equalsIgnoreCase(nazwisko) && !wpis.getKsiazka().getDostepna())
+                .collect(Collectors.toList());
+    }
 
 
     public static void main(String[] args) {

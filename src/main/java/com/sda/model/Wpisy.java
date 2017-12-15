@@ -5,10 +5,10 @@ import javax.xml.bind.annotation.*;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="ksiazki")
+@XmlRootElement(name="wpisy")
 public class Wpisy{
 
-    @XmlElements(@XmlElement(name="ksiazka"))
+    @XmlElements(@XmlElement(name="wpis"))
     private List<Wpis> wpisy;
 
     public Wpisy(){}

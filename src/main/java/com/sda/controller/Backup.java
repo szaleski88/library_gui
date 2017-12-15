@@ -72,13 +72,7 @@ public class Backup {
     public void odczytUzytkownikow(Biblioteka biblioteka) throws JAXBException {
 
         File file = new File("./uzytkownicy.xml");
-        if(!file.exists())
-            try {
-                file.getParentFile().mkdirs();
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        createFile(file);
 
         JAXBContext jaxbContext = JAXBContext.newInstance(Uzytkownicy.class);
 
@@ -93,6 +87,8 @@ public class Backup {
     public void odczytKsiazek(Biblioteka biblioteka) throws JAXBException {
 
         File file = new File ("./ksiazki.xml");
+        createFile(file);
+
         JAXBContext jaxbContext = JAXBContext.newInstance(Ksiazki.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -107,18 +103,30 @@ public class Backup {
 
     public void odczytRejestru(Biblioteka biblioteka) throws JAXBException {
 
-        File file = new File ("./wpisy.xml");
+        File file = new File("./wpisy.xml");
+        createFile(file);
         JAXBContext jaxbContext = JAXBContext.newInstance(Wpisy.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         Wpisy wpisy = (Wpisy) jaxbUnmarshaller.unmarshal(file);
-
-        for (Wpis wp : wpisy.getWpisy()) {
-            biblioteka.dodajWpis(wp);
+        if (wpisy.getWpisy().size() >  0) {
+            for (Wpis wp : wpisy.getWpisy()) {
+                biblioteka.dodajWpis(wp);
+            }
         }
-
-
     }
+
+    private void createFile(File file){
+        if(!file.exists())
+            try {
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+
     public static void main(String[] args) throws JAXBException {
 
         Biblioteka biblioteka = new Biblioteka();
@@ -127,17 +135,17 @@ public class Backup {
 
         Backup b = new Backup();
 
-        /*
+
         biblioteka.dodajUzytkownika(new Uzytkownik("Stefan", "Mikrut", Plec.MEZCZYZNA));
         biblioteka.dodajUzytkownika(new Uzytkownik("Mariola", "Kowalska", Plec.KOBIETA));
         biblioteka.dodajUzytkownika(new Uzytkownik("Krzysztof", "Różalski", Plec.MEZCZYZNA));
         biblioteka.dodajUzytkownika(new Uzytkownik("Katarzyna", "Kowalec", Plec.KOBIETA));
 
         b.zapisUzytkownikow(biblioteka);
-        */
+
 
         b.odczytKsiazek(biblioteka);
-        b.odczytUzytkownikow(biblioteka);
+        //b.odczytUzytkownikow(biblioteka);
         ZarzadzanieBiblioteka zb = new ZarzadzanieBiblioteka(biblioteka);
 
         zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(12), biblioteka.getListaUzytkownikow().get(1));
@@ -146,6 +154,7 @@ public class Backup {
         zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(2), biblioteka.getListaUzytkownikow().get(3));
 
         zb.wyswietlWypozyczoneKsiazki();
+        b.zapisRejestru(biblioteka);
 
 
 

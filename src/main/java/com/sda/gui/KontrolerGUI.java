@@ -67,6 +67,12 @@ public class KontrolerGUI {
     private TableView<Wpis> tabelaWypozyczone;
     @FXML
     private ComboBox<String> comboBox;
+    @FXML
+    private TextField textFieldNazwiskoWypozyczajacego;
+    @FXML
+    private TextField textFieldImieWypozyczajacego;
+
+
 
     public KontrolerGUI() {
         biblioteka = new Biblioteka();
@@ -79,7 +85,18 @@ public class KontrolerGUI {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        zb.wyswietlListeKsiazek();
+        try {
+            backup.odczytUzytkownikow(biblioteka);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        try {
+            backup.odczytRejestru(biblioteka);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        zb.wyswietlWypozyczoneKsiazki();
+//        zb.wyswietlListeKsiazek();
 //        dropDown.getItems().addAll(Plec.values());
         // tableSetup();
     }
@@ -164,10 +181,14 @@ public class KontrolerGUI {
 
     @FXML
     public void szukajWypozyczonychUzytkownika() {
+        List<Wpis> wypUzytk = zb.getWypozyczonePrzezUzytkownika(textFieldImieWypozyczajacego.getText(),
+                textFieldNazwiskoWypozyczajacego.getText());
+        wypelnijWypozyczone(wypUzytk);
     }
 
     @FXML
     public void szukajWypozyczonych() {
+        zb.getWypozyczoneKsiazki();
 
     }
 

@@ -14,6 +14,8 @@ public class Wpis {
     private Autor autor;
     private String tytul;
 
+    public Wpis(){}
+
     public Wpis(Ksiazka ksiazka, Uzytkownik uzytkownik, LocalDate dataWypozyczenia, LocalDate dataZwrotu) {
         this.ksiazka = ksiazka;
         this.uzytkownik = uzytkownik;
