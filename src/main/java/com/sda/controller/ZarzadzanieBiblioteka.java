@@ -55,15 +55,15 @@ public class ZarzadzanieBiblioteka {
         }
     }
 
-    public void wyszukajPoTytule(String tytul){
+    public List<Ksiazka> wyszukajPoTytule(String tytul){
         WyszukiwanieBinarne wb = new WyszukiwanieBinarne(biblioteka);
-        List<Ksiazka> ksiazkiTytul = wb.szukajTytul(tytul);
+        return wb.szukajTytul(tytul);
 
     }
 
-    public void wyszukajPoAutorze(String imie, String nazwisko){
+    public List<Ksiazka> wyszukajPoAutorze(String imie, String nazwisko){
         WyszukiwanieBinarne wb = new WyszukiwanieBinarne(biblioteka);
-        List<Ksiazka> ksiazkiAutora = wb.szukajAutora(imie, nazwisko);
+        return wb.szukajAutora(imie, nazwisko);
     }
 
     public void  dodajUzytkownika(Uzytkownik uzytkownik){
@@ -111,10 +111,15 @@ public class ZarzadzanieBiblioteka {
 
         List<Wpis> rejestr = biblioteka.getRejestrWypozyczen();
 
-
-        return rejestr.stream().filter(wpis -> wpis.getUzytkownik().getImie().equalsIgnoreCase(imie) &&
+        List<Wpis> wypozyczone =  rejestr.stream().filter(wpis -> wpis.getUzytkownik().getImie().equalsIgnoreCase(imie) &&
                 wpis.getUzytkownik().getNazwisko().equalsIgnoreCase(nazwisko) && !wpis.getKsiazka().getDostepna())
                 .collect(Collectors.toList());
+
+        if (wypozyczone.size() == 0 ) {
+            return null;
+        } else {
+            return wypozyczone;
+        }
     }
 
 
