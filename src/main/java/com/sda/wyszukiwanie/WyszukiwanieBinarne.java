@@ -176,6 +176,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
     public List<Uzytkownik> szukajUzytkownika(String imie, String nazwisko) {
         List<Uzytkownik> uzytkownicy = biblioteka.getListaUzytkownikow();
         List<Uzytkownik> znalezieni = new ArrayList<>();
+
         uzytkownicy.sort((o1, o2) -> {
             if (o1.equals(o2) ) return 0;
             if (o1.getImie().equalsIgnoreCase(o2.getImie())&& o1.getNazwisko().equalsIgnoreCase(o2.getNazwisko())) {
@@ -221,7 +222,7 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
         if ( uzytkownicy.get(index).getImie().equalsIgnoreCase(imie)
                 &&  uzytkownicy.get(index).getNazwisko().equalsIgnoreCase(nazwisko)) {
             return index;
-        } else if ( uzytkownicy.get(index).getImie().compareTo(imie) > 0 ) {
+        } else if ( uzytkownicy.get(index).getImie().compareToIgnoreCase(imie) > 0 ) {
             List<Uzytkownik> lewa = new ArrayList<>();
 
             for (int i = 0; i < index ; i++) {

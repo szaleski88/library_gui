@@ -227,15 +227,21 @@ public class KontrolerGUI {
     }
 
     public void wypozyczKsiazke() {
+        Uzytkownik uz = tableViewUzytkownicy.getSelectionModel().getSelectedItem();
+        Ksiazka ks = tabelaSzukaj.getSelectionModel().getSelectedItem();
+        System.out.println();
+
+        zb.wypozyczKsiazke(ks, uz);
+        System.out.println("Wypozyczone!!!");
 
     }
 
     public void szukajUzytkownika() {
-        String imie = textFieldImieUzytkownika.getText();
-        String nazwisko = textFieldNazwiskoUzytkownika.getText();
+        String imie = textFieldImieUzytkSzukaj.getText();
+        String nazwisko = textFieldNazwiskoUzytkSzukaj.getText();
 
         List<Uzytkownik> uzytkownikSzukany = wyszukaj.szukajUzytkownika(imie, nazwisko);
-
+        System.out.println("Znaleziono uzytkownika: " + uzytkownikSzukany.size());
 
         wypelnijUzytkownikow(uzytkownikSzukany);
     }
