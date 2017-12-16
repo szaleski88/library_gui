@@ -141,11 +141,11 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Dane użytkownika:" />
-                              <TextField fx:id="textFieldImieUzytkownika" promptText="Imie" GridPane.columnIndex="1" />
-                              <TextField fx:id="textFieldNazwiskoUzytkownika" promptText="Nazwisko" GridPane.columnIndex="3" />
+                              <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="153.0" text="Dane użytkownika:" GridPane.columnIndex="1" />
+                              <TextField fx:id="textFieldImieUzytkownika" promptText="Imie" GridPane.columnIndex="3" />
+                              <TextField fx:id="textFieldNazwiskoUzytkownika" promptText="Nazwisko" GridPane.columnIndex="5" />
                               <Button fx:id="buttonDodajUzytkownika" mnemonicParsing="false" onAction="#dodajUzytkownika" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="8" />
-                              <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="plec:" GridPane.columnIndex="5">
+                              <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="plec:" GridPane.columnIndex="6">
                                <items>
                                    <FXCollections fx:factory="observableArrayList">
                                        <String fx:value="Kobieta" />
@@ -156,9 +156,29 @@
                               <Button mnemonicParsing="false" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="8" GridPane.rowIndex="2" />
                               <TextField promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField promptText="Imię Autora" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                              <ComboBox prefWidth="150.0" promptText="Gatunek" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                              <ComboBox prefWidth="150.0" promptText="Gatunek" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                               <items>
+                                   <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="BAJKA" />
+                                       <String fx:value="BIOGRAFIA" />
+                                       <String fx:value="DRAMAT" />
+                                       <String fx:value="HISTORYCZNA" />
+                                       <String fx:value="HORROR" />
+                                       <String fx:value="KLASYKA" />
+                                       <String fx:value="KOMIKS" />
+                                       <String fx:value="OBYCZAJ" />
+                                       <String fx:value="POEZJA" />
+                                       <String fx:value="POZOSTALE" />
+                                       <String fx:value="PRZYGODA" />
+                                       <String fx:value="ROMANS" />
+                                       <String fx:value="SATYRA" />
+                                       <String fx:value="SCIFI" />
+                                       <String fx:value="THRILLER" />
+                                   </FXCollections>
+                               </items>
+                               </ComboBox>
                               <TextField promptText="Nazwisko Autora" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                              <Label prefHeight="17.0" prefWidth="83.0" text="Ksiazka:" GridPane.rowIndex="2" />
+                              <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="83.0" text="Ksiazka:" GridPane.rowIndex="2" />
                               <TextField promptText="rok Wydania" GridPane.columnIndex="7" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
