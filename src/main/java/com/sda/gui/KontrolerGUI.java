@@ -8,7 +8,6 @@ import com.sda.wyszukiwanie.WyszukiwanieBinarne;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -96,10 +95,8 @@ public class KontrolerGUI {
             e.printStackTrace();
         }
 
-
 //        zb.wyswietlListeKsiazek();
 //        dropDown.getItems().addAll(Plec.values());
-        // tableSetup();
     }
 
    @FXML
@@ -180,6 +177,7 @@ public class KontrolerGUI {
 
     @FXML
     public void szukajWypozyczonychUzytkownika() {
+
         List<Wpis> wypUzytk = zb.getWypozyczonePrzezUzytkownika(textFieldImieWypozyczajacego.getText(),
                 textFieldNazwiskoWypozyczajacego.getText());
         wypelnijWypozyczone(wypUzytk);
@@ -212,9 +210,6 @@ public class KontrolerGUI {
         tabelaWypozyczone.getSelectionModel().setSelectionMode(
                 SelectionMode.MULTIPLE
         );
-
-
-
     }
 
     public void shutdown() {
