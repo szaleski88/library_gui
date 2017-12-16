@@ -58,7 +58,6 @@
                                     <TableColumn fx:id="kolumnaUzytkImie" prefWidth="168.0" text="Imię" />
                                     <TableColumn fx:id="kolumnaUzytkNazwisko" minWidth="0.0" prefWidth="304.0" text="Nazwisko" />
                                     <TableColumn fx:id="kolUzytkPlec" minWidth="0.0" prefWidth="88.0" text="Plec" />
-                                    <TableColumn fx:id="kolUzytkIlosc" minWidth="0.0" prefWidth="88.0" text="Il.Wyp" />
                                  </columns>
                               </TableView>
                               <Button fx:id="buttonWypozycz" mnemonicParsing="false" onAction="#wypozyczKsiazke" prefWidth="150.0" text="WYPOŻYCZ" GridPane.columnIndex="5" GridPane.rowIndex="8" />

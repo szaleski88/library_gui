@@ -67,8 +67,6 @@ public class KontrolerGUI {
     @FXML private TableColumn<Uzytkownik, String> kolumnaUzytkNazwisko;
     @FXML private TableColumn<Uzytkownik, Plec> kolUzytkPlec;
 
-    @FXML private TableColumn<Ksiazka, Integer> kolUzytkIlosc;
-
     @FXML
     private TableView<Wpis> tabelaWypozyczone;
     @FXML
@@ -237,11 +235,14 @@ public class KontrolerGUI {
         String nazwisko = textFieldNazwiskoUzytkownika.getText();
 
         List<Uzytkownik> uzytkownikSzukany = wyszukaj.szukajUzytkownika(imie, nazwisko);
+
+
         wypelnijUzytkownikow(uzytkownikSzukany);
     }
 
     public void szukajWszystkichUzytkownikow() {
         List<Uzytkownik> uzytkownicy = biblioteka.getListaUzytkownikow();
+
         wypelnijUzytkownikow(uzytkownicy);
     }
 
@@ -257,9 +258,6 @@ public class KontrolerGUI {
         );
         kolUzytkPlec.setCellValueFactory(
                 new PropertyValueFactory("plec")
-        );
-        kolUzytkIlosc.setCellValueFactory(
-                new PropertyValueFactory("ilosc")
         );
 
         tableViewUzytkownicy.setItems(data);
