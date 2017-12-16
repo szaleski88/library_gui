@@ -3,10 +3,6 @@ package com.sda.model;
 import javax.xml.bind.annotation.*;
 import java.util.UUID;
 
-//@XmlAccessorType(XmlAccessType.FIELD)
-//@XmlAccessorType(XmlAccessType.PROPERTY)
-//@XmlType(name = "", propOrder = {"imie","nazwisko","id","plec"})
-
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "uzytkownik")
 public class Uzytkownik implements  Comparable<Uzytkownik>{

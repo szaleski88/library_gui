@@ -8,37 +8,43 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.FXCollections?>
 
-<AnchorPane prefHeight="655.0" prefWidth="891.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sda.gui.KontrolerGUI">
+<AnchorPane prefHeight="655.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sda.gui.KontrolerGUI">
    <children>
-      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="619.0" prefWidth="866.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="14.0" layoutY="14.0" prefHeight="619.0" prefWidth="928.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Szukaj">
+          <Tab text="Szukaj i Wypozycz">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <GridPane layoutX="14.0" layoutY="14.0" prefHeight="576.0" prefWidth="838.0">
+                        <GridPane layoutX="14.0" layoutY="15.0" prefHeight="575.0" prefWidth="910.0">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="178.0" minWidth="5.0" prefWidth="80.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="320.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="64.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="318.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="161.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="238.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="53.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="206.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="131.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="254.0" minWidth="10.0" prefWidth="162.0" />
                           </columnConstraints>
                           <rowConstraints>
-                              <RowConstraints maxHeight="110.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="220.0" minHeight="0.0" prefHeight="13.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="451.0" minHeight="10.0" prefHeight="438.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="110.0" minHeight="0.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="220.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="451.0" minHeight="10.0" prefHeight="254.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="451.0" minHeight="10.0" prefHeight="24.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="212.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="142.0" minHeight="10.0" prefHeight="117.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="42.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button id="buttonSzukajTytulu" fx:id="buttonSzukajTytulu" mnemonicParsing="false" onAction="#szukajTytulu" prefHeight="25.0" prefWidth="150.0" text="Szukaj Tytulu" GridPane.columnIndex="4" />
-                              <Button id="buttonSzukajAutora" fx:id="buttonSzukajAutora" mnemonicParsing="false" onAction="#szukajAutora" prefHeight="25.0" prefWidth="150.0" text="Szukaj Autora" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                              <Button id="buttonSzukajTytulu" fx:id="buttonSzukajTytulu" mnemonicParsing="false" onAction="#szukajTytulu" prefHeight="25.0" prefWidth="150.0" text="Szukaj Tytulu" GridPane.columnIndex="5" />
+                              <Button id="buttonSzukajAutora" fx:id="buttonSzukajAutora" mnemonicParsing="false" onAction="#szukajAutora" prefHeight="25.0" prefWidth="150.0" text="Szukaj Autora" GridPane.columnIndex="5" GridPane.rowIndex="1" />
                               <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="88.0" text="Tytuł:" GridPane.halignment="RIGHT" />
                               <TextField id="textLineTytulKsiazki" fx:id="textFieldTytul" prefHeight="25.0" prefWidth="613.0" promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.columnSpan="3" />
                               <TextField id="textLineImieAutora" fx:id="textFieldImieAutora" prefHeight="25.0" prefWidth="311.0" promptText="Imie Autora" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <TextField id="textLineNazwiskoAutora" fx:id="textFieldNazwiskoAutora" promptText="Nazwisko Autora" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="98.0" text="Label:" GridPane.rowIndex="1" />
-                              <TableView fx:id="tabelaSzukaj" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="2">
+                              <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="98.0" text="Autor:" GridPane.rowIndex="1" />
+                              <TableView fx:id="tabelaSzukaj" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2">
                                 <columns>
                                   <TableColumn fx:id="kolumnaTytul" prefWidth="150.0" text="Tytul" />
                                   <TableColumn fx:id="kolumnaAutor" minWidth="0.0" prefWidth="151.0" text="Autor" />
@@ -47,15 +53,25 @@
                                     <TableColumn fx:id="kolumnaStatus" prefWidth="74.0" text="Status" />
                                 </columns>
                               </TableView>
+                              <TableView fx:id="tableViewUzytkownicy" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5">
+                                 <columns>
+                                    <TableColumn fx:id="kolumnaUzytkImie" prefWidth="168.0" text="Imię" />
+                                    <TableColumn fx:id="kolumnaUzytkNazwisko" minWidth="0.0" prefWidth="304.0" text="Nazwisko" />
+                                    <TableColumn fx:id="kolUzytkPlec" minWidth="0.0" prefWidth="88.0" text="Plec" />
+                                    <TableColumn fx:id="kolUzytkIlosc" minWidth="0.0" prefWidth="88.0" text="Il.Wyp" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="buttonWypozycz" mnemonicParsing="false" onAction="#wypozyczKsiazke" prefWidth="150.0" text="WYPOŻYCZ" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                              <Button fx:id="buttonSzukajUzytkownika" mnemonicParsing="false" onAction="#szukajUzytkownika" prefWidth="900.0" text="Szukaj Uzytkownika" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                              <TextField fx:id="textFieldImieUzytkSzukaj" promptText="Imię użytkownika" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="textFieldNazwiskoUzytkSzukaj" promptText="Nazwisko Użytkownika" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <Button fx:id="buttonWszyscyUzytkownicy" mnemonicParsing="false" onAction="#szukajWszystkichUzytkownikow" prefWidth="900.0" text="Wszyscy UZ" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                              <Label text="Uzytkownicy:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </children>
                   </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Wypozycz">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
           </Tab>
             <Tab text="Zwroc">
@@ -101,7 +117,7 @@
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Zarzadzaj Uzytkownikami">
+            <Tab text="Zarzadzaj Biblioteką">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -109,9 +125,11 @@
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="174.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="0.0" prefWidth="31.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="236.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="134.0" minWidth="0.0" prefWidth="37.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="136.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="270.0" minWidth="10.0" prefWidth="32.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="203.0" minWidth="10.0" prefWidth="180.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
@@ -126,8 +144,8 @@
                               <Label text="Dane użytkownika:" />
                               <TextField fx:id="textFieldImieUzytkownika" promptText="Imie" GridPane.columnIndex="1" />
                               <TextField fx:id="textFieldNazwiskoUzytkownika" promptText="Nazwisko" GridPane.columnIndex="3" />
-                              <Button fx:id="buttonDodajUzytkownika" mnemonicParsing="false" onAction="#dodajUzytkownika" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="6" />
-                              <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="plec:" GridPane.columnIndex="4">
+                              <Button fx:id="buttonDodajUzytkownika" mnemonicParsing="false" onAction="#dodajUzytkownika" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="8" />
+                              <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="plec:" GridPane.columnIndex="5">
                                <items>
                                    <FXCollections fx:factory="observableArrayList">
                                        <String fx:value="Kobieta" />
@@ -135,15 +153,17 @@
                                    </FXCollections>
                                </items>
                               </ComboBox>
+                              <Button mnemonicParsing="false" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                              <TextField promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField promptText="Imię Autora" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <ComboBox prefWidth="150.0" promptText="Gatunek" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+                              <TextField promptText="Nazwisko Autora" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <Label prefHeight="17.0" prefWidth="83.0" text="Ksiazka:" GridPane.rowIndex="2" />
+                              <TextField promptText="rok Wydania" GridPane.columnIndex="7" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
                   </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Zarzadzaj Ksiazkami">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
             </Tab>
         </tabs>

@@ -72,7 +72,6 @@ public class KontrolerGUI {
     private TextField textFieldImieWypozyczajacego;
 
 
-
     public KontrolerGUI() {
         biblioteka = new Biblioteka();
         zb = new ZarzadzanieBiblioteka(biblioteka);
@@ -94,7 +93,6 @@ public class KontrolerGUI {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-
 //        zb.wyswietlListeKsiazek();
 //        dropDown.getItems().addAll(Plec.values());
     }

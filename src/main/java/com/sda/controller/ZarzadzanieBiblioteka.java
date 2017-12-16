@@ -19,16 +19,16 @@ public class ZarzadzanieBiblioteka {
         biblioteka = biblio;
     }
 
-    private static void dodajKsiazkeDoBiblioteki(Ksiazka ksiazka){
+    private void dodajKsiazkeDoBiblioteki(Ksiazka ksiazka){
 
         biblioteka.dodajKsiazke(ksiazka);
     }
 
-    public static List<String> zwrocTytulyKsiazek() {
+    public List<String> zwrocTytulyKsiazek() {
         return biblioteka.getListaKsiazek().stream().map(ksiazka -> ksiazka.getTytul()).collect(Collectors.toList());
     }
 
-    public static void wypozyczKsiazke(Ksiazka ksiazka, Uzytkownik uzytkownik){
+    public void wypozyczKsiazke(Ksiazka ksiazka, Uzytkownik uzytkownik){
         ksiazka.setDostepna(false);
         Wpis wpis = new Wpis(ksiazka, uzytkownik, LocalDate.now(), null);
         biblioteka.getRejestrWypozyczen().add(wpis);
@@ -66,16 +66,16 @@ public class ZarzadzanieBiblioteka {
         List<Ksiazka> ksiazkiAutora = wb.szukajAutora(imie, nazwisko);
     }
 
-    public static void  dodajUzytkownika(Uzytkownik uzytkownik){
+    public void  dodajUzytkownika(Uzytkownik uzytkownik){
         biblioteka.dodajUzytkownika(uzytkownik);
     }
 
-    public static void dodajUzytkownika(String imie, String nazwisko, Plec plec){
+    public void dodajUzytkownika(String imie, String nazwisko, Plec plec){
         // sprawdzenie czy uzytkownik juz istnieje?
         biblioteka.dodajUzytkownika(new Uzytkownik(imie, nazwisko, plec));
     }
 
-    public static void  wyswietlWypozyczoneKsiazki(){
+    public void  wyswietlWypozyczoneKsiazki(){
 
         List<Ksiazka> wypozyczoneKsiazki = biblioteka.getRejestrWypozyczen().stream()
                 .filter(wpis -> !wpis.getKsiazka().getDostepna()).map(Wpis::getKsiazka)
@@ -88,7 +88,7 @@ public class ZarzadzanieBiblioteka {
 
     }
 
-    public static void wyswietlWypozyczonePrzezUzytkownika(Uzytkownik uzytkownik){
+    public void wyswietlWypozyczonePrzezUzytkownika(Uzytkownik uzytkownik){
 
         List<Wpis> rejestr = biblioteka.getRejestrWypozyczen();
         List<Ksiazka> wypozyczoneUzytkownika = rejestr.stream().filter(wpis -> wpis.getUzytkownik()
@@ -100,14 +100,14 @@ public class ZarzadzanieBiblioteka {
             System.out.println(i+". " + wypozyczoneUzytkownika.get(i));
         }
     }
-    public static List<Wpis> getWypozyczoneKsiazki() {
+    public List<Wpis> getWypozyczoneKsiazki() {
 
         return biblioteka.getRejestrWypozyczen().stream()
                 .filter(wpis -> !wpis.getKsiazka().getDostepna())
                 .collect(Collectors.toList());
     }
 
-    public static List<Wpis> getWypozyczonePrzezUzytkownika(String imie, String nazwisko){
+    public List<Wpis> getWypozyczonePrzezUzytkownika(String imie, String nazwisko){
 
         List<Wpis> rejestr = biblioteka.getRejestrWypozyczen();
 
