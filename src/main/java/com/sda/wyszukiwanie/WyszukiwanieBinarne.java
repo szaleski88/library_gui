@@ -3,9 +3,7 @@ package com.sda.wyszukiwanie;
 
 import com.sda.controller.Backup;
 import com.sda.controller.ZarzadzanieBiblioteka;
-import com.sda.model.Autor;
-import com.sda.model.Biblioteka;
-import com.sda.model.Ksiazka;
+import com.sda.model.*;
 import com.sda.sortowanie.Sortowanie;
 import com.sda.sortowanie.SortowanieSzybkie;
 
@@ -173,5 +171,77 @@ public class WyszukiwanieBinarne implements Wyszukiwanie {
             System.out.println(ksiazka);
         }
 
+    }
+
+    public List<Uzytkownik> szukajUzytkownika(String imie, String nazwisko) {
+        List<Uzytkownik> uzytkownicy = biblioteka.getListaUzytkownikow();
+        List<Uzytkownik> znalezieni = new ArrayList<>();
+        uzytkownicy.sort((o1, o2) -> {
+            if (o1.equals(o2) ) return 0;
+            if (o1.getImie().equalsIgnoreCase(o2.getImie())&& o1.getNazwisko().equalsIgnoreCase(o2.getNazwisko())) {
+                return 0;
+            }
+
+            else if ( o1.getImie().compareToIgnoreCase(o2.getImie()) == 0 ) {
+                return o1.getNazwisko().compareToIgnoreCase(o2.getNazwisko());
+            }
+            else return o1.getImie().compareTo(o2.getImie());
+        });
+
+        int pierwszyTraf = szukajUzytkownikaRekurencyjnie(imie, nazwisko, uzytkownicy);
+        if (pierwszyTraf == -1) return znalezieni;
+
+        znalezieni.add(uzytkownicy.get(pierwszyTraf));
+        for (int i = pierwszyTraf + 1; i < uzytkownicy.size(); i++) {
+            if (uzytkownicy.get(i).getImie().equalsIgnoreCase(imie) &&
+                    uzytkownicy.get(i).getNazwisko().equalsIgnoreCase(nazwisko)) znalezieni.add(uzytkownicy.get(i));
+            else break;
+        }
+
+        for (int i = pierwszyTraf - 1 ; i >= 0; i--) {
+            if (uzytkownicy.get(i).getImie().equalsIgnoreCase(imie) &&
+                    uzytkownicy.get(i).getNazwisko().equalsIgnoreCase(nazwisko)) znalezieni.add(uzytkownicy.get(i));
+            else break;
+        }
+        return znalezieni;
+
+
+
+
+
+    }
+
+    private int szukajUzytkownikaRekurencyjnie(String imie, String nazwisko, List<Uzytkownik> uzytkownicy) {
+
+        if (uzytkownicy==null || uzytkownicy.size() == 0) return -1;
+        int przesuniecie = 0;
+        int szukanaLiczba;
+        int index = uzytkownicy.size() / 2;
+
+        if ( uzytkownicy.get(index).getImie().equalsIgnoreCase(imie)
+                &&  uzytkownicy.get(index).getNazwisko().equalsIgnoreCase(nazwisko)) {
+            return index;
+        } else if ( uzytkownicy.get(index).getImie().compareTo(imie) > 0 ) {
+            List<Uzytkownik> lewa = new ArrayList<>();
+
+            for (int i = 0; i < index ; i++) {
+                lewa.add(i, uzytkownicy.get(i));
+            }
+
+            szukanaLiczba = szukajUzytkownikaRekurencyjnie(imie, nazwisko, lewa);
+        } else {
+            List<Uzytkownik> prawa = new ArrayList<>();
+
+            // NOWOSC!
+            for (int i = index + 1, j = 0; i < uzytkownicy.size() ; i++, j++ ) {
+                prawa.add(j, uzytkownicy.get(i));
+            }
+            przesuniecie = index + 1;
+            szukanaLiczba = szukajUzytkownikaRekurencyjnie(imie, nazwisko, prawa);
+            if ( szukanaLiczba != -1 ) {
+                szukanaLiczba += przesuniecie;
+            }
+        }
+        return szukanaLiczba;
     }
 }

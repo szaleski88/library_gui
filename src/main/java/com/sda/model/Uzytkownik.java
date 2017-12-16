@@ -59,7 +59,16 @@ public class Uzytkownik implements  Comparable<Uzytkownik>{
     }
 
     public int compareTo(Uzytkownik o) {
-       return 0;
+        if (this.equals(o) ) return 0;
+        if (this.imie.equalsIgnoreCase(o.getImie())&& this.getNazwisko().equalsIgnoreCase(o.getNazwisko())) {
+            return 0;
+        }
+
+        else if ( this.imie.compareToIgnoreCase(o.getImie()) == 0 ) {
+            return this.getNazwisko().compareToIgnoreCase(o.getNazwisko());
+        }
+        else return this.getImie().compareTo(o.getImie());
+
     }
 
     @Override

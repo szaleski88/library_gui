@@ -24,4 +24,6 @@ public class Uzytkownicy{
     public void setUzytkownicy(List<Uzytkownik> uzytkownicy) {
         this.uzytkownicy = uzytkownicy;
     }
+
+
 }

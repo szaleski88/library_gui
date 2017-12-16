@@ -2,6 +2,7 @@ package com.sda.wyszukiwanie;
 
 import com.sda.model.Autor;
 import com.sda.model.Ksiazka;
+import com.sda.model.Uzytkownik;
 
 import java.util.List;
 
@@ -15,5 +16,6 @@ public interface Wyszukiwanie {
      */
     List<Ksiazka> szukajTytul(String tytul);
     List<Ksiazka> szukajAutora(String imie, String nazwisko);
+    List<Uzytkownik> szukajUzytkownika(String imie, String nazwisko);
 
 }

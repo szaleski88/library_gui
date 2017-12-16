@@ -63,14 +63,24 @@ public class KontrolerGUI {
     private TableColumn<Wpis, LocalDate> kolumnaDataWypozyczenia;
     @FXML
     private TableColumn<Wpis, String> kolumnaTytulWypozyczony;
+    @FXML private  TableColumn<Uzytkownik, String> kolumnaUzytkImie;
+    @FXML private TableColumn<Uzytkownik, String> kolumnaUzytkNazwisko;
+    @FXML private TableColumn<Uzytkownik, Plec> kolUzytkPlec;
+
+    @FXML private TableColumn<Ksiazka, Integer> kolUzytkIlosc;
+
     @FXML
     private TableView<Wpis> tabelaWypozyczone;
+    @FXML
+    private TableView<Uzytkownik> tableViewUzytkownicy;
     @FXML
     private ComboBox<String> comboBox;
     @FXML
     private TextField textFieldNazwiskoWypozyczajacego;
     @FXML
     private TextField textFieldImieWypozyczajacego;
+    @FXML private TextField textFieldImieUzytkSzukaj;
+    @FXML private TextField textFieldNazwiskoUzytkSzukaj;
 
 
     public KontrolerGUI() {
@@ -218,12 +228,43 @@ public class KontrolerGUI {
         Platform.exit();
     }
 
-    public void wypozyczKsiazke(ActionEvent actionEvent) {
+    public void wypozyczKsiazke() {
+
     }
 
-    public void szukajUzytkownika(ActionEvent actionEvent) {
+    public void szukajUzytkownika() {
+        String imie = textFieldImieUzytkownika.getText();
+        String nazwisko = textFieldNazwiskoUzytkownika.getText();
+
+        List<Uzytkownik> uzytkownikSzukany = wyszukaj.szukajUzytkownika(imie, nazwisko);
+        wypelnijUzytkownikow(uzytkownikSzukany);
     }
 
-    public void szukajWszystkichUzytkownikow(ActionEvent actionEvent) {
+    public void szukajWszystkichUzytkownikow() {
+        List<Uzytkownik> uzytkownicy = biblioteka.getListaUzytkownikow();
+        wypelnijUzytkownikow(uzytkownicy);
+    }
+
+    private void wypelnijUzytkownikow(List<Uzytkownik> uzytkownicy) {
+
+        ObservableList<Uzytkownik> data = FXCollections.observableArrayList(uzytkownicy);
+
+        kolumnaUzytkImie.setCellValueFactory(
+                new PropertyValueFactory<>("imie")
+        );
+        kolumnaUzytkNazwisko.setCellValueFactory(
+                new PropertyValueFactory<>("nazwisko")
+        );
+        kolUzytkPlec.setCellValueFactory(
+                new PropertyValueFactory("plec")
+        );
+        kolUzytkIlosc.setCellValueFactory(
+                new PropertyValueFactory("ilosc")
+        );
+
+        tableViewUzytkownicy.setItems(data);
+        tableViewUzytkownicy.getSelectionModel().setSelectionMode(
+                SelectionMode.SINGLE
+        );
     }
 }
