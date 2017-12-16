@@ -10,13 +10,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import javax.xml.bind.JAXBException;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 public class KontrolerGUI {
@@ -110,21 +118,14 @@ public class KontrolerGUI {
    private void szukajTytulu(){
 
        String tytul = textFieldTytul.getText();
-       System.out.println(tytul);
-       List<Ksiazka> listaKsiazek = new ArrayList<>();
-       listaKsiazek = wyszukaj.szukajTytul(tytul);
-
-       wyswietlWyniki(listaKsiazek);
+       wyswietlWyniki(zb.wyszukajPoTytule(tytul));
    }
 
     @FXML
     private void szukajAutora(){
         String imie = textFieldImieAutora.getText();
         String nazwisko = textFieldNazwiskoAutora.getText();
-        System.out.println(imie + " " + nazwisko);
-        List<Ksiazka> listaKsiazke = wyszukaj.szukajAutora(imie, nazwisko);
-        System.out.println("Znaleziomo: " + listaKsiazke.size());
-        wyswietlWyniki(listaKsiazke);
+        wyswietlWyniki(zb.wyszukajPoAutorze(imie, nazwisko));
     }
 
 
@@ -177,17 +178,22 @@ public class KontrolerGUI {
         List<Wpis> wpisy = tabelaWypozyczone.getSelectionModel().getSelectedItems();
         for (Wpis wpis : wpisy) {
             wpis.setDataZwrotu(LocalDate.now());
-            wpis.getKsiazka().setDostepna(true);
+            zmienStatusKsiazki(wpis.getKsiazka());
+
             System.out.println("Pomyślnie zwrócono ksiązkę: " + wpis.getKsiazka().getTytul());
         }
     }
 
+    private void zmienStatusKsiazki(Ksiazka ksiazka) {
+        List<Ksiazka> ksiazkaSzukana = biblioteka.getListaKsiazek().stream().filter(ks -> ks.getID().equals(ksiazka.getID())).collect(Collectors.toList());
+        ksiazkaSzukana.get(0).setDostepna(true);
+    }
+
     @FXML
     public void szukajWypozyczonychUzytkownika() {
-
         List<Wpis> wypUzytk = zb.getWypozyczonePrzezUzytkownika(textFieldImieWypozyczajacego.getText(),
                 textFieldNazwiskoWypozyczajacego.getText());
-        wypelnijWypozyczone(wypUzytk);
+        if( wypUzytk!= null) wypelnijWypozyczone(wypUzytk);
     }
 
     @FXML
@@ -270,5 +276,25 @@ public class KontrolerGUI {
         tableViewUzytkownicy.getSelectionModel().setSelectionMode(
                 SelectionMode.SINGLE
         );
+    }
+
+    public void otworzOknoDodawaniaOsoby(ActionEvent actionEvent) {
+        Stage stage = new Stage();
+        Parent root = null;
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("dodajKsiazke.fxml"));
+//            root = FXMLLoader.load(getClass().getResource("BibliotekaGUI.fxml"));
+            root = loader.load();
+            Scene scene = new Scene(root);
+            // to sprawia że okno spod spodu jest ZABLOKOWANE!!!!
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            stage.show();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }

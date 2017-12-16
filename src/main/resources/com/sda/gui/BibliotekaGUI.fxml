@@ -152,7 +152,7 @@
                                    </FXCollections>
                                </items>
                               </ComboBox>
-                              <Button mnemonicParsing="false" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" onAction="#otworzOknoDodawaniaOsoby" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="8" GridPane.rowIndex="2" />
                               <TextField promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <TextField promptText="Imię Autora" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                               <ComboBox prefWidth="150.0" promptText="Gatunek" GridPane.columnIndex="6" GridPane.rowIndex="2">
