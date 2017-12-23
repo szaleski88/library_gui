@@ -139,7 +139,7 @@ public class Backup {
         b.readBooksFromFile(library);
         b.readUsersFromFile(library);
         LibraryManagement zb = new LibraryManagement(library);
-        User user = new User("Sebastian", "Zaleski", Gender.MEZCZYZNA);
+        User user = new User("Sebastian", "Zaleski", Gender.MALE);
         library.addUser(user);
 
         zb.borrowBook(library.getAllBooks().get(44), user);
