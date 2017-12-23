@@ -19,7 +19,7 @@ public class LibraryManagement {
         library = library;
     }
 
-    private void dodajKsiazkeDoBiblioteki(Book book){
+    private void addBookToLibrary(Book book){
 
         library.addBook(book);
     }
@@ -122,23 +122,4 @@ public class LibraryManagement {
         }
     }
 
-
-    public static void main(String[] args) {
-
-        Library library = new Library();
-        Backup b = new Backup();
-        LibraryManagement zb = new LibraryManagement(library);
-
-        try {
-            b.readBooksFromFile(library);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        zb.dodajKsiazkeDoBiblioteki(new Book("Dziewczyna z pociągu", "Maria", "Konopnicka", 2016, Genre.THRILLER));
-        zb.dodajKsiazkeDoBiblioteki(new Book("Nad Niemnem", "Eliza", "Orzeszkowa", 2016, Genre.HORROR));
-
-
-
-    }
 }
