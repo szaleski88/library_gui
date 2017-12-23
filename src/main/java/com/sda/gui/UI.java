@@ -7,6 +7,6 @@ public class UI {
        Library library = new Library();
 
 
-        System.out.println(library.getListaKsiazek());
+        System.out.println(library.getBooksList());
     }
 }

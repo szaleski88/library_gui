@@ -14,9 +14,9 @@ public class LibraryManagement {
     private static Library library;
 
 
-    public LibraryManagement(Library biblio){
+    public LibraryManagement(Library library){
 
-        library = biblio;
+        library = library;
     }
 
     private void dodajKsiazkeDoBiblioteki(Book book){
@@ -24,101 +24,101 @@ public class LibraryManagement {
         library.addBook(book);
     }
 
-    public List<String> zwrocTytulyKsiazek() {
-        return library.getListaKsiazek().stream().map(ksiazka -> ksiazka.getTytul()).collect(Collectors.toList());
+    public List<String> getBooksTitles() {
+        return library.getBooksList().stream().map(book -> book.getTitle()).collect(Collectors.toList());
     }
 
-    public void wypozyczKsiazke(Book book, User user){
-        book.setDostepna(false);
+    public void borrowBook(Book book, User user){
+        book.setAvailable(false);
         LogEntry logEntry = new LogEntry(book, user, LocalDate.now(), null);
-        library.getRejestrWypozyczen().add(logEntry);
+        library.getRegistry().add(logEntry);
     }
 
-    public void zwrocKsiazke(Book book, User user){
-        Optional<LogEntry> rejWyp = library.getRejestrWypozyczen().stream()
-                .filter(wpis -> wpis.getBook().equals(book) && wpis.getUser().equals(user) && !wpis.getBook()
-                        .getDostepna()).findFirst();
+    public void returnBorrowedBook(Book book, User user){
+        Optional<LogEntry> rejWyp = library.getRegistry().stream()
+                .filter(logEntry -> logEntry.getBook().equals(book) && logEntry.getUser().equals(user) && !logEntry.getBook()
+                        .getAvailable()).findFirst();
         if ( rejWyp.isPresent()) {
             LogEntry logEntry = rejWyp.get();
-            logEntry.setDataZwrotu(LocalDate.now());
-            logEntry.getBook().setDostepna(true);
-            System.out.println("Book: {" + book.toString() + "} została pomyślnie zwrócona!");
+            logEntry.setReturnDate(LocalDate.now());
+            logEntry.getBook().setAvailable(true);
+            System.out.println("Book: {" + book.toString() + "} was successfully returned!");
         } else {
-            System.out.println("WYSTĄPIL JAKIS BLAD!!!");
+            System.out.println("An Error occured while returning a book!!!");
         }
     }
 
-    public void wyswietlListeKsiazek() {
+    public void displayBooksList() {
 
-        for (Book book : library.getListaKsiazek()){
+        for (Book book : library.getBooksList()){
             System.out.println(book);
         }
     }
 
-    public List<Book> wyszukajPoTytule(String tytul){
-        BinarySearch wb = new BinarySearch(library);
-        return wb.szukajTytul(tytul);
+    public List<Book> searchByTitle(String title){
+        BinarySearch bs = new BinarySearch(library);
+        return bs.searchByTitle(title);
 
     }
 
-    public List<Book> wyszukajPoAutorze(String imie, String nazwisko){
-        BinarySearch wb = new BinarySearch(library);
-        return wb.szukajAutora(imie, nazwisko);
+    public List<Book> searchByAuthor(String firstName, String lastName){
+        BinarySearch bs = new BinarySearch(library);
+        return bs.szukajAutora(firstName, lastName);
     }
 
-    public void  dodajUzytkownika(User user){
+    public void addUser(User user){
         library.addUser(user);
     }
 
-    public void dodajUzytkownika(String imie, String nazwisko, Gender gender){
+    public void addUser(String firstName, String lastName, Gender gender){
         // sprawdzenie czy uzytkownik juz istnieje?
-        library.addUser(new User(imie, nazwisko, gender));
+        library.addUser(new User(firstName, lastName, gender));
     }
 
-    public void  wyswietlWypozyczoneKsiazki(){
+    public void displayAllBorrowedBooks(){
 
-        List<Book> wypozyczoneKsiazki = library.getRejestrWypozyczen().stream()
-                .filter(wpis -> !wpis.getBook().getDostepna()).map(LogEntry::getBook)
+        List<Book> borrowedBooks = library.getRegistry().stream()
+                .filter(logEntry -> !logEntry.getBook().getAvailable()).map(LogEntry::getBook)
                 .collect(Collectors.toList());
 
-        System.out.println("AKTUALNIE WYPOZYCZONE KSIAZKI:");
-        for (int i = 0; i < wypozyczoneKsiazki.size(); i++) {
-            System.out.println(i+". " + wypozyczoneKsiazki.get(i));
+        System.out.println("Currently borrowed books:");
+        for (int i = 0; i < borrowedBooks.size(); i++) {
+            System.out.println(i+". " + borrowedBooks.get(i));
         }
 
     }
 
-    public void wyswietlWypozyczonePrzezUzytkownika(User user){
+    public void displayBooksBorrowedByUser(User user){
 
-        List<LogEntry> rejestr = library.getRejestrWypozyczen();
-        List<Book> wypozyczoneUzytkownika = rejestr.stream().filter(wpis -> wpis.getUser()
-                .equals(user) && !wpis.getBook().getDostepna())
+        List<LogEntry> registry = library.getRegistry();
+        List<Book> borrowedByUser = registry.stream().filter(logEntry -> logEntry.getUser()
+                .equals(user) && !logEntry.getBook().getAvailable())
                 .map(LogEntry::getBook).collect(Collectors.toList());
 
-        System.out.println("AKTUALNIE WYPOZYCZONE KSIAZKI PRZEZ: " + user.toString());
-        for (int i = 0; i < wypozyczoneUzytkownika.size(); i++) {
-            System.out.println(i+". " + wypozyczoneUzytkownika.get(i));
+        System.out.println("Books borrowed by : " + user.toString());
+        for (int i = 0; i < borrowedByUser.size(); i++) {
+            System.out.println(i+". " + borrowedByUser.get(i));
         }
     }
-    public List<LogEntry> getWypozyczoneKsiazki() {
+    public List<LogEntry> getBorrowedBooks() {
 
-        return library.getRejestrWypozyczen().stream()
-                .filter(wpis -> !wpis.getBook().getDostepna())
+        return library.getRegistry().stream()
+                .filter(logEntry -> !logEntry.getBook().getAvailable())
                 .collect(Collectors.toList());
     }
 
-    public List<LogEntry> getWypozyczonePrzezUzytkownika(String imie, String nazwisko){
+    public List<LogEntry> getBorrowedByUser(String firstName, String lastName){
 
-        List<LogEntry> rejestr = library.getRejestrWypozyczen();
+        List<LogEntry> registry = library.getRegistry();
 
-        List<LogEntry> wypozyczone =  rejestr.stream().filter(wpis -> wpis.getUser().getImie().equalsIgnoreCase(imie) &&
-                wpis.getUser().getNazwisko().equalsIgnoreCase(nazwisko) && !wpis.getBook().getDostepna())
+        List<LogEntry> borrowedBooks =  registry.stream().filter(logEntry -> logEntry.getUser().getImie().equalsIgnoreCase(firstName) &&
+                logEntry.getUser().getLastName().equalsIgnoreCase(lastName) && !logEntry.getBook().getAvailable())
                 .collect(Collectors.toList());
 
-        if (wypozyczone.size() == 0 ) {
+        if (borrowedBooks.size() == 0 ) {
             return null;
         } else {
-            return wypozyczone;
+            return borrowedBooks;
         }
     }
 

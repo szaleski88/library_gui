@@ -34,7 +34,7 @@ public class LogEntry {
         this.dataWypozyczenia = dataWypozyczenia;
         this.author = book.getAuthor();
         this.dataZwrotu = dataZwrotu;
-        this.tytul = book.getTytul();
+        this.tytul = book.getTitle();
     }
 
     public String getIdKsiazki() {
@@ -65,7 +65,7 @@ public class LogEntry {
         return dataZwrotu;
     }
 
-    public void setDataZwrotu(LocalDate dataZwrotu) {
+    public void setReturnDate(LocalDate dataZwrotu) {
         this.dataZwrotu = dataZwrotu;
     }
 

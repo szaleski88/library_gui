@@ -108,7 +108,7 @@ public class GUIController {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-//        zb.wyswietlListeKsiazek();
+//        zb.displayBooksList();
 //        dropDown.getItems().addAll(Gender.values());
     }
 
@@ -116,14 +116,14 @@ public class GUIController {
    private void szukajTytulu(){
 
        String tytul = textFieldTytul.getText();
-       wyswietlWyniki(zb.wyszukajPoTytule(tytul));
+       wyswietlWyniki(zb.searchByTitle(tytul));
    }
 
     @FXML
     private void szukajAutora(){
         String imie = textFieldImieAutora.getText();
         String nazwisko = textFieldNazwiskoAutora.getText();
-        wyswietlWyniki(zb.wyszukajPoAutorze(imie, nazwisko));
+        wyswietlWyniki(zb.searchByAuthor(imie, nazwisko));
     }
 
 
@@ -175,29 +175,29 @@ public class GUIController {
     public void zwrocZaznaczoneKsiazki() {
         List<LogEntry> wpisy = tabelaWypozyczone.getSelectionModel().getSelectedItems();
         for (LogEntry logEntry : wpisy) {
-            logEntry.setDataZwrotu(LocalDate.now());
+            logEntry.setReturnDate(LocalDate.now());
             zmienStatusKsiazki(logEntry.getBook());
 
-            System.out.println("Pomyślnie zwrócono ksiązkę: " + logEntry.getBook().getTytul());
+            System.out.println("Pomyślnie zwrócono ksiązkę: " + logEntry.getBook().getTitle());
         }
     }
 
     private void zmienStatusKsiazki(Book book) {
-        List<Book> bookSzukana = library.getListaKsiazek().stream()
+        List<Book> bookSzukana = library.getBooksList().stream()
                                         .filter(ks -> ks.getID().equals(book.getID())).collect(Collectors.toList());
-        bookSzukana.get(0).setDostepna(true);
+        bookSzukana.get(0).setAvailable(true);
     }
 
     @FXML
     public void szukajWypozyczonychUzytkownika() {
-        List<LogEntry> wypUzytk = zb.getWypozyczonePrzezUzytkownika(textFieldImieWypozyczajacego.getText(),
+        List<LogEntry> wypUzytk = zb.getBorrowedByUser(textFieldImieWypozyczajacego.getText(),
                 textFieldNazwiskoWypozyczajacego.getText());
         if( wypUzytk!= null) wypelnijWypozyczone(wypUzytk);
     }
 
     @FXML
     public void szukajWypozyczonych() {
-        wypelnijWypozyczone(zb.getWypozyczoneKsiazki());
+        wypelnijWypozyczone(zb.getBorrowedBooks());
 
     }
 
@@ -236,7 +236,7 @@ public class GUIController {
         Book ks = tabelaSzukaj.getSelectionModel().getSelectedItem();
         System.out.println();
 
-        zb.wypozyczKsiazke(ks, uz);
+        zb.borrowBook(ks, uz);
         System.out.println("Wypozyczone!!!");
 
     }

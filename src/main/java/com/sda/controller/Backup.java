@@ -25,10 +25,10 @@ public class Backup {
     }
 
     public void saveLogsToFile(Library library) {
-        LogEntries logEntries = new LogEntries(library);
+        Registry registry = new Registry(library);
 
         try {
-            saveToFile(logEntries);
+            saveToFile(registry);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -95,14 +95,14 @@ public class Backup {
 
     public void readLogsFromFile(Library library) throws JAXBException {
 
-        File file = new File("./logEntries.xml");
+        File file = new File("./registry.xml");
         createFile(file);
-        JAXBContext jaxbContext = JAXBContext.newInstance(LogEntries.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(Registry.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        LogEntries logEntries = (LogEntries) jaxbUnmarshaller.unmarshal(file);
-        if (logEntries.getEntries().size() >  0) {
-            for (LogEntry le : logEntries.getEntries()) {
+        Registry registry = (Registry) jaxbUnmarshaller.unmarshal(file);
+        if (registry.getEntries().size() >  0) {
+            for (LogEntry le : registry.getEntries()) {
                 library.addEntry(le);
             }
         }
@@ -142,16 +142,16 @@ public class Backup {
         User user = new User("Sebastian", "Zaleski", Gender.MEZCZYZNA);
         library.addUser(user);
 
-        zb.wypozyczKsiazke(library.getListaKsiazek().get(44), user);
-        zb.wypozyczKsiazke(library.getListaKsiazek().get(57), user);
-        zb.wypozyczKsiazke(library.getListaKsiazek().get(111), user);
-        zb.wypozyczKsiazke(library.getListaKsiazek().get(178), user);
-        zb.wypozyczKsiazke(library.getListaKsiazek().get(11), library.getListaUzytkownikow().get(0));
-        zb.wypozyczKsiazke(library.getListaKsiazek().get(17), library.getListaUzytkownikow().get(0));
-        zb.wypozyczKsiazke(library.getListaKsiazek().get(100), library.getListaUzytkownikow().get(2));
-        zb.wypozyczKsiazke(library.getListaKsiazek().get(101), library.getListaUzytkownikow().get(3));
+        zb.borrowBook(library.getBooksList().get(44), user);
+        zb.borrowBook(library.getBooksList().get(57), user);
+        zb.borrowBook(library.getBooksList().get(111), user);
+        zb.borrowBook(library.getBooksList().get(178), user);
+        zb.borrowBook(library.getBooksList().get(11), library.getListaUzytkownikow().get(0));
+        zb.borrowBook(library.getBooksList().get(17), library.getListaUzytkownikow().get(0));
+        zb.borrowBook(library.getBooksList().get(100), library.getListaUzytkownikow().get(2));
+        zb.borrowBook(library.getBooksList().get(101), library.getListaUzytkownikow().get(3));
 
-        zb.wyswietlWypozyczoneKsiazki();
+        zb.displayAllBorrowedBooks();
         b.saveUsersToFile(library);
         b.saveLogsToFile(library);
 

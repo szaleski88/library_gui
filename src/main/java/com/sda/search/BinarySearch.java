@@ -30,15 +30,15 @@ public class BinarySearch implements Search {
     }
 
     @Override
-    public List<Book> szukajTytul(String tytul) {
+    public List<Book> searchByTitle(String tytul) {
         // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
-        //this.wszystkieKsiazki = sort.sortuj(library.getListaKsiazek());
+        //this.wszystkieKsiazki = sort.sortuj(library.getBooksList());
         this.trafienia = new ArrayList<>();
-        this.wszystkieKsiazki = library.getListaKsiazek();
+        this.wszystkieKsiazki = library.getBooksList();
 
         this.wszystkieKsiazki.sort((a, b) -> {
-            String tytul1 = a.getTytul();
-            String tytul2 = b.getTytul();
+            String tytul1 = a.getTitle();
+            String tytul2 = b.getTitle();
             return tytul1.compareToIgnoreCase(tytul2);
         });
 
@@ -47,12 +47,12 @@ public class BinarySearch implements Search {
 
         trafienia.add(wszystkieKsiazki.get(pierwszyTraf));
         for (int i = pierwszyTraf + 1; i < wszystkieKsiazki.size(); i++) {
-            if (wszystkieKsiazki.get(i).getTytul().equalsIgnoreCase(tytul)) trafienia.add(wszystkieKsiazki.get(i));
+            if (wszystkieKsiazki.get(i).getTitle().equalsIgnoreCase(tytul)) trafienia.add(wszystkieKsiazki.get(i));
             else break;
         }
 
         for (int i = pierwszyTraf - 1 ; i >= 0; i--) {
-            if (wszystkieKsiazki.get(i).getTytul().equalsIgnoreCase(tytul)) trafienia.add(wszystkieKsiazki.get(i));
+            if (wszystkieKsiazki.get(i).getTitle().equalsIgnoreCase(tytul)) trafienia.add(wszystkieKsiazki.get(i));
             else break;
         }
         return trafienia;
@@ -63,7 +63,7 @@ public class BinarySearch implements Search {
         // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
         this.trafienia = new ArrayList<>();
         Author author = new Author(imie, nazwisko);
-        this.wszystkieKsiazki = sortowanie.sortuj(library.getListaKsiazek());
+        this.wszystkieKsiazki = sortowanie.sortuj(library.getBooksList());
         int pierwszyTraf = szukajAutoraRekurencyjnie(author, wszystkieKsiazki);
         if (pierwszyTraf == -1) return trafienia;
 
@@ -120,9 +120,9 @@ public class BinarySearch implements Search {
         int szukanaLiczba;
         int index = ksiazki.size() / 2;
 
-        if ( ksiazki.get(index).getTytul().equalsIgnoreCase(tytul) ) {
+        if ( ksiazki.get(index).getTitle().equalsIgnoreCase(tytul) ) {
             return index;
-        } else if ( ksiazki.get(index).getTytul().compareToIgnoreCase(tytul) > 0 ) {
+        } else if ( ksiazki.get(index).getTitle().compareToIgnoreCase(tytul) > 0 ) {
             List<Book> lewa = new ArrayList<>();
 
             for (int i = 0; i < index ; i++) {
@@ -158,10 +158,10 @@ public class BinarySearch implements Search {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        System.out.println(library.getListaKsiazek().size());
+        System.out.println(library.getBooksList().size());
         BinarySearch wb = new BinarySearch(library);
 
-        List<Book> ksiazki = wb.szukajTytul("Domowy Pan");
+        List<Book> ksiazki = wb.searchByTitle("Domowy Pan");
         //List<Book> autorzy = wb.szukajAutora("Adam", "Mickiewicz");
 
         for (Book book : ksiazki){
@@ -176,12 +176,12 @@ public class BinarySearch implements Search {
 
         uzytkownicy.sort((o1, o2) -> {
             if (o1.equals(o2) ) return 0;
-            if (o1.getImie().equalsIgnoreCase(o2.getImie())&& o1.getNazwisko().equalsIgnoreCase(o2.getNazwisko())) {
+            if (o1.getImie().equalsIgnoreCase(o2.getImie())&& o1.getLastName().equalsIgnoreCase(o2.getLastName())) {
                 return 0;
             }
 
             else if ( o1.getImie().compareToIgnoreCase(o2.getImie()) == 0 ) {
-                return o1.getNazwisko().compareToIgnoreCase(o2.getNazwisko());
+                return o1.getLastName().compareToIgnoreCase(o2.getLastName());
             }
             else return o1.getImie().compareTo(o2.getImie());
         });
@@ -192,13 +192,13 @@ public class BinarySearch implements Search {
         znalezieni.add(uzytkownicy.get(pierwszyTraf));
         for (int i = pierwszyTraf + 1; i < uzytkownicy.size(); i++) {
             if (uzytkownicy.get(i).getImie().equalsIgnoreCase(imie) &&
-                    uzytkownicy.get(i).getNazwisko().equalsIgnoreCase(nazwisko)) znalezieni.add(uzytkownicy.get(i));
+                    uzytkownicy.get(i).getLastName().equalsIgnoreCase(nazwisko)) znalezieni.add(uzytkownicy.get(i));
             else break;
         }
 
         for (int i = pierwszyTraf - 1 ; i >= 0; i--) {
             if (uzytkownicy.get(i).getImie().equalsIgnoreCase(imie) &&
-                    uzytkownicy.get(i).getNazwisko().equalsIgnoreCase(nazwisko)) znalezieni.add(uzytkownicy.get(i));
+                    uzytkownicy.get(i).getLastName().equalsIgnoreCase(nazwisko)) znalezieni.add(uzytkownicy.get(i));
             else break;
         }
         return znalezieni;
@@ -217,7 +217,7 @@ public class BinarySearch implements Search {
         int index = uzytkownicy.size() / 2;
 
         if ( uzytkownicy.get(index).getImie().equalsIgnoreCase(imie)
-                &&  uzytkownicy.get(index).getNazwisko().equalsIgnoreCase(nazwisko)) {
+                &&  uzytkownicy.get(index).getLastName().equalsIgnoreCase(nazwisko)) {
             return index;
         } else if ( uzytkownicy.get(index).getImie().compareToIgnoreCase(imie) > 0 ) {
             List<User> lewa = new ArrayList<>();

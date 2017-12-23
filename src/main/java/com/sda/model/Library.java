@@ -25,14 +25,14 @@ public class Library {
         listaUzytkownikow.add(user);
     }
 
-    public List<Book> getListaKsiazek() {
+    public List<Book> getBooksList() {
         return listaKsiazek;
     }
     public List<User> getListaUzytkownikow() {
         return listaUzytkownikow;
     }
 
-    public List<LogEntry> getRejestrWypozyczen() {
+    public List<LogEntry> getRegistry() {
         return rejestrWypozyczen;
     }
 

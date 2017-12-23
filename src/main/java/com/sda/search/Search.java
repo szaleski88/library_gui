@@ -13,7 +13,7 @@ public interface Search {
      * jeśli nie - zwraca -1
      * @return
      */
-    List<Book> szukajTytul(String tytul);
+    List<Book> searchByTitle(String tytul);
     List<Book> szukajAutora(String imie, String nazwisko);
     List<User> szukajUzytkownika(String imie, String nazwisko);
 

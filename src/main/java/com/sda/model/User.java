@@ -39,7 +39,7 @@ public class User implements  Comparable<User>{
         return imie;
     }
 
-    public String getNazwisko() {
+    public String getLastName() {
         return nazwisko;
     }
 
@@ -60,12 +60,12 @@ public class User implements  Comparable<User>{
 
     public int compareTo(User o) {
         if (this.equals(o) ) return 0;
-        if (this.imie.equalsIgnoreCase(o.getImie())&& this.getNazwisko().equalsIgnoreCase(o.getNazwisko())) {
+        if (this.imie.equalsIgnoreCase(o.getImie())&& this.getLastName().equalsIgnoreCase(o.getLastName())) {
             return 0;
         }
 
         else if ( this.imie.compareToIgnoreCase(o.getImie()) == 0 ) {
-            return this.getNazwisko().compareToIgnoreCase(o.getNazwisko());
+            return this.getLastName().compareToIgnoreCase(o.getLastName());
         }
         else return this.getImie().compareTo(o.getImie());
 

@@ -13,7 +13,7 @@ public class AllBooks {
     public AllBooks(){}
 
     public AllBooks(Library b){
-        this.ksiazki = b.getListaKsiazek();
+        this.ksiazki = b.getBooksList();
     }
 
     public List<Book> getBooks() {

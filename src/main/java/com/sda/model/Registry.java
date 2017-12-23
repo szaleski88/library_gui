@@ -6,15 +6,15 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="wpisy")
-public class LogEntries {
+public class Registry {
 
     @XmlElements(@XmlElement(name="wpis"))
     private List<LogEntry> wpisy;
 
-    public LogEntries(){}
+    public Registry(){}
 
-    public LogEntries(Library b){
-        this.wpisy = b.getRejestrWypozyczen();
+    public Registry(Library b){
+        this.wpisy = b.getRegistry();
     }
 
     public List<LogEntry> getEntries() {

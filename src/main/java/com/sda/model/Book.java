@@ -67,7 +67,7 @@ public class Book implements Comparable<Book>{
         this.genre = genre;
     }
 
-    public String getTytul() {
+    public String getTitle() {
         return tytul;
     }
 
@@ -88,11 +88,11 @@ public class Book implements Comparable<Book>{
     }
 
 
-    public Boolean getDostepna() {
+    public Boolean getAvailable() {
         return dostepna;
     }
 
-    public void setDostepna(Boolean dostepna) {
+    public void setAvailable(Boolean dostepna) {
         this.dostepna = dostepna;
     }
 
@@ -134,12 +134,12 @@ public class Book implements Comparable<Book>{
     public int compareTo(Book o) {
 
         if (this.equals(o) ) return 0;
-        if (this.author.compareTo(o.getAuthor()) == 0 && this.getTytul().equalsIgnoreCase(o.getTytul())) {
+        if (this.author.compareTo(o.getAuthor()) == 0 && this.getTitle().equalsIgnoreCase(o.getTitle())) {
             return 0;
         }
 
         else if ( this.author.compareTo(o.getAuthor()) == 0 ) {
-            return this.getTytul().compareToIgnoreCase(o.getTytul());
+            return this.getTitle().compareToIgnoreCase(o.getTitle());
         }
         else return this.getAuthor().compareTo(o.getAuthor());
 
