@@ -4,23 +4,23 @@ import javax.xml.bind.annotation.*;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="ksiazki")
+@XmlRootElement(name="allBooks")
 public class AllBooks {
 
-    @XmlElements(@XmlElement(name="ksiazka"))
-    private List<Book> ksiazki;
+    @XmlElements(@XmlElement(name="book"))
+    private List<Book> books;
 
     public AllBooks(){}
 
     public AllBooks(Library b){
-        this.ksiazki = b.getBooksList();
+        this.books = b.getAllBooks();
     }
 
     public List<Book> getBooks() {
-        return ksiazki;
+        return books;
     }
 
-    public void setKsiazki(List<Book> ksiazki) {
-        this.ksiazki = ksiazki;
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

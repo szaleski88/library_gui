@@ -129,9 +129,9 @@ public class Backup {
 
 
 //        library.addUser(new User("Stefan", "Mikrut", Gender.MEZCZYZNA));
-//        library.addUser(new User("Mariola", "Kowalska", Gender.KOBIETA));
+//        library.addUser(new User("Mariola", "Kowalska", Gender.FEMALE));
 //        library.addUser(new User("Krzysztof", "Różalski", Gender.MEZCZYZNA));
-//        library.addUser(new User("Katarzyna", "Kowalec", Gender.KOBIETA));
+//        library.addUser(new User("Katarzyna", "Kowalec", Gender.FEMALE));
 //
 //        b.saveUsersToFile(library);
 //
@@ -142,14 +142,14 @@ public class Backup {
         User user = new User("Sebastian", "Zaleski", Gender.MEZCZYZNA);
         library.addUser(user);
 
-        zb.borrowBook(library.getBooksList().get(44), user);
-        zb.borrowBook(library.getBooksList().get(57), user);
-        zb.borrowBook(library.getBooksList().get(111), user);
-        zb.borrowBook(library.getBooksList().get(178), user);
-        zb.borrowBook(library.getBooksList().get(11), library.getUsersList().get(0));
-        zb.borrowBook(library.getBooksList().get(17), library.getUsersList().get(0));
-        zb.borrowBook(library.getBooksList().get(100), library.getUsersList().get(2));
-        zb.borrowBook(library.getBooksList().get(101), library.getUsersList().get(3));
+        zb.borrowBook(library.getAllBooks().get(44), user);
+        zb.borrowBook(library.getAllBooks().get(57), user);
+        zb.borrowBook(library.getAllBooks().get(111), user);
+        zb.borrowBook(library.getAllBooks().get(178), user);
+        zb.borrowBook(library.getAllBooks().get(11), library.getUsersList().get(0));
+        zb.borrowBook(library.getAllBooks().get(17), library.getUsersList().get(0));
+        zb.borrowBook(library.getAllBooks().get(100), library.getUsersList().get(2));
+        zb.borrowBook(library.getAllBooks().get(101), library.getUsersList().get(3));
 
         zb.displayAllBorrowedBooks();
         b.saveUsersToFile(library);

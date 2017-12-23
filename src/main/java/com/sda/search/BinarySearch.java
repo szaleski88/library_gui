@@ -32,9 +32,9 @@ public class BinarySearch implements Search {
     @Override
     public List<Book> searchByTitle(String tytul) {
         // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
-        //this.wszystkieKsiazki = sort.sortuj(library.getBooksList());
+        //this.wszystkieKsiazki = sort.sortuj(library.getAllBooks());
         this.trafienia = new ArrayList<>();
-        this.wszystkieKsiazki = library.getBooksList();
+        this.wszystkieKsiazki = library.getAllBooks();
 
         this.wszystkieKsiazki.sort((a, b) -> {
             String tytul1 = a.getTitle();
@@ -63,7 +63,7 @@ public class BinarySearch implements Search {
         // ZACIĄGNIĘCIE I POSORTOWANIE AKTUALNEJ LISTY KSIĄZEK
         this.trafienia = new ArrayList<>();
         Author author = new Author(imie, nazwisko);
-        this.wszystkieKsiazki = sortowanie.sortuj(library.getBooksList());
+        this.wszystkieKsiazki = sortowanie.sortuj(library.getAllBooks());
         int pierwszyTraf = szukajAutoraRekurencyjnie(author, wszystkieKsiazki);
         if (pierwszyTraf == -1) return trafienia;
 
@@ -158,7 +158,7 @@ public class BinarySearch implements Search {
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-        System.out.println(library.getBooksList().size());
+        System.out.println(library.getAllBooks().size());
         BinarySearch wb = new BinarySearch(library);
 
         List<Book> ksiazki = wb.searchByTitle("Domowy Pan");

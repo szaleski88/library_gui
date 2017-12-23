@@ -6,52 +6,52 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="autor")
+@XmlRootElement(name="authorr")
 public class Author implements Comparable<Author>{
 
-    @XmlElement(name = "imie")
-    private String imie;
-    @XmlElement(name = "nazwisko")
-    private String nazwisko;
+    @XmlElement(name = "firstName")
+    private String firstName;
+    @XmlElement(name = "lastName")
+    private String lastName;
 
     public Author(){}
 
-    public Author(String imie, String nazwisko) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
 
     }
 
-    public String getImie() {
-        return imie;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getNazwisko() {
-        return nazwisko;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setImie(String imie) {
-        this.imie = imie;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setNazwisko(String nazwisko) {
-        this.nazwisko = nazwisko;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer(imie);
-        sb.append(" ").append(nazwisko);
+        final StringBuffer sb = new StringBuffer(firstName);
+        sb.append(" ").append(lastName);
         return sb.toString();
     }
 
     @Override
     public int compareTo(Author o) {
         if (this.equals(o)) return 0;
-        if (this.getImie().equalsIgnoreCase(o.getImie())) {
-            return this.getNazwisko().compareToIgnoreCase(o.getNazwisko());
+        if (this.getFirstName().equalsIgnoreCase(o.getFirstName())) {
+            return this.getLastName().compareToIgnoreCase(o.getLastName());
         }
-        return this.getImie().compareToIgnoreCase(o.getImie());
+        return this.getFirstName().compareToIgnoreCase(o.getFirstName());
 
     }
 
@@ -62,14 +62,14 @@ public class Author implements Comparable<Author>{
 
         Author author = (Author) o;
 
-        if (!imie.equalsIgnoreCase(author.imie)) return false;
-        return nazwisko.equalsIgnoreCase(author.nazwisko);
+        if (!firstName.equalsIgnoreCase(author.firstName)) return false;
+        return lastName.equalsIgnoreCase(author.lastName);
     }
 
     @Override
     public int hashCode() {
-        int result = imie.hashCode();
-        result = 31 * result + nazwisko.hashCode();
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
         return result;
     }
 }

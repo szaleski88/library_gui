@@ -5,23 +5,23 @@ import javax.xml.bind.annotation.*;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="wpisy")
+@XmlRootElement(name="registry")
 public class Registry {
 
-    @XmlElements(@XmlElement(name="wpis"))
-    private List<RegEntry> wpisy;
+    @XmlElements(@XmlElement(name="regEntry"))
+    private List<RegEntry> regEntries;
 
     public Registry(){}
 
     public Registry(Library b){
-        this.wpisy = b.getRegistry();
+        this.regEntries = b.getRegistry();
     }
 
     public List<RegEntry> getRegEntries() {
-        return wpisy;
+        return regEntries;
     }
 
-    public void setWpisy(List<RegEntry> wpisy) {
-        this.wpisy = wpisy;
+    public void setRegEntries(List<RegEntry> regEntries) {
+        this.regEntries = regEntries;
     }
 }

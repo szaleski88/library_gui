@@ -38,6 +38,6 @@ public class GUI extends Application {
     @Override
     public void stop() {
         // executed when the application shuts down
-        System.out.println("ZAPISANO STAN BIBLIOTEKI");
+        System.out.println("LIBRARY STATE SAVED!");
     }
 }

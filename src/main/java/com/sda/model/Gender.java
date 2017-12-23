@@ -1,3 +1,5 @@
 package com.sda.model;
 
-public enum Gender {KOBIETA, MEZCZYZNA}
+public enum Gender {FEMALE, MALE}
+
+

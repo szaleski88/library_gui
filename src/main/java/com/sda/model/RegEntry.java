@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="wpis")
+@XmlRootElement(name="regEntry")
 public class RegEntry {
 
     @XmlElement(name = "book", required = true)
@@ -16,28 +16,28 @@ public class RegEntry {
     @XmlElement(name = "user", required = true)
     private User user;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
-    @XmlElement(name = "dataWypozyczenia", required = true)
-    private LocalDate dataWypozyczenia;
+    @XmlElement(name = "dateBorrowed", required = true)
+    private LocalDate dateBorrowed;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
-    @XmlElement(name = "dataZwrotu", required = true)
-    private LocalDate dataZwrotu;
+    @XmlElement(name = "dateReturned", required = true)
+    private LocalDate dateReturned;
     @XmlElement(name = "author", required = true)
     private Author author;
-    @XmlElement(name = "tytul", required = true)
-    private String tytul;
+    @XmlElement(name = "title", required = true)
+    private String title;
 
     public RegEntry(){}
 
-    public RegEntry(Book book, User user, LocalDate dataWypozyczenia, LocalDate dataZwrotu) {
+    public RegEntry(Book book, User user, LocalDate dateBorrowed, LocalDate dateReturned) {
         this.book = book;
         this.user = user;
-        this.dataWypozyczenia = dataWypozyczenia;
+        this.dateBorrowed = dateBorrowed;
         this.author = book.getAuthor();
-        this.dataZwrotu = dataZwrotu;
-        this.tytul = book.getTitle();
+        this.dateReturned = dateReturned;
+        this.title = book.getTitle();
     }
 
-    public String getIdKsiazki() {
+    public String getBookId() {
         return book.getID();
     }
 
@@ -53,20 +53,20 @@ public class RegEntry {
         this.user = user;
     }
 
-    public LocalDate getDataWypozyczenia() {
-        return dataWypozyczenia;
+    public LocalDate getDateBorrowed() {
+        return dateBorrowed;
     }
 
-    public void setDataWypozyczenia(LocalDate dataWypozyczenia) {
-        this.dataWypozyczenia = dataWypozyczenia;
+    public void setDateBorrowed(LocalDate dateBorrowed) {
+        this.dateBorrowed = dateBorrowed;
     }
 
-    public LocalDate getDataZwrotu() {
-        return dataZwrotu;
+    public LocalDate getDateReturned() {
+        return dateReturned;
     }
 
     public void setReturnDate(LocalDate dataZwrotu) {
-        this.dataZwrotu = dataZwrotu;
+        this.dateReturned = dataZwrotu;
     }
 
     public Author getAuthor() {
@@ -81,11 +81,11 @@ public class RegEntry {
         return book;
     }
 
-    public String getTytul() {
-        return tytul;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTytul(String tytul) {
-        this.tytul = tytul;
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

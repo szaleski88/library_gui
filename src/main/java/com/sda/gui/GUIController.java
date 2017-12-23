@@ -183,7 +183,7 @@ public class GUIController {
     }
 
     private void changeBookStatus(Book book) {
-        List<Book> searchedBook = library.getBooksList().stream()
+        List<Book> searchedBook = library.getAllBooks().stream()
                                         .filter(b -> b.getID().equals(b.getID())).collect(Collectors.toList());
         searchedBook.get(0).setAvailable(true);
     }

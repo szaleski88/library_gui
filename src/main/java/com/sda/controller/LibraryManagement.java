@@ -25,7 +25,7 @@ public class LibraryManagement {
     }
 
     public List<String> getBooksTitles() {
-        return library.getBooksList().stream().map(book -> book.getTitle()).collect(Collectors.toList());
+        return library.getAllBooks().stream().map(book -> book.getTitle()).collect(Collectors.toList());
     }
 
     public void borrowBook(Book book, User user){
@@ -50,7 +50,7 @@ public class LibraryManagement {
 
     public void displayBooksList() {
 
-        for (Book book : library.getBooksList()){
+        for (Book book : library.getAllBooks()){
             System.out.println(book);
         }
     }

@@ -5,39 +5,39 @@ import java.util.List;
 
 public class Library {
 
-    private List<Book> listaKsiazek;
+    private List<Book> allBooks;
 
-    private List<User> listaUzytkownikow;
+    private List<User> allUsers;
 
-    private List<RegEntry> rejestrWypozyczen;
+    private List<RegEntry> regitstry;
 
     public Library() {
-        this.listaKsiazek = new ArrayList<>();
-        this.listaUzytkownikow = new ArrayList<>();
-        this.rejestrWypozyczen = new ArrayList<>();
+        this.allBooks = new ArrayList<>();
+        this.allUsers = new ArrayList<>();
+        this.regitstry = new ArrayList<>();
     }
 
     public void addBook(Book book) {
-        listaKsiazek.add(book);
+        allBooks.add(book);
     }
 
     public void addUser(User user) {
-        listaUzytkownikow.add(user);
+        allUsers.add(user);
     }
 
-    public List<Book> getBooksList() {
-        return listaKsiazek;
+    public List<Book> getAllBooks() {
+        return allBooks;
     }
     public List<User> getUsersList() {
-        return listaUzytkownikow;
+        return allUsers;
     }
 
     public List<RegEntry> getRegistry() {
-        return rejestrWypozyczen;
+        return regitstry;
     }
 
 
     public void addRegEntry(RegEntry wp) {
-        rejestrWypozyczen.add(wp);
+        regitstry.add(wp);
     }
 }

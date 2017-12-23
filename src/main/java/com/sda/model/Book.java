@@ -6,25 +6,25 @@ import java.util.UUID;
 
 /**
  * KONSTRUKTOR DO WCZYTYWANIA DANYCH Z PLIKU
- * tytul
+ * title
  * autorImie
  * autorNazwisko
- * rokWydania
+ * releaseDate
  * genre
  * ID
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name="ksiazka")
+@XmlRootElement(name="book")
 public class Book implements Comparable<Book>{
 
-    @XmlElement(name = "tytul", required = true)
-    private String tytul;
+    @XmlElement(name = "title", required = true)
+    private String title;
 
-    @XmlElement(name = "rok_wydania", required = true)
-    private Integer rokWydania;
+    @XmlElement(name = "release_date", required = true)
+    private Integer releaseDate;
 
-    @XmlElement(name = "dostepna", required = true)
-    private Boolean dostepna;
+    @XmlElement(name = "available", required = true)
+    private Boolean available;
 
     @XmlElement(name = "ID", required = true)
     private String ID;
@@ -37,38 +37,38 @@ public class Book implements Comparable<Book>{
 
     public Book(){}
 
-    public Book(String tytul, int rokWydania, boolean dostepna, String ID, Author author, Genre genre) {
-        this.tytul = tytul;
-        this.rokWydania = rokWydania;
-        this.dostepna = dostepna;
+    public Book(String title, int releaseDate, boolean available, String ID, Author author, Genre genre) {
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.available = available;
         this.ID = ID;
         this.author = author;
         this.genre = genre;
     }
 
-    public Book(String tytul, String autorImie, String autorNazwisko, int rokWydania, Genre genre) {
+    public Book(String title, String authorFirstName, String authorLastName, int releaseDate, Genre genre) {
         this.ID = UUID.randomUUID().toString();
-        this.tytul = tytul;
-        this.author = new Author(autorImie, autorNazwisko);
-        this.rokWydania = rokWydania;
+        this.title = title;
+        this.author = new Author(authorFirstName, authorLastName);
+        this.releaseDate = releaseDate;
         this.genre = genre;
-        this.dostepna = true;
+        this.available = true;
     }
 
 
 
-    public Book(String tytul, String autorImie, String autorNazwisko, int rokWydania, boolean dostepna, Genre genre, String ID) {
-        this.tytul = tytul;
+    public Book(String title, String authorFirstName, String authorLastName, int releaseDate, boolean available, Genre genre, String ID) {
+        this.title = title;
 
-        this.author = new Author(autorImie, autorNazwisko );
-        this.rokWydania = rokWydania;
-        this.dostepna = dostepna;
+        this.author = new Author(authorFirstName, authorLastName );
+        this.releaseDate = releaseDate;
+        this.available = available;
         this.ID = ID;
         this.genre = genre;
     }
 
     public String getTitle() {
-        return tytul;
+        return title;
     }
 
     public String getID() {
@@ -83,17 +83,17 @@ public class Book implements Comparable<Book>{
         return author;
     }
 
-    public Integer getRokWydania() {
-        return rokWydania;
+    public Integer getReleaseDate() {
+        return releaseDate;
     }
 
 
     public Boolean getAvailable() {
-        return dostepna;
+        return available;
     }
 
-    public void setAvailable(Boolean dostepna) {
-        this.dostepna = dostepna;
+    public void setAvailable(Boolean avaiable) {
+        this.available = avaiable;
     }
 
     public void setAuthor(Author author) {
@@ -107,26 +107,26 @@ public class Book implements Comparable<Book>{
 
         Book book = (Book) o;
 
-        if (rokWydania != book.rokWydania) return false;
-        if (!tytul.equals(book.tytul)) return false;
-        return author.getNazwisko().equals(book.author.getNazwisko());
+        if (releaseDate != book.releaseDate) return false;
+        if (!title.equals(book.title)) return false;
+        return author.getLastName().equals(book.author.getLastName());
     }
 
     @Override
     public int hashCode() {
-        int result = tytul.hashCode();
-        result = 31 * result + author.getNazwisko().hashCode();
-        result = 31 * result + author.getImie().hashCode();
-        result = 31 * result + rokWydania;
+        int result = title.hashCode();
+        result = 31 * result + author.getLastName().hashCode();
+        result = 31 * result + author.getFirstName().hashCode();
+        result = 31 * result + releaseDate;
         return result;
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer(""+ author);
-        sb.append(", \'").append(tytul).append('\'');
+        sb.append(", \'").append(title).append('\'');
         sb.append(", ").append(genre);
-        sb.append("; ").append(rokWydania);
+        sb.append("; ").append(releaseDate);
         return sb.toString();
     }
 
