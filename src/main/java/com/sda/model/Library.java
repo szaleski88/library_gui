@@ -1,0 +1,43 @@
+package com.sda.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Library {
+
+    private List<Book> listaKsiazek;
+
+    private List<User> listaUzytkownikow;
+
+    private List<LogEntry> rejestrWypozyczen;
+
+    public Library() {
+        this.listaKsiazek = new ArrayList<>();
+        this.listaUzytkownikow = new ArrayList<>();
+        this.rejestrWypozyczen = new ArrayList<>();
+    }
+
+    public void dodajKsiazke(Book book) {
+        listaKsiazek.add(book);
+    }
+
+    public void dodajUzytkownika (User user) {
+        listaUzytkownikow.add(user);
+    }
+
+    public List<Book> getListaKsiazek() {
+        return listaKsiazek;
+    }
+    public List<User> getListaUzytkownikow() {
+        return listaUzytkownikow;
+    }
+
+    public List<LogEntry> getRejestrWypozyczen() {
+        return rejestrWypozyczen;
+    }
+
+
+    public void dodajWpis(LogEntry wp) {
+        rejestrWypozyczen.add(wp);
+    }
+}

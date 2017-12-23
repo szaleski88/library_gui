@@ -6,22 +6,22 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="uzytkownicy")
-public class Uzytkownicy{
+public class AllUsers {
     @XmlElements(@XmlElement( name="uzytkownik"))
-    private List<Uzytkownik> uzytkownicy;
+    private List<User> uzytkownicy;
 
-    public Uzytkownicy(){
+    public AllUsers(){
     }
 
-    public Uzytkownicy(Biblioteka b){
+    public AllUsers(Library b){
         this.uzytkownicy = b.getListaUzytkownikow();
     }
 
-    public List<Uzytkownik> getUzytkownicy() {
+    public List<User> getUzytkownicy() {
         return uzytkownicy;
     }
 
-    public void setUzytkownicy(List<Uzytkownik> uzytkownicy) {
+    public void setUzytkownicy(List<User> uzytkownicy) {
         this.uzytkownicy = uzytkownicy;
     }
 

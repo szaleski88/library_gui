@@ -5,22 +5,22 @@ import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="ksiazki")
-public class Ksiazki{
+public class AllBooks {
 
     @XmlElements(@XmlElement(name="ksiazka"))
-    private List<Ksiazka> ksiazki;
+    private List<Book> ksiazki;
 
-    public Ksiazki(){}
+    public AllBooks(){}
 
-    public Ksiazki(Biblioteka b){
+    public AllBooks(Library b){
         this.ksiazki = b.getListaKsiazek();
     }
 
-    public List<Ksiazka> getKsiazki() {
+    public List<Book> getKsiazki() {
         return ksiazki;
     }
 
-    public void setKsiazki(List<Ksiazka> ksiazki) {
+    public void setKsiazki(List<Book> ksiazki) {
         this.ksiazki = ksiazki;
     }
 }

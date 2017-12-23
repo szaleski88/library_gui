@@ -10,12 +10,12 @@ import java.util.UUID;
  * autorImie
  * autorNazwisko
  * rokWydania
- * gatunek
+ * genre
  * ID
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="ksiazka")
-public class Ksiazka implements Comparable<Ksiazka>{
+public class Book implements Comparable<Book>{
 
     @XmlElement(name = "tytul", required = true)
     private String tytul;
@@ -29,42 +29,42 @@ public class Ksiazka implements Comparable<Ksiazka>{
     @XmlElement(name = "ID", required = true)
     private String ID;
 
-    @XmlElements(@XmlElement(name = "autor", required = true))
-    private Autor autor;
+    @XmlElements(@XmlElement(name = "author", required = true))
+    private Author author;
 
-    @XmlElement(name = "gatunek", required = true)
-    private Gatunek gatunek;
+    @XmlElement(name = "genre", required = true)
+    private Genre genre;
 
-    public Ksiazka(){}
+    public Book(){}
 
-    public Ksiazka(String tytul, int rokWydania, boolean dostepna, String ID, Autor autor, Gatunek gatunek) {
+    public Book(String tytul, int rokWydania, boolean dostepna, String ID, Author author, Genre genre) {
         this.tytul = tytul;
         this.rokWydania = rokWydania;
         this.dostepna = dostepna;
         this.ID = ID;
-        this.autor = autor;
-        this.gatunek = gatunek;
+        this.author = author;
+        this.genre = genre;
     }
 
-    public Ksiazka(String tytul, String autorImie, String autorNazwisko, int rokWydania, Gatunek gatunek) {
+    public Book(String tytul, String autorImie, String autorNazwisko, int rokWydania, Genre genre) {
         this.ID = UUID.randomUUID().toString();
         this.tytul = tytul;
-        this.autor = new Autor(autorImie, autorNazwisko);
+        this.author = new Author(autorImie, autorNazwisko);
         this.rokWydania = rokWydania;
-        this.gatunek = gatunek;
+        this.genre = genre;
         this.dostepna = true;
     }
 
 
 
-    public Ksiazka(String tytul, String autorImie, String autorNazwisko, int rokWydania, boolean dostepna, Gatunek gatunek, String ID) {
+    public Book(String tytul, String autorImie, String autorNazwisko, int rokWydania, boolean dostepna, Genre genre, String ID) {
         this.tytul = tytul;
 
-        this.autor = new Autor(autorImie, autorNazwisko );
+        this.author = new Author(autorImie, autorNazwisko );
         this.rokWydania = rokWydania;
         this.dostepna = dostepna;
         this.ID = ID;
-        this.gatunek = gatunek;
+        this.genre = genre;
     }
 
     public String getTytul() {
@@ -75,12 +75,12 @@ public class Ksiazka implements Comparable<Ksiazka>{
         return ID;
     }
 
-    public Gatunek getGatunek() {
-        return gatunek;
+    public Genre getGenre() {
+        return genre;
     }
 
-    public Autor getAutor() {
-        return autor;
+    public Author getAuthor() {
+        return author;
     }
 
     public Integer getRokWydania() {
@@ -96,8 +96,8 @@ public class Ksiazka implements Comparable<Ksiazka>{
         this.dostepna = dostepna;
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     @Override
@@ -105,43 +105,43 @@ public class Ksiazka implements Comparable<Ksiazka>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Ksiazka ksiazka = (Ksiazka) o;
+        Book book = (Book) o;
 
-        if (rokWydania != ksiazka.rokWydania) return false;
-        if (!tytul.equals(ksiazka.tytul)) return false;
-        return autor.getNazwisko().equals(ksiazka.autor.getNazwisko());
+        if (rokWydania != book.rokWydania) return false;
+        if (!tytul.equals(book.tytul)) return false;
+        return author.getNazwisko().equals(book.author.getNazwisko());
     }
 
     @Override
     public int hashCode() {
         int result = tytul.hashCode();
-        result = 31 * result + autor.getNazwisko().hashCode();
-        result = 31 * result + autor.getImie().hashCode();
+        result = 31 * result + author.getNazwisko().hashCode();
+        result = 31 * result + author.getImie().hashCode();
         result = 31 * result + rokWydania;
         return result;
     }
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer(""+autor);
+        final StringBuffer sb = new StringBuffer(""+ author);
         sb.append(", \'").append(tytul).append('\'');
-        sb.append(", ").append(gatunek);
+        sb.append(", ").append(genre);
         sb.append("; ").append(rokWydania);
         return sb.toString();
     }
 
     @Override
-    public int compareTo(Ksiazka o) {
+    public int compareTo(Book o) {
 
         if (this.equals(o) ) return 0;
-        if (this.autor.compareTo(o.getAutor()) == 0 && this.getTytul().equalsIgnoreCase(o.getTytul())) {
+        if (this.author.compareTo(o.getAuthor()) == 0 && this.getTytul().equalsIgnoreCase(o.getTytul())) {
             return 0;
         }
 
-        else if ( this.autor.compareTo(o.getAutor()) == 0 ) {
+        else if ( this.author.compareTo(o.getAuthor()) == 0 ) {
             return this.getTytul().compareToIgnoreCase(o.getTytul());
         }
-        else return this.getAutor().compareTo(o.getAutor());
+        else return this.getAuthor().compareTo(o.getAuthor());
 
     }
 }

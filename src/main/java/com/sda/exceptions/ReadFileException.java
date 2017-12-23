@@ -4,15 +4,15 @@ import java.io.IOException;
 
 public class ReadFileException extends IOException{
 
-    private String nazwaPliku;
+    private String fileName;
 
-    public ReadFileException(String nazwaPliku){
-        this.nazwaPliku = nazwaPliku;
+    public ReadFileException(String fileName){
+        this.fileName = fileName;
     }
 
 
     @Override
     public String getMessage() {
-        return "Nie udalo sie wczytac listy: " + nazwaPliku ;
+        return "Could not open file: " + fileName;
     }
 }

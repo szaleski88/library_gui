@@ -1,0 +1,4 @@
+package com.sda.model;
+
+public enum Genre { HORROR, OBYCZAJ, PRZYGODA, SCIFI, ROMANS, POEZJA, HISTORYCZNA, KLASYKA, SATYRA, THRILLER, DRAMAT,
+                     BIOGRAFIA, BAJKA, KOMIKS, POZOSTALE }

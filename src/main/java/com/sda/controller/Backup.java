@@ -1,32 +1,22 @@
 package com.sda.controller;
 
 
-import com.sda.exceptions.ReadFileException;
 import com.sda.model.*;
 
 import javax.xml.bind.*;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
 
 
 public class Backup {
 
 
-    public void zapisUzytkownikow(Biblioteka biblioteka) {
+    public void zapisUzytkownikow(Library library) {
 
-        Uzytkownicy uzytkownicy = new Uzytkownicy(biblioteka);
+        AllUsers allUsers = new AllUsers(library);
 
         try {
-            zapisDoPliku(uzytkownicy);
+            zapisDoPliku(allUsers);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -34,22 +24,22 @@ public class Backup {
 
     }
 
-    public void zapisRejestru(Biblioteka biblioteka) {
-        Wpisy wpisy = new Wpisy(biblioteka);
+    public void zapisRejestru(Library library) {
+        LogEntries logEntries = new LogEntries(library);
 
         try {
-            zapisDoPliku(wpisy);
+            zapisDoPliku(logEntries);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void zapisKsiazek(Biblioteka biblioteka) {
-        Ksiazki ksiazki = new Ksiazki(biblioteka);
+    public void zapisKsiazek(Library library) {
+        AllBooks allBooks = new AllBooks(library);
 
         try {
-            zapisDoPliku(ksiazki);
+            zapisDoPliku(allBooks);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -71,49 +61,49 @@ public class Backup {
 
     }
 
-    public void odczytUzytkownikow(Biblioteka biblioteka) throws JAXBException {
+    public void odczytUzytkownikow(Library library) throws JAXBException {
 
-        File file = new File("./uzytkownicy.xml");
+        File file = new File("./allUsers.xml");
         createFile(file);
 
-        JAXBContext jaxbContext = JAXBContext.newInstance(Uzytkownicy.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(AllUsers.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Uzytkownicy uzytkownicy = (Uzytkownicy) jaxbUnmarshaller.unmarshal(file);
+        AllUsers allUsers = (AllUsers) jaxbUnmarshaller.unmarshal(file);
 
-        for (Uzytkownik uz : uzytkownicy.getUzytkownicy()) {
-            biblioteka.dodajUzytkownika(uz);
+        for (User uz : allUsers.getUzytkownicy()) {
+            library.dodajUzytkownika(uz);
         }
     }
 
-    public void odczytKsiazek(Biblioteka biblioteka) throws JAXBException {
+    public void odczytKsiazek(Library library) throws JAXBException {
 
-        File file = new File ("./ksiazki.xml");
+        File file = new File ("./allBooks.xml");
         createFile(file);
 
-        JAXBContext jaxbContext = JAXBContext.newInstance(Ksiazki.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(AllBooks.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Ksiazki ksiazki = (Ksiazki) jaxbUnmarshaller.unmarshal(file);
+        AllBooks allBooks = (AllBooks) jaxbUnmarshaller.unmarshal(file);
 
-        for (Ksiazka ks : ksiazki.getKsiazki()) {
-            biblioteka.dodajKsiazke(ks);
+        for (Book ks : allBooks.getKsiazki()) {
+            library.dodajKsiazke(ks);
         }
 
 
     }
 
-    public void odczytRejestru(Biblioteka biblioteka) throws JAXBException {
+    public void odczytRejestru(Library library) throws JAXBException {
 
-        File file = new File("./wpisy.xml");
+        File file = new File("./logEntries.xml");
         createFile(file);
-        JAXBContext jaxbContext = JAXBContext.newInstance(Wpisy.class);
+        JAXBContext jaxbContext = JAXBContext.newInstance(LogEntries.class);
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Wpisy wpisy = (Wpisy) jaxbUnmarshaller.unmarshal(file);
-        if (wpisy.getWpisy().size() >  0) {
-            for (Wpis wp : wpisy.getWpisy()) {
-                biblioteka.dodajWpis(wp);
+        LogEntries logEntries = (LogEntries) jaxbUnmarshaller.unmarshal(file);
+        if (logEntries.getWpisy().size() >  0) {
+            for (LogEntry wp : logEntries.getWpisy()) {
+                library.dodajWpis(wp);
             }
         }
     }
@@ -131,39 +121,39 @@ public class Backup {
 
     public static void main(String[] args) throws JAXBException {
 
-        Biblioteka biblioteka = new Biblioteka();
+        Library library = new Library();
 
             // wyświetlenie na out
 
         Backup b = new Backup();
 
 
-//        biblioteka.dodajUzytkownika(new Uzytkownik("Stefan", "Mikrut", Plec.MEZCZYZNA));
-//        biblioteka.dodajUzytkownika(new Uzytkownik("Mariola", "Kowalska", Plec.KOBIETA));
-//        biblioteka.dodajUzytkownika(new Uzytkownik("Krzysztof", "Różalski", Plec.MEZCZYZNA));
-//        biblioteka.dodajUzytkownika(new Uzytkownik("Katarzyna", "Kowalec", Plec.KOBIETA));
+//        library.dodajUzytkownika(new User("Stefan", "Mikrut", Gender.MEZCZYZNA));
+//        library.dodajUzytkownika(new User("Mariola", "Kowalska", Gender.KOBIETA));
+//        library.dodajUzytkownika(new User("Krzysztof", "Różalski", Gender.MEZCZYZNA));
+//        library.dodajUzytkownika(new User("Katarzyna", "Kowalec", Gender.KOBIETA));
 //
-//        b.zapisUzytkownikow(biblioteka);
+//        b.zapisUzytkownikow(library);
 //
 //
-        b.odczytKsiazek(biblioteka);
-        b.odczytUzytkownikow(biblioteka);
-        ZarzadzanieBiblioteka zb = new ZarzadzanieBiblioteka(biblioteka);
-        Uzytkownik uzytkownik = new Uzytkownik("Sebastian", "Zaleski", Plec.MEZCZYZNA);
-        biblioteka.dodajUzytkownika(uzytkownik);
+        b.odczytKsiazek(library);
+        b.odczytUzytkownikow(library);
+        LibraryManagement zb = new LibraryManagement(library);
+        User user = new User("Sebastian", "Zaleski", Gender.MEZCZYZNA);
+        library.dodajUzytkownika(user);
 
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(44), uzytkownik);
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(57), uzytkownik);
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(111), uzytkownik);
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(178), uzytkownik);
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(11), biblioteka.getListaUzytkownikow().get(0));
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(17), biblioteka.getListaUzytkownikow().get(0));
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(100), biblioteka.getListaUzytkownikow().get(2));
-        zb.wypozyczKsiazke(biblioteka.getListaKsiazek().get(101), biblioteka.getListaUzytkownikow().get(3));
+        zb.wypozyczKsiazke(library.getListaKsiazek().get(44), user);
+        zb.wypozyczKsiazke(library.getListaKsiazek().get(57), user);
+        zb.wypozyczKsiazke(library.getListaKsiazek().get(111), user);
+        zb.wypozyczKsiazke(library.getListaKsiazek().get(178), user);
+        zb.wypozyczKsiazke(library.getListaKsiazek().get(11), library.getListaUzytkownikow().get(0));
+        zb.wypozyczKsiazke(library.getListaKsiazek().get(17), library.getListaUzytkownikow().get(0));
+        zb.wypozyczKsiazke(library.getListaKsiazek().get(100), library.getListaUzytkownikow().get(2));
+        zb.wypozyczKsiazke(library.getListaKsiazek().get(101), library.getListaUzytkownikow().get(3));
 
         zb.wyswietlWypozyczoneKsiazki();
-        b.zapisUzytkownikow(biblioteka);
-        b.zapisRejestru(biblioteka);
+        b.zapisUzytkownikow(library);
+        b.zapisRejestru(library);
 
 
 

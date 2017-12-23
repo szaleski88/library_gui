@@ -5,7 +5,7 @@ import java.util.UUID;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "uzytkownik")
-public class Uzytkownik implements  Comparable<Uzytkownik>{
+public class User implements  Comparable<User>{
 
     @XmlElement(name = "imie", required = true)
     private String imie;
@@ -13,26 +13,26 @@ public class Uzytkownik implements  Comparable<Uzytkownik>{
     private String nazwisko;
     @XmlElement(name = "id", required = true)
     private String id;
-    @XmlElement(name = "plec", required = true)
-    private Plec plec;
+    @XmlElement(name = "gender", required = true)
+    private Gender gender;
 //    private Adres adres;
-    public Uzytkownik(){
+    public User(){
 
     }
 
 
-    public Uzytkownik(String imie, String nazwisko, Plec plec) {
+    public User(String imie, String nazwisko, Gender gender) {
         this.imie = imie;
         this.nazwisko = nazwisko;
-        this.plec = plec;
+        this.gender = gender;
         id = UUID.randomUUID().toString();
     }
 
-    public Uzytkownik(String imie, String nazwisko, String id, Plec plec) {
+    public User(String imie, String nazwisko, String id, Gender gender) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.id = id;
-        this.plec = plec;
+        this.gender = gender;
     }
 
     public String getImie() {
@@ -43,8 +43,8 @@ public class Uzytkownik implements  Comparable<Uzytkownik>{
         return nazwisko;
     }
 
-    public Plec getPlec() {
-        return plec;
+    public Gender getGender() {
+        return gender;
     }
 
     public String getId() {
@@ -58,7 +58,7 @@ public class Uzytkownik implements  Comparable<Uzytkownik>{
         return sb.toString();
     }
 
-    public int compareTo(Uzytkownik o) {
+    public int compareTo(User o) {
         if (this.equals(o) ) return 0;
         if (this.imie.equalsIgnoreCase(o.getImie())&& this.getNazwisko().equalsIgnoreCase(o.getNazwisko())) {
             return 0;
@@ -76,7 +76,7 @@ public class Uzytkownik implements  Comparable<Uzytkownik>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Uzytkownik that = (Uzytkownik) o;
+        User that = (User) o;
 
         if (!imie.equals(that.imie)) return false;
         return !nazwisko.equals(that.nazwisko);

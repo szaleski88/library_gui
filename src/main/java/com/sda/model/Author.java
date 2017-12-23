@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="autor")
-public class Autor implements Comparable<Autor>{
+public class Author implements Comparable<Author>{
 
     @XmlElement(name = "imie")
     private String imie;
     @XmlElement(name = "nazwisko")
     private String nazwisko;
 
-    public Autor(){}
+    public Author(){}
 
-    public Autor(String imie, String nazwisko) {
+    public Author(String imie, String nazwisko) {
         this.imie = imie;
         this.nazwisko = nazwisko;
 
@@ -46,7 +46,7 @@ public class Autor implements Comparable<Autor>{
     }
 
     @Override
-    public int compareTo(Autor o) {
+    public int compareTo(Author o) {
         if (this.equals(o)) return 0;
         if (this.getImie().equalsIgnoreCase(o.getImie())) {
             return this.getNazwisko().compareToIgnoreCase(o.getNazwisko());
@@ -60,10 +60,10 @@ public class Autor implements Comparable<Autor>{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Autor autor = (Autor) o;
+        Author author = (Author) o;
 
-        if (!imie.equalsIgnoreCase(autor.imie)) return false;
-        return nazwisko.equalsIgnoreCase(autor.nazwisko);
+        if (!imie.equalsIgnoreCase(author.imie)) return false;
+        return nazwisko.equalsIgnoreCase(author.nazwisko);
     }
 
     @Override

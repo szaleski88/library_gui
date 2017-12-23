@@ -1,40 +1,40 @@
-package com.sda.sortowanie;
+package com.sda.sort;
 
-import com.sda.model.Ksiazka;
+import com.sda.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SortowanieSzybkie implements com.sda.sortowanie.Sortowanie {
+public class QuickSort implements Sort {
 
 
     public String getNazwaAlgorytmu() {
-        return "Sortowanie szybkie.";
+        return "Sort szybkie.";
     }
 
 
-    public List<Ksiazka> sortuj(List<Ksiazka> ksiazki) {
+    public List<Book> sortuj(List<Book> ksiazki) {
 
         ksiazki = sortujRekurencyjnie(ksiazki);
 
         return ksiazki;
     }
 
-    private List<Ksiazka> sortujRekurencyjnie( List<Ksiazka> lista ){
+    private List<Book> sortujRekurencyjnie(List<Book> lista ){
 
         if (lista.size() < 2 ) {
             return lista;
         } else if (lista.size() == 2 ) {
             if ( lista.get(0).compareTo(lista.get(1)) <= 0) {
-                Ksiazka temp = lista.get(0);
+                Book temp = lista.get(0);
                 lista.set(0, lista.get(1));
                 lista.set(1, temp);
             }
         }
 
-        Ksiazka srodek = lista.get(0);
-        List<Ksiazka> mniejszeRowne = new ArrayList<>();
-        List<Ksiazka> wieksze = new ArrayList<>();
+        Book srodek = lista.get(0);
+        List<Book> mniejszeRowne = new ArrayList<>();
+        List<Book> wieksze = new ArrayList<>();
         for (int i = 1; i < lista.size(); i++) {
             if (lista.get(i).compareTo(srodek) <= 0){
                 mniejszeRowne.add(lista.get(i));
@@ -47,7 +47,7 @@ public class SortowanieSzybkie implements com.sda.sortowanie.Sortowanie {
         mniejszeRowne = sortujRekurencyjnie(mniejszeRowne);
         wieksze = sortujRekurencyjnie(wieksze);
 
-        List<Ksiazka> wyniki = new ArrayList<>();
+        List<Book> wyniki = new ArrayList<>();
         wyniki.addAll(mniejszeRowne);
         wyniki.add(srodek);
         wyniki.addAll(wieksze);

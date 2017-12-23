@@ -1,12 +1,12 @@
 package com.sda.gui;
 
-import com.sda.model.Biblioteka;
+import com.sda.model.Library;
 
 public class UI {
     public static void main(String[] args) {
-       Biblioteka biblioteka = new Biblioteka();
+       Library library = new Library();
 
 
-        System.out.println(biblioteka.getListaKsiazek());
+        System.out.println(library.getListaKsiazek());
     }
 }

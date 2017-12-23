@@ -1,10 +1,10 @@
 package com.sda.gui;
 
 import com.sda.controller.Backup;
-import com.sda.controller.ZarzadzanieBiblioteka;
+import com.sda.controller.LibraryManagement;
 import com.sda.model.*;
-import com.sda.sortowanie.SortowanieSzybkie;
-import com.sda.wyszukiwanie.WyszukiwanieBinarne;
+import com.sda.sort.QuickSort;
+import com.sda.search.BinarySearch;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,19 +21,17 @@ import javafx.stage.Stage;
 import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
-public class KontrolerGUI {
+public class GUIController {
 
-    private static Biblioteka biblioteka;
-    private static ZarzadzanieBiblioteka zb;
+    private static Library library;
+    private static LibraryManagement zb;
     private static Backup backup;
-    private static WyszukiwanieBinarne wyszukaj;
-    private static SortowanieSzybkie sortuj;
+    private static BinarySearch wyszukaj;
+    private static QuickSort sortuj;
 
     @FXML
     private   TextField textFieldTytul;
@@ -52,33 +50,33 @@ public class KontrolerGUI {
     @FXML
     private Button buttonSzukajTytulu;
     @FXML
-    private  TableView<Ksiazka> tabelaSzukaj;
+    private  TableView<Book> tabelaSzukaj;
     @FXML
-    private TableColumn<Ksiazka, String> kolumnaTytul;
+    private TableColumn<Book, String> kolumnaTytul;
     @FXML
-    private TableColumn<Ksiazka, Autor> kolumnaAutor;
+    private TableColumn<Book, Author> kolumnaAutor;
     @FXML
-    private TableColumn<Ksiazka, Gatunek> kolumnaGatunek;
+    private TableColumn<Book, Genre> kolumnaGatunek;
     @FXML
-    private TableColumn<Ksiazka, Integer> kolumnaRokWydania;
+    private TableColumn<Book, Integer> kolumnaRokWydania;
     @FXML
-    private TableColumn<Ksiazka, Boolean> kolumnaStatus;
+    private TableColumn<Book, Boolean> kolumnaStatus;
     @FXML
-    private TableColumn<Wpis, Autor> kolumnaAutorWypozyczony;
+    private TableColumn<LogEntry, Author> kolumnaAutorWypozyczony;
     @FXML
-    private TableColumn<Wpis, Uzytkownik> kolumnaUzytkownikWypozyczony;
+    private TableColumn<LogEntry, User> kolumnaUzytkownikWypozyczony;
     @FXML
-    private TableColumn<Wpis, LocalDate> kolumnaDataWypozyczenia;
+    private TableColumn<LogEntry, LocalDate> kolumnaDataWypozyczenia;
     @FXML
-    private TableColumn<Wpis, String> kolumnaTytulWypozyczony;
-    @FXML private  TableColumn<Uzytkownik, String> kolumnaUzytkImie;
-    @FXML private TableColumn<Uzytkownik, String> kolumnaUzytkNazwisko;
-    @FXML private TableColumn<Uzytkownik, Plec> kolUzytkPlec;
+    private TableColumn<LogEntry, String> kolumnaTytulWypozyczony;
+    @FXML private  TableColumn<User, String> kolumnaUzytkImie;
+    @FXML private TableColumn<User, String> kolumnaUzytkNazwisko;
+    @FXML private TableColumn<User, Gender> kolUzytkPlec;
 
     @FXML
-    private TableView<Wpis> tabelaWypozyczone;
+    private TableView<LogEntry> tabelaWypozyczone;
     @FXML
-    private TableView<Uzytkownik> tableViewUzytkownicy;
+    private TableView<User> tableViewUzytkownicy;
     @FXML
     private ComboBox<String> comboBox;
     @FXML
@@ -89,29 +87,29 @@ public class KontrolerGUI {
     @FXML private TextField textFieldNazwiskoUzytkSzukaj;
 
 
-    public KontrolerGUI() {
-        biblioteka = new Biblioteka();
-        zb = new ZarzadzanieBiblioteka(biblioteka);
-        wyszukaj = new WyszukiwanieBinarne(biblioteka);
-        sortuj = new SortowanieSzybkie();
+    public GUIController() {
+        library = new Library();
+        zb = new LibraryManagement(library);
+        wyszukaj = new BinarySearch(library);
+        sortuj = new QuickSort();
         backup = new Backup();
         try {
-            backup.odczytKsiazek(biblioteka);
+            backup.odczytKsiazek(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
         try {
-            backup.odczytUzytkownikow(biblioteka);
+            backup.odczytUzytkownikow(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
         try {
-            backup.odczytRejestru(biblioteka);
+            backup.odczytRejestru(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
 //        zb.wyswietlListeKsiazek();
-//        dropDown.getItems().addAll(Plec.values());
+//        dropDown.getItems().addAll(Gender.values());
     }
 
    @FXML
@@ -129,13 +127,13 @@ public class KontrolerGUI {
     }
 
 
-    private void wyswietlWyniki(List<Ksiazka> listaKsiazek){
+    private void wyswietlWyniki(List<Book> listaKsiazek){
 
         textFieldNazwiskoAutora.setText("");
         textFieldImieAutora.setText("");
         textFieldTytul.setText("");
 
-        ObservableList<Ksiazka> data = FXCollections.observableArrayList(listaKsiazek);
+        ObservableList<Book> data = FXCollections.observableArrayList(listaKsiazek);
 
         kolumnaAutor.setCellValueFactory(
                 new PropertyValueFactory<>("autor")
@@ -162,37 +160,37 @@ public class KontrolerGUI {
 
     @FXML
     private void dodajUzytkownika(){
-        Uzytkownik uzytkownik = new Uzytkownik(textFieldImieUzytkownika.getText().trim(),
+        User user = new User(textFieldImieUzytkownika.getText().trim(),
                                                 textFieldNazwiskoUzytkownika.getText().trim(),
-                                                Plec.valueOf(comboBox.getValue().toUpperCase()));
-        biblioteka.dodajUzytkownika(uzytkownik);
+                                                Gender.valueOf(comboBox.getValue().toUpperCase()));
+        library.dodajUzytkownika(user);
 
         textFieldImieUzytkownika.setText("");
         textFieldNazwiskoUzytkownika.setText("");
-        System.out.println(uzytkownik);
+        System.out.println(user);
     }
 
 
     @FXML
     public void zwrocZaznaczoneKsiazki() {
-        List<Wpis> wpisy = tabelaWypozyczone.getSelectionModel().getSelectedItems();
-        for (Wpis wpis : wpisy) {
-            wpis.setDataZwrotu(LocalDate.now());
-            zmienStatusKsiazki(wpis.getKsiazka());
+        List<LogEntry> wpisy = tabelaWypozyczone.getSelectionModel().getSelectedItems();
+        for (LogEntry logEntry : wpisy) {
+            logEntry.setDataZwrotu(LocalDate.now());
+            zmienStatusKsiazki(logEntry.getBook());
 
-            System.out.println("Pomyślnie zwrócono ksiązkę: " + wpis.getKsiazka().getTytul());
+            System.out.println("Pomyślnie zwrócono ksiązkę: " + logEntry.getBook().getTytul());
         }
     }
 
-    private void zmienStatusKsiazki(Ksiazka ksiazka) {
-        List<Ksiazka> ksiazkaSzukana = biblioteka.getListaKsiazek().stream()
-                                        .filter(ks -> ks.getID().equals(ksiazka.getID())).collect(Collectors.toList());
-        ksiazkaSzukana.get(0).setDostepna(true);
+    private void zmienStatusKsiazki(Book book) {
+        List<Book> bookSzukana = library.getListaKsiazek().stream()
+                                        .filter(ks -> ks.getID().equals(book.getID())).collect(Collectors.toList());
+        bookSzukana.get(0).setDostepna(true);
     }
 
     @FXML
     public void szukajWypozyczonychUzytkownika() {
-        List<Wpis> wypUzytk = zb.getWypozyczonePrzezUzytkownika(textFieldImieWypozyczajacego.getText(),
+        List<LogEntry> wypUzytk = zb.getWypozyczonePrzezUzytkownika(textFieldImieWypozyczajacego.getText(),
                 textFieldNazwiskoWypozyczajacego.getText());
         if( wypUzytk!= null) wypelnijWypozyczone(wypUzytk);
     }
@@ -203,9 +201,9 @@ public class KontrolerGUI {
 
     }
 
-    private void wypelnijWypozyczone(List<Wpis> wpisy) {
+    private void wypelnijWypozyczone(List<LogEntry> wpisy) {
 
-        ObservableList<Wpis> data = FXCollections.observableArrayList(wpisy);
+        ObservableList<LogEntry> data = FXCollections.observableArrayList(wpisy);
 
         kolumnaAutorWypozyczony.setCellValueFactory(
                 new PropertyValueFactory<>("autor")
@@ -227,15 +225,15 @@ public class KontrolerGUI {
     }
 
     public void shutdown() {
-        backup.zapisRejestru(biblioteka);
-        backup.zapisUzytkownikow(biblioteka);
-        backup.zapisKsiazek(biblioteka);
+        backup.zapisRejestru(library);
+        backup.zapisUzytkownikow(library);
+        backup.zapisKsiazek(library);
         Platform.exit();
     }
 
     public void wypozyczKsiazke() {
-        Uzytkownik uz = tableViewUzytkownicy.getSelectionModel().getSelectedItem();
-        Ksiazka ks = tabelaSzukaj.getSelectionModel().getSelectedItem();
+        User uz = tableViewUzytkownicy.getSelectionModel().getSelectedItem();
+        Book ks = tabelaSzukaj.getSelectionModel().getSelectedItem();
         System.out.println();
 
         zb.wypozyczKsiazke(ks, uz);
@@ -247,21 +245,21 @@ public class KontrolerGUI {
         String imie = textFieldImieUzytkSzukaj.getText();
         String nazwisko = textFieldNazwiskoUzytkSzukaj.getText();
 
-        List<Uzytkownik> uzytkownikSzukany = wyszukaj.szukajUzytkownika(imie, nazwisko);
-        System.out.println("Znaleziono uzytkownika: " + uzytkownikSzukany.size());
+        List<User> userSzukany = wyszukaj.szukajUzytkownika(imie, nazwisko);
+        System.out.println("Znaleziono uzytkownika: " + userSzukany.size());
 
-        wypelnijUzytkownikow(uzytkownikSzukany);
+        wypelnijUzytkownikow(userSzukany);
     }
 
     public void szukajWszystkichUzytkownikow() {
-        List<Uzytkownik> uzytkownicy = biblioteka.getListaUzytkownikow();
+        List<User> uzytkownicy = library.getListaUzytkownikow();
 
         wypelnijUzytkownikow(uzytkownicy);
     }
 
-    private void wypelnijUzytkownikow(List<Uzytkownik> uzytkownicy) {
+    private void wypelnijUzytkownikow(List<User> uzytkownicy) {
 
-        ObservableList<Uzytkownik> data = FXCollections.observableArrayList(uzytkownicy);
+        ObservableList<User> data = FXCollections.observableArrayList(uzytkownicy);
 
         kolumnaUzytkImie.setCellValueFactory(
                 new PropertyValueFactory<>("imie")

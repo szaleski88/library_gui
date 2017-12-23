@@ -1,8 +1,5 @@
 package com.sda.model;
 
-import com.sda.model.Ksiazka;
-import com.sda.model.Uzytkownik;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -12,48 +9,48 @@ import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="wpis")
-public class Wpis {
+public class LogEntry {
 
-    @XmlElement(name = "ksiazka", required = true)
-    private Ksiazka ksiazka;
-    @XmlElement(name = "uzytkownik", required = true)
-    private Uzytkownik uzytkownik;
+    @XmlElement(name = "book", required = true)
+    private Book book;
+    @XmlElement(name = "user", required = true)
+    private User user;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     @XmlElement(name = "dataWypozyczenia", required = true)
     private LocalDate dataWypozyczenia;
     @XmlJavaTypeAdapter(value = LocalDateAdapter.class)
     @XmlElement(name = "dataZwrotu", required = true)
     private LocalDate dataZwrotu;
-    @XmlElement(name = "autor", required = true)
-    private Autor autor;
+    @XmlElement(name = "author", required = true)
+    private Author author;
     @XmlElement(name = "tytul", required = true)
     private String tytul;
 
-    public Wpis(){}
+    public LogEntry(){}
 
-    public Wpis(Ksiazka ksiazka, Uzytkownik uzytkownik, LocalDate dataWypozyczenia, LocalDate dataZwrotu) {
-        this.ksiazka = ksiazka;
-        this.uzytkownik = uzytkownik;
+    public LogEntry(Book book, User user, LocalDate dataWypozyczenia, LocalDate dataZwrotu) {
+        this.book = book;
+        this.user = user;
         this.dataWypozyczenia = dataWypozyczenia;
-        this.autor = ksiazka.getAutor();
+        this.author = book.getAuthor();
         this.dataZwrotu = dataZwrotu;
-        this.tytul = ksiazka.getTytul();
+        this.tytul = book.getTytul();
     }
 
     public String getIdKsiazki() {
-        return ksiazka.getID();
+        return book.getID();
     }
 
-    public void setKsiazka(Ksiazka ksiazka) {
-        this.ksiazka = ksiazka;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
-    public Uzytkownik getUzytkownik() {
-        return uzytkownik;
+    public User getUser() {
+        return user;
     }
 
-    public void setUzytkownik(Uzytkownik uzytkownik) {
-        this.uzytkownik = uzytkownik;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public LocalDate getDataWypozyczenia() {
@@ -72,16 +69,16 @@ public class Wpis {
         this.dataZwrotu = dataZwrotu;
     }
 
-    public Autor getAutor() {
-        return autor;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAutor(Autor autor) {
-        this.autor = autor;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
-    public Ksiazka getKsiazka() {
-        return ksiazka;
+    public Book getBook() {
+        return book;
     }
 
     public String getTytul() {

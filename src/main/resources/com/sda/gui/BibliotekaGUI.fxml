@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.FXCollections?>
 
-<AnchorPane prefHeight="655.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sda.gui.KontrolerGUI">
+<AnchorPane prefHeight="655.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sda.gui.GUIController">
    <children>
       <TabPane layoutX="14.0" layoutY="14.0" prefHeight="619.0" prefWidth="928.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -144,7 +144,7 @@
                               <TextField fx:id="textFieldImieUzytkownika" promptText="Imie" GridPane.columnIndex="3" />
                               <TextField fx:id="textFieldNazwiskoUzytkownika" promptText="Nazwisko" GridPane.columnIndex="5" />
                               <Button fx:id="buttonDodajUzytkownika" mnemonicParsing="false" onAction="#dodajUzytkownika" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="8" />
-                              <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="plec:" GridPane.columnIndex="6">
+                              <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="gender:" GridPane.columnIndex="6">
                                <items>
                                    <FXCollections fx:factory="observableArrayList">
                                        <String fx:value="Kobieta" />
