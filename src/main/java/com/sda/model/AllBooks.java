@@ -16,7 +16,7 @@ public class AllBooks {
         this.ksiazki = b.getListaKsiazek();
     }
 
-    public List<Book> getKsiazki() {
+    public List<Book> getBooks() {
         return ksiazki;
     }
 

@@ -21,7 +21,7 @@ public class LibraryManagement {
 
     private void dodajKsiazkeDoBiblioteki(Book book){
 
-        library.dodajKsiazke(book);
+        library.addBook(book);
     }
 
     public List<String> zwrocTytulyKsiazek() {
@@ -67,12 +67,12 @@ public class LibraryManagement {
     }
 
     public void  dodajUzytkownika(User user){
-        library.dodajUzytkownika(user);
+        library.addUser(user);
     }
 
     public void dodajUzytkownika(String imie, String nazwisko, Gender gender){
         // sprawdzenie czy uzytkownik juz istnieje?
-        library.dodajUzytkownika(new User(imie, nazwisko, gender));
+        library.addUser(new User(imie, nazwisko, gender));
     }
 
     public void  wyswietlWypozyczoneKsiazki(){
@@ -130,7 +130,7 @@ public class LibraryManagement {
         LibraryManagement zb = new LibraryManagement(library);
 
         try {
-            b.odczytKsiazek(library);
+            b.readBooksFromFile(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }

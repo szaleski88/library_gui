@@ -17,7 +17,7 @@ public class AllUsers {
         this.uzytkownicy = b.getListaUzytkownikow();
     }
 
-    public List<User> getUzytkownicy() {
+    public List<User> getUsers() {
         return uzytkownicy;
     }
 

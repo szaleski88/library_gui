@@ -94,17 +94,17 @@ public class GUIController {
         sortuj = new QuickSort();
         backup = new Backup();
         try {
-            backup.odczytKsiazek(library);
+            backup.readBooksFromFile(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
         try {
-            backup.odczytUzytkownikow(library);
+            backup.readUsersFromFile(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
         try {
-            backup.odczytRejestru(library);
+            backup.readLogsFromFile(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
@@ -163,7 +163,7 @@ public class GUIController {
         User user = new User(textFieldImieUzytkownika.getText().trim(),
                                                 textFieldNazwiskoUzytkownika.getText().trim(),
                                                 Gender.valueOf(comboBox.getValue().toUpperCase()));
-        library.dodajUzytkownika(user);
+        library.addUser(user);
 
         textFieldImieUzytkownika.setText("");
         textFieldNazwiskoUzytkownika.setText("");
@@ -225,9 +225,9 @@ public class GUIController {
     }
 
     public void shutdown() {
-        backup.zapisRejestru(library);
-        backup.zapisUzytkownikow(library);
-        backup.zapisKsiazek(library);
+        backup.saveLogsToFile(library);
+        backup.saveUsersToFile(library);
+        backup.saveBooksToFile(library);
         Platform.exit();
     }
 
@@ -281,7 +281,7 @@ public class GUIController {
         Stage stage = new Stage();
         Parent root = null;
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("dodajKsiazke.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("addBook.fxml"));
 //            root = FXMLLoader.load(getClass().getResource("BibliotekaGUI.fxml"));
             root = loader.load();
             Scene scene = new Scene(root);

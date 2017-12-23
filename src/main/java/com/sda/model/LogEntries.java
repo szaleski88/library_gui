@@ -17,7 +17,7 @@ public class LogEntries {
         this.wpisy = b.getRejestrWypozyczen();
     }
 
-    public List<LogEntry> getWpisy() {
+    public List<LogEntry> getEntries() {
         return wpisy;
     }
 

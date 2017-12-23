@@ -17,11 +17,11 @@ public class Library {
         this.rejestrWypozyczen = new ArrayList<>();
     }
 
-    public void dodajKsiazke(Book book) {
+    public void addBook(Book book) {
         listaKsiazek.add(book);
     }
 
-    public void dodajUzytkownika (User user) {
+    public void addUser(User user) {
         listaUzytkownikow.add(user);
     }
 
@@ -37,7 +37,7 @@ public class Library {
     }
 
 
-    public void dodajWpis(LogEntry wp) {
+    public void addEntry(LogEntry wp) {
         rejestrWypozyczen.add(wp);
     }
 }

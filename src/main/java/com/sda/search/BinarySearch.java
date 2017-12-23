@@ -154,7 +154,7 @@ public class BinarySearch implements Search {
         Backup b = new Backup();
 
         try {
-            b.odczytKsiazek(library);
+            b.readBooksFromFile(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
