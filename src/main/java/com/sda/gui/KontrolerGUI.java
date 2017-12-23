@@ -185,7 +185,8 @@ public class KontrolerGUI {
     }
 
     private void zmienStatusKsiazki(Ksiazka ksiazka) {
-        List<Ksiazka> ksiazkaSzukana = biblioteka.getListaKsiazek().stream().filter(ks -> ks.getID().equals(ksiazka.getID())).collect(Collectors.toList());
+        List<Ksiazka> ksiazkaSzukana = biblioteka.getListaKsiazek().stream()
+                                        .filter(ks -> ks.getID().equals(ksiazka.getID())).collect(Collectors.toList());
         ksiazkaSzukana.get(0).setDostepna(true);
     }
 
