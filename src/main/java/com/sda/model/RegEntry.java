@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name="wpis")
-public class LogEntry {
+public class RegEntry {
 
     @XmlElement(name = "book", required = true)
     private Book book;
@@ -26,9 +26,9 @@ public class LogEntry {
     @XmlElement(name = "tytul", required = true)
     private String tytul;
 
-    public LogEntry(){}
+    public RegEntry(){}
 
-    public LogEntry(Book book, User user, LocalDate dataWypozyczenia, LocalDate dataZwrotu) {
+    public RegEntry(Book book, User user, LocalDate dataWypozyczenia, LocalDate dataZwrotu) {
         this.book = book;
         this.user = user;
         this.dataWypozyczenia = dataWypozyczenia;

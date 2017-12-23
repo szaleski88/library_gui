@@ -14,7 +14,7 @@ public class AllUsers {
     }
 
     public AllUsers(Library b){
-        this.uzytkownicy = b.getListaUzytkownikow();
+        this.uzytkownicy = b.getUsersList();
     }
 
     public List<User> getUsers() {

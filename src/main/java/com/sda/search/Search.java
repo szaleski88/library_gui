@@ -15,6 +15,6 @@ public interface Search {
      */
     List<Book> searchByTitle(String tytul);
     List<Book> szukajAutora(String imie, String nazwisko);
-    List<User> szukajUzytkownika(String imie, String nazwisko);
+    List<User> searchForUser(String imie, String nazwisko);
 
 }

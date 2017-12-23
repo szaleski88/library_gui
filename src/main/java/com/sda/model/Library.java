@@ -9,7 +9,7 @@ public class Library {
 
     private List<User> listaUzytkownikow;
 
-    private List<LogEntry> rejestrWypozyczen;
+    private List<RegEntry> rejestrWypozyczen;
 
     public Library() {
         this.listaKsiazek = new ArrayList<>();
@@ -28,16 +28,16 @@ public class Library {
     public List<Book> getBooksList() {
         return listaKsiazek;
     }
-    public List<User> getListaUzytkownikow() {
+    public List<User> getUsersList() {
         return listaUzytkownikow;
     }
 
-    public List<LogEntry> getRegistry() {
+    public List<RegEntry> getRegistry() {
         return rejestrWypozyczen;
     }
 
 
-    public void addEntry(LogEntry wp) {
+    public void addRegEntry(RegEntry wp) {
         rejestrWypozyczen.add(wp);
     }
 }

@@ -9,7 +9,7 @@ import java.util.List;
 public class Registry {
 
     @XmlElements(@XmlElement(name="wpis"))
-    private List<LogEntry> wpisy;
+    private List<RegEntry> wpisy;
 
     public Registry(){}
 
@@ -17,11 +17,11 @@ public class Registry {
         this.wpisy = b.getRegistry();
     }
 
-    public List<LogEntry> getEntries() {
+    public List<RegEntry> getRegEntries() {
         return wpisy;
     }
 
-    public void setWpisy(List<LogEntry> wpisy) {
+    public void setWpisy(List<RegEntry> wpisy) {
         this.wpisy = wpisy;
     }
 }

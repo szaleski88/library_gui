@@ -170,8 +170,8 @@ public class BinarySearch implements Search {
 
     }
 
-    public List<User> szukajUzytkownika(String imie, String nazwisko) {
-        List<User> uzytkownicy = library.getListaUzytkownikow();
+    public List<User> searchForUser(String imie, String nazwisko) {
+        List<User> uzytkownicy = library.getUsersList();
         List<User> znalezieni = new ArrayList<>();
 
         uzytkownicy.sort((o1, o2) -> {

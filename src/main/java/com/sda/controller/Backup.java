@@ -24,7 +24,7 @@ public class Backup {
 
     }
 
-    public void saveLogsToFile(Library library) {
+    public void saveRegistryToFile(Library library) {
         Registry registry = new Registry(library);
 
         try {
@@ -93,7 +93,7 @@ public class Backup {
 
     }
 
-    public void readLogsFromFile(Library library) throws JAXBException {
+    public void readRegistryFromFile(Library library) throws JAXBException {
 
         File file = new File("./registry.xml");
         createFile(file);
@@ -101,9 +101,9 @@ public class Backup {
 
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         Registry registry = (Registry) jaxbUnmarshaller.unmarshal(file);
-        if (registry.getEntries().size() >  0) {
-            for (LogEntry le : registry.getEntries()) {
-                library.addEntry(le);
+        if (registry.getRegEntries().size() >  0) {
+            for (RegEntry le : registry.getRegEntries()) {
+                library.addRegEntry(le);
             }
         }
     }
@@ -146,14 +146,14 @@ public class Backup {
         zb.borrowBook(library.getBooksList().get(57), user);
         zb.borrowBook(library.getBooksList().get(111), user);
         zb.borrowBook(library.getBooksList().get(178), user);
-        zb.borrowBook(library.getBooksList().get(11), library.getListaUzytkownikow().get(0));
-        zb.borrowBook(library.getBooksList().get(17), library.getListaUzytkownikow().get(0));
-        zb.borrowBook(library.getBooksList().get(100), library.getListaUzytkownikow().get(2));
-        zb.borrowBook(library.getBooksList().get(101), library.getListaUzytkownikow().get(3));
+        zb.borrowBook(library.getBooksList().get(11), library.getUsersList().get(0));
+        zb.borrowBook(library.getBooksList().get(17), library.getUsersList().get(0));
+        zb.borrowBook(library.getBooksList().get(100), library.getUsersList().get(2));
+        zb.borrowBook(library.getBooksList().get(101), library.getUsersList().get(3));
 
         zb.displayAllBorrowedBooks();
         b.saveUsersToFile(library);
-        b.saveLogsToFile(library);
+        b.saveRegistryToFile(library);
 
 
 

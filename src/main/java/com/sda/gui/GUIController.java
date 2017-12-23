@@ -28,70 +28,70 @@ import java.util.stream.Collectors;
 public class GUIController {
 
     private static Library library;
-    private static LibraryManagement zb;
+    private static LibraryManagement lm;
     private static Backup backup;
-    private static BinarySearch wyszukaj;
-    private static QuickSort sortuj;
+    private static BinarySearch search;
+    private static QuickSort quickSort;
 
     @FXML
-    private   TextField textFieldTytul;
+    private   TextField tfTitle;
     @FXML
-    private   TextField textFieldImieAutora;
+    private   TextField tfAuthorFirstName;
     @FXML
-    private   TextField textFieldImieUzytkownika;
+    private   TextField tfUserFirstName;
     @FXML
-    private   TextField textFieldNazwiskoAutora;
+    private   TextField tfAuthorLastName;
     @FXML
-    private   TextField textFieldNazwiskoUzytkownika;
+    private   TextField tfUserLastName;
     @FXML
-    private   Button buttonDodajUzytkownika;
+    private   Button btnAddUser;
     @FXML
-    private Button buttonSzukajAutora;
+    private Button btnSearchForAuthor;
     @FXML
-    private Button buttonSzukajTytulu;
+    private Button btnSearchForTitle;
     @FXML
-    private  TableView<Book> tabelaSzukaj;
+    private  TableView<Book> tblSearch;
     @FXML
-    private TableColumn<Book, String> kolumnaTytul;
+    private TableColumn<Book, String> colTitle;
     @FXML
-    private TableColumn<Book, Author> kolumnaAutor;
+    private TableColumn<Book, Author> colAuthor;
     @FXML
-    private TableColumn<Book, Genre> kolumnaGatunek;
+    private TableColumn<Book, Genre> colGenre;
     @FXML
-    private TableColumn<Book, Integer> kolumnaRokWydania;
+    private TableColumn<Book, Integer> colReleaseDate;
     @FXML
-    private TableColumn<Book, Boolean> kolumnaStatus;
+    private TableColumn<Book, Boolean> colStatus;
     @FXML
-    private TableColumn<LogEntry, Author> kolumnaAutorWypozyczony;
+    private TableColumn<RegEntry, Author> colBorrowedAuthor;
     @FXML
-    private TableColumn<LogEntry, User> kolumnaUzytkownikWypozyczony;
+    private TableColumn<RegEntry, User> colBorrowedUser;
     @FXML
-    private TableColumn<LogEntry, LocalDate> kolumnaDataWypozyczenia;
+    private TableColumn<RegEntry, LocalDate> colBorrowDate;
     @FXML
-    private TableColumn<LogEntry, String> kolumnaTytulWypozyczony;
-    @FXML private  TableColumn<User, String> kolumnaUzytkImie;
-    @FXML private TableColumn<User, String> kolumnaUzytkNazwisko;
-    @FXML private TableColumn<User, Gender> kolUzytkPlec;
+    private TableColumn<RegEntry, String> colBorrowedTitle;
+    @FXML private  TableColumn<User, String> colUserFirstName;
+    @FXML private TableColumn<User, String> colUserLastName;
+    @FXML private TableColumn<User, Gender> colUserGender;
 
     @FXML
-    private TableView<LogEntry> tabelaWypozyczone;
+    private TableView<RegEntry> tblBorrowed;
     @FXML
-    private TableView<User> tableViewUzytkownicy;
+    private TableView<User> tblUsers;
     @FXML
     private ComboBox<String> comboBox;
     @FXML
-    private TextField textFieldNazwiskoWypozyczajacego;
+    private TextField tfLastNameBorrower;
     @FXML
-    private TextField textFieldImieWypozyczajacego;
-    @FXML private TextField textFieldImieUzytkSzukaj;
-    @FXML private TextField textFieldNazwiskoUzytkSzukaj;
+    private TextField tfFirstNameBorrower;
+    @FXML private TextField tfSearchUserFirstName;
+    @FXML private TextField tfSearchUserLastName;
 
 
     public GUIController() {
         library = new Library();
-        zb = new LibraryManagement(library);
-        wyszukaj = new BinarySearch(library);
-        sortuj = new QuickSort();
+        lm = new LibraryManagement(library);
+        search = new BinarySearch(library);
+        quickSort = new QuickSort();
         backup = new Backup();
         try {
             backup.readBooksFromFile(library);
@@ -104,180 +104,180 @@ public class GUIController {
             e.printStackTrace();
         }
         try {
-            backup.readLogsFromFile(library);
+            backup.readRegistryFromFile(library);
         } catch (JAXBException e) {
             e.printStackTrace();
         }
-//        zb.displayBooksList();
+//        lm.displayBooksList();
 //        dropDown.getItems().addAll(Gender.values());
     }
 
    @FXML
-   private void szukajTytulu(){
+   private void searchForTitle(){
 
-       String tytul = textFieldTytul.getText();
-       wyswietlWyniki(zb.searchByTitle(tytul));
+       String title = tfTitle.getText();
+       displayResult(lm.searchByTitle(title));
    }
 
     @FXML
-    private void szukajAutora(){
-        String imie = textFieldImieAutora.getText();
-        String nazwisko = textFieldNazwiskoAutora.getText();
-        wyswietlWyniki(zb.searchByAuthor(imie, nazwisko));
+    private void searchForAuthor(){
+        String firstName = tfAuthorFirstName.getText();
+        String lastName = tfAuthorLastName.getText();
+        displayResult(lm.searchByAuthor(firstName, lastName));
     }
 
 
-    private void wyswietlWyniki(List<Book> listaKsiazek){
+    private void displayResult(List<Book> books){
 
-        textFieldNazwiskoAutora.setText("");
-        textFieldImieAutora.setText("");
-        textFieldTytul.setText("");
+        tfAuthorLastName.setText("");
+        tfAuthorFirstName.setText("");
+        tfTitle.setText("");
 
-        ObservableList<Book> data = FXCollections.observableArrayList(listaKsiazek);
+        ObservableList<Book> data = FXCollections.observableArrayList(books);
 
-        kolumnaAutor.setCellValueFactory(
-                new PropertyValueFactory<>("autor")
+        colAuthor.setCellValueFactory(
+                new PropertyValueFactory<>("author")
         );
-        kolumnaTytul.setCellValueFactory(
-                new PropertyValueFactory<>("tytul")
+        colTitle.setCellValueFactory(
+                new PropertyValueFactory<>("title")
         );
-        kolumnaRokWydania.setCellValueFactory(
-                new PropertyValueFactory("rokWydania")
+        colReleaseDate.setCellValueFactory(
+                new PropertyValueFactory("releaseDate")
         );
-        kolumnaGatunek.setCellValueFactory(
-                new PropertyValueFactory("gatunek")
+        colGenre.setCellValueFactory(
+                new PropertyValueFactory("genre")
         );
-        kolumnaStatus.setCellValueFactory(
-                new PropertyValueFactory("dostepna")
+        colStatus.setCellValueFactory(
+                new PropertyValueFactory("available")
         );
 
-        tabelaSzukaj.setItems(data);
-        tabelaSzukaj.getSelectionModel().setSelectionMode(
+        tblSearch.setItems(data);
+        tblSearch.getSelectionModel().setSelectionMode(
                 SelectionMode.SINGLE
         );
 
     }
 
     @FXML
-    private void dodajUzytkownika(){
-        User user = new User(textFieldImieUzytkownika.getText().trim(),
-                                                textFieldNazwiskoUzytkownika.getText().trim(),
+    private void addUser(){
+        User user = new User(tfUserFirstName.getText().trim(),
+                                                tfUserLastName.getText().trim(),
                                                 Gender.valueOf(comboBox.getValue().toUpperCase()));
         library.addUser(user);
 
-        textFieldImieUzytkownika.setText("");
-        textFieldNazwiskoUzytkownika.setText("");
+        tfUserFirstName.setText("");
+        tfUserLastName.setText("");
         System.out.println(user);
     }
 
 
     @FXML
-    public void zwrocZaznaczoneKsiazki() {
-        List<LogEntry> wpisy = tabelaWypozyczone.getSelectionModel().getSelectedItems();
-        for (LogEntry logEntry : wpisy) {
-            logEntry.setReturnDate(LocalDate.now());
-            zmienStatusKsiazki(logEntry.getBook());
+    public void returnBorrowedBooks() {
+        List<RegEntry> entries = tblBorrowed.getSelectionModel().getSelectedItems();
+        for (RegEntry regEntry : entries) {
+            regEntry.setReturnDate(LocalDate.now());
+            changeBookStatus(regEntry.getBook());
 
-            System.out.println("Pomyślnie zwrócono ksiązkę: " + logEntry.getBook().getTitle());
+            System.out.println("Successfully returned book: " + regEntry.getBook().getTitle());
         }
     }
 
-    private void zmienStatusKsiazki(Book book) {
-        List<Book> bookSzukana = library.getBooksList().stream()
-                                        .filter(ks -> ks.getID().equals(book.getID())).collect(Collectors.toList());
-        bookSzukana.get(0).setAvailable(true);
+    private void changeBookStatus(Book book) {
+        List<Book> searchedBook = library.getBooksList().stream()
+                                        .filter(b -> b.getID().equals(b.getID())).collect(Collectors.toList());
+        searchedBook.get(0).setAvailable(true);
     }
 
     @FXML
-    public void szukajWypozyczonychUzytkownika() {
-        List<LogEntry> wypUzytk = zb.getBorrowedByUser(textFieldImieWypozyczajacego.getText(),
-                textFieldNazwiskoWypozyczajacego.getText());
-        if( wypUzytk!= null) wypelnijWypozyczone(wypUzytk);
+    public void searchForBorrowedByUser() {
+        List<RegEntry> borrowedByUser = lm.getBorrowedByUser(tfFirstNameBorrower.getText(),
+                tfLastNameBorrower.getText());
+        if( borrowedByUser!= null) fillInBorrowed(borrowedByUser);
     }
 
     @FXML
-    public void szukajWypozyczonych() {
-        wypelnijWypozyczone(zb.getBorrowedBooks());
+    public void searchForBorrowed() {
+        fillInBorrowed(lm.getBorrowedBooks());
 
     }
 
-    private void wypelnijWypozyczone(List<LogEntry> wpisy) {
+    private void fillInBorrowed(List<RegEntry> registry) {
 
-        ObservableList<LogEntry> data = FXCollections.observableArrayList(wpisy);
+        ObservableList<RegEntry> data = FXCollections.observableArrayList(registry);
 
-        kolumnaAutorWypozyczony.setCellValueFactory(
-                new PropertyValueFactory<>("autor")
+        colBorrowedAuthor.setCellValueFactory(
+                new PropertyValueFactory<>("author")
         );
-        kolumnaTytulWypozyczony.setCellValueFactory(
-                new PropertyValueFactory<>("tytul")
+        colBorrowedTitle.setCellValueFactory(
+                new PropertyValueFactory<>("title")
         );
-        kolumnaDataWypozyczenia.setCellValueFactory(
-                new PropertyValueFactory("dataWypozyczenia")
+        colBorrowDate.setCellValueFactory(
+                new PropertyValueFactory("releaseDate")
         );
-        kolumnaUzytkownikWypozyczony.setCellValueFactory(
-                new PropertyValueFactory("uzytkownik")
+        colBorrowedUser.setCellValueFactory(
+                new PropertyValueFactory("user")
         );
 
-        tabelaWypozyczone.setItems(data);
-        tabelaWypozyczone.getSelectionModel().setSelectionMode(
+        tblBorrowed.setItems(data);
+        tblBorrowed.getSelectionModel().setSelectionMode(
                 SelectionMode.MULTIPLE
         );
     }
 
     public void shutdown() {
-        backup.saveLogsToFile(library);
+        backup.saveRegistryToFile(library);
         backup.saveUsersToFile(library);
         backup.saveBooksToFile(library);
         Platform.exit();
     }
 
-    public void wypozyczKsiazke() {
-        User uz = tableViewUzytkownicy.getSelectionModel().getSelectedItem();
-        Book ks = tabelaSzukaj.getSelectionModel().getSelectedItem();
+    public void borrowBook() {
+        User us = tblUsers.getSelectionModel().getSelectedItem();
+        Book bk = tblSearch.getSelectionModel().getSelectedItem();
         System.out.println();
 
-        zb.borrowBook(ks, uz);
-        System.out.println("Wypozyczone!!!");
+        lm.borrowBook(bk, us);
+        System.out.println("Borrowed!!!");
 
     }
 
-    public void szukajUzytkownika() {
-        String imie = textFieldImieUzytkSzukaj.getText();
-        String nazwisko = textFieldNazwiskoUzytkSzukaj.getText();
+    public void findUser() {
+        String firstName = tfSearchUserFirstName.getText();
+        String lastName = tfSearchUserLastName.getText();
 
-        List<User> userSzukany = wyszukaj.szukajUzytkownika(imie, nazwisko);
-        System.out.println("Znaleziono uzytkownika: " + userSzukany.size());
+        List<User> searchedUser = search.searchForUser(firstName, lastName);
+        System.out.println("Found User: " + searchedUser.size());
 
-        wypelnijUzytkownikow(userSzukany);
+        fillInUsers(searchedUser);
     }
 
-    public void szukajWszystkichUzytkownikow() {
-        List<User> uzytkownicy = library.getListaUzytkownikow();
+    public void findAllUsers() {
+        List<User> users = library.getUsersList();
 
-        wypelnijUzytkownikow(uzytkownicy);
+        fillInUsers(users);
     }
 
-    private void wypelnijUzytkownikow(List<User> uzytkownicy) {
+    private void fillInUsers(List<User> users) {
 
-        ObservableList<User> data = FXCollections.observableArrayList(uzytkownicy);
+        ObservableList<User> data = FXCollections.observableArrayList(users);
 
-        kolumnaUzytkImie.setCellValueFactory(
-                new PropertyValueFactory<>("imie")
+        colUserFirstName.setCellValueFactory(
+                new PropertyValueFactory<>("firstName")
         );
-        kolumnaUzytkNazwisko.setCellValueFactory(
-                new PropertyValueFactory<>("nazwisko")
+        colUserLastName.setCellValueFactory(
+                new PropertyValueFactory<>("lastName")
         );
-        kolUzytkPlec.setCellValueFactory(
-                new PropertyValueFactory("plec")
+        colUserGender.setCellValueFactory(
+                new PropertyValueFactory("gender")
         );
 
-        tableViewUzytkownicy.setItems(data);
-        tableViewUzytkownicy.getSelectionModel().setSelectionMode(
+        tblUsers.setItems(data);
+        tblUsers.getSelectionModel().setSelectionMode(
                 SelectionMode.SINGLE
         );
     }
 
-    public void otworzOknoDodawaniaOsoby(ActionEvent actionEvent) {
+    public void openAddUserWindow(ActionEvent actionEvent) {
         Stage stage = new Stage();
         Parent root = null;
         try {

@@ -30,18 +30,18 @@ public class LibraryManagement {
 
     public void borrowBook(Book book, User user){
         book.setAvailable(false);
-        LogEntry logEntry = new LogEntry(book, user, LocalDate.now(), null);
-        library.getRegistry().add(logEntry);
+        RegEntry regEntry = new RegEntry(book, user, LocalDate.now(), null);
+        library.getRegistry().add(regEntry);
     }
 
     public void returnBorrowedBook(Book book, User user){
-        Optional<LogEntry> rejWyp = library.getRegistry().stream()
+        Optional<RegEntry> rejWyp = library.getRegistry().stream()
                 .filter(logEntry -> logEntry.getBook().equals(book) && logEntry.getUser().equals(user) && !logEntry.getBook()
                         .getAvailable()).findFirst();
         if ( rejWyp.isPresent()) {
-            LogEntry logEntry = rejWyp.get();
-            logEntry.setReturnDate(LocalDate.now());
-            logEntry.getBook().setAvailable(true);
+            RegEntry regEntry = rejWyp.get();
+            regEntry.setReturnDate(LocalDate.now());
+            regEntry.getBook().setAvailable(true);
             System.out.println("Book: {" + book.toString() + "} was successfully returned!");
         } else {
             System.out.println("An Error occured while returning a book!!!");
@@ -78,7 +78,7 @@ public class LibraryManagement {
     public void displayAllBorrowedBooks(){
 
         List<Book> borrowedBooks = library.getRegistry().stream()
-                .filter(logEntry -> !logEntry.getBook().getAvailable()).map(LogEntry::getBook)
+                .filter(logEntry -> !logEntry.getBook().getAvailable()).map(RegEntry::getBook)
                 .collect(Collectors.toList());
 
         System.out.println("Currently borrowed books:");
@@ -90,28 +90,28 @@ public class LibraryManagement {
 
     public void displayBooksBorrowedByUser(User user){
 
-        List<LogEntry> registry = library.getRegistry();
+        List<RegEntry> registry = library.getRegistry();
         List<Book> borrowedByUser = registry.stream().filter(logEntry -> logEntry.getUser()
                 .equals(user) && !logEntry.getBook().getAvailable())
-                .map(LogEntry::getBook).collect(Collectors.toList());
+                .map(RegEntry::getBook).collect(Collectors.toList());
 
         System.out.println("Books borrowed by : " + user.toString());
         for (int i = 0; i < borrowedByUser.size(); i++) {
             System.out.println(i+". " + borrowedByUser.get(i));
         }
     }
-    public List<LogEntry> getBorrowedBooks() {
+    public List<RegEntry> getBorrowedBooks() {
 
         return library.getRegistry().stream()
                 .filter(logEntry -> !logEntry.getBook().getAvailable())
                 .collect(Collectors.toList());
     }
 
-    public List<LogEntry> getBorrowedByUser(String firstName, String lastName){
+    public List<RegEntry> getBorrowedByUser(String firstName, String lastName){
 
-        List<LogEntry> registry = library.getRegistry();
+        List<RegEntry> registry = library.getRegistry();
 
-        List<LogEntry> borrowedBooks =  registry.stream().filter(logEntry -> logEntry.getUser().getImie().equalsIgnoreCase(firstName) &&
+        List<RegEntry> borrowedBooks =  registry.stream().filter(logEntry -> logEntry.getUser().getImie().equalsIgnoreCase(firstName) &&
                 logEntry.getUser().getLastName().equalsIgnoreCase(lastName) && !logEntry.getBook().getAvailable())
                 .collect(Collectors.toList());
 
