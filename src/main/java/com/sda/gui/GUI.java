@@ -22,10 +22,10 @@ public class GUI extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BibliotekaGUI.fxml"));
 //            root = FXMLLoader.load(getClass().getResource("BibliotekaGUI.fxml"));
             root = loader.load();
-            GUIController kontroler = loader.getController();
+            GUIController controller = loader.getController();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            primaryStage.setOnHidden(e -> kontroler.shutdown());
+            primaryStage.setOnHidden(e -> controller.shutdown());
             primaryStage.show();
 
 

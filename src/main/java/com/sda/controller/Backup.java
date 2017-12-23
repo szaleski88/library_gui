@@ -45,7 +45,7 @@ public class Backup {
         }
     }
 
-    public void saveToFile(Object o ) throws JAXBException{
+    private void saveToFile(Object o ) throws JAXBException{
         String[] parts = o.getClass().toString().toLowerCase().split("\\.");
 
         File file = new File (String.format(".\\%s.xml", parts[parts.length-1] ));
@@ -128,14 +128,14 @@ public class Backup {
         Backup b = new Backup();
 
 
-//        library.addUser(new User("Stefan", "Mikrut", Gender.MEZCZYZNA));
-//        library.addUser(new User("Mariola", "Kowalska", Gender.FEMALE));
-//        library.addUser(new User("Krzysztof", "Różalski", Gender.MEZCZYZNA));
-//        library.addUser(new User("Katarzyna", "Kowalec", Gender.FEMALE));
-//
-//        b.saveUsersToFile(library);
-//
-//
+        library.addUser(new User("Jacob", "Moore", Gender.MALE));
+        library.addUser(new User("Elizabeth", "Hurley", Gender.FEMALE));
+        library.addUser(new User("Cristopher", "Doe", Gender.MALE));
+        library.addUser(new User("Catrine", "Cooper", Gender.FEMALE));
+
+        b.saveUsersToFile(library);
+
+
         b.readBooksFromFile(library);
         b.readUsersFromFile(library);
         LibraryManagement zb = new LibraryManagement(library);

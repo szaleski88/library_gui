@@ -9,12 +9,12 @@ public class Library {
 
     private List<User> allUsers;
 
-    private List<RegEntry> regitstry;
+    private List<RegEntry> registry;
 
     public Library() {
         this.allBooks = new ArrayList<>();
         this.allUsers = new ArrayList<>();
-        this.regitstry = new ArrayList<>();
+        this.registry = new ArrayList<>();
     }
 
     public void addBook(Book book) {
@@ -33,11 +33,11 @@ public class Library {
     }
 
     public List<RegEntry> getRegistry() {
-        return regitstry;
+        return registry;
     }
 
 
     public void addRegEntry(RegEntry wp) {
-        regitstry.add(wp);
+        registry.add(wp);
     }
 }
