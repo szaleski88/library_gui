@@ -61,7 +61,7 @@ public class Backup {
 
     }
 
-    public void readUsersFromFile(Library library) throws JAXBException {
+    public static void readUsersFromFile(Library library) throws JAXBException {
 
         File file = new File("./allUsers.xml");
         createFile(file);
@@ -76,7 +76,7 @@ public class Backup {
         }
     }
 
-    public void readBooksFromFile(Library library) throws JAXBException {
+    public static void readBooksFromFile(Library library) throws JAXBException {
 
         File file = new File ("./allBooks.xml");
         createFile(file);
@@ -93,7 +93,7 @@ public class Backup {
 
     }
 
-    public void readRegistryFromFile(Library library) throws JAXBException {
+    public static void readRegistryFromFile(Library library) throws JAXBException {
 
         File file = new File("./registry.xml");
         createFile(file);
@@ -108,7 +108,7 @@ public class Backup {
         }
     }
 
-    private void createFile(File file){
+    private static void createFile(File file){
         if(!file.exists())
             try {
                 file.getParentFile().mkdirs();
@@ -116,49 +116,6 @@ public class Backup {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-    }
-
-
-    public static void main(String[] args) throws JAXBException {
-
-        Library library = new Library();
-
-            // wyświetlenie na out
-
-        Backup b = new Backup();
-
-
-        library.addUser(new User("Jacob", "Moore", Gender.MALE));
-        library.addUser(new User("Elizabeth", "Hurley", Gender.FEMALE));
-        library.addUser(new User("Cristopher", "Doe", Gender.MALE));
-        library.addUser(new User("Catrine", "Cooper", Gender.FEMALE));
-
-        b.saveUsersToFile(library);
-
-
-        b.readBooksFromFile(library);
-        b.readUsersFromFile(library);
-        LibraryManagement zb = new LibraryManagement(library);
-        User user = new User("Sebastian", "Zaleski", Gender.MALE);
-        library.addUser(user);
-
-        zb.borrowBook(library.getAllBooks().get(44), user);
-        zb.borrowBook(library.getAllBooks().get(57), user);
-        zb.borrowBook(library.getAllBooks().get(111), user);
-        zb.borrowBook(library.getAllBooks().get(178), user);
-        zb.borrowBook(library.getAllBooks().get(11), library.getUsersList().get(0));
-        zb.borrowBook(library.getAllBooks().get(17), library.getUsersList().get(0));
-        zb.borrowBook(library.getAllBooks().get(100), library.getUsersList().get(2));
-        zb.borrowBook(library.getAllBooks().get(101), library.getUsersList().get(3));
-
-        zb.displayAllBorrowedBooks();
-        b.saveUsersToFile(library);
-        b.saveRegistryToFile(library);
-
-
-
-
-
     }
 
 }

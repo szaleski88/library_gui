@@ -4,13 +4,13 @@ import javax.xml.bind.annotation.*;
 import java.util.UUID;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "uzytkownik")
+@XmlRootElement(name = "user")
 public class User implements  Comparable<User>{
 
-    @XmlElement(name = "imie", required = true)
-    private String imie;
-    @XmlElement(name = "nazwisko", required = true)
-    private String nazwisko;
+    @XmlElement(name = "firstName", required = true)
+    private String firstName;
+    @XmlElement(name = "lastName", required = true)
+    private String lastName;
     @XmlElement(name = "id", required = true)
     private String id;
     @XmlElement(name = "gender", required = true)
@@ -21,26 +21,26 @@ public class User implements  Comparable<User>{
     }
 
 
-    public User(String imie, String nazwisko, Gender gender) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
+    public User(String firstName, String lastName, Gender gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.gender = gender;
         id = UUID.randomUUID().toString();
     }
 
-    public User(String imie, String nazwisko, String id, Gender gender) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
+    public User(String firstName, String lastName, String id, Gender gender) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.id = id;
         this.gender = gender;
     }
 
-    public String getImie() {
-        return imie;
+    public String getFirstName() {
+        return firstName;
     }
 
     public String getLastName() {
-        return nazwisko;
+        return lastName;
     }
 
     public Gender getGender() {
@@ -53,21 +53,21 @@ public class User implements  Comparable<User>{
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer(imie);
-        sb.append(" ").append(nazwisko);
+        final StringBuffer sb = new StringBuffer(firstName);
+        sb.append(" ").append(lastName);
         return sb.toString();
     }
 
     public int compareTo(User o) {
         if (this.equals(o) ) return 0;
-        if (this.imie.equalsIgnoreCase(o.getImie())&& this.getLastName().equalsIgnoreCase(o.getLastName())) {
+        if (this.firstName.equalsIgnoreCase(o.getFirstName())&& this.getLastName().equalsIgnoreCase(o.getLastName())) {
             return 0;
         }
 
-        else if ( this.imie.compareToIgnoreCase(o.getImie()) == 0 ) {
+        else if ( this.firstName.compareToIgnoreCase(o.getFirstName()) == 0 ) {
             return this.getLastName().compareToIgnoreCase(o.getLastName());
         }
-        else return this.getImie().compareTo(o.getImie());
+        else return this.getFirstName().compareTo(o.getFirstName());
 
     }
 
@@ -78,14 +78,14 @@ public class User implements  Comparable<User>{
 
         User that = (User) o;
 
-        if (!imie.equals(that.imie)) return false;
-        return !nazwisko.equals(that.nazwisko);
+        if (!firstName.equals(that.firstName)) return false;
+        return !lastName.equals(that.lastName);
     }
 
     @Override
     public int hashCode() {
-        int result = imie.hashCode();
-        result = 31 * result + nazwisko.hashCode();
+        int result = firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
 //        result = 31 * result + adres.hashCode();
         return result;
     }

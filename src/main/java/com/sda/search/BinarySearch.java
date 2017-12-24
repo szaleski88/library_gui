@@ -176,14 +176,14 @@ public class BinarySearch implements Search {
 
         uzytkownicy.sort((o1, o2) -> {
             if (o1.equals(o2) ) return 0;
-            if (o1.getImie().equalsIgnoreCase(o2.getImie())&& o1.getLastName().equalsIgnoreCase(o2.getLastName())) {
+            if (o1.getFirstName().equalsIgnoreCase(o2.getFirstName())&& o1.getLastName().equalsIgnoreCase(o2.getLastName())) {
                 return 0;
             }
 
-            else if ( o1.getImie().compareToIgnoreCase(o2.getImie()) == 0 ) {
+            else if ( o1.getFirstName().compareToIgnoreCase(o2.getFirstName()) == 0 ) {
                 return o1.getLastName().compareToIgnoreCase(o2.getLastName());
             }
-            else return o1.getImie().compareTo(o2.getImie());
+            else return o1.getFirstName().compareTo(o2.getFirstName());
         });
 
         int pierwszyTraf = szukajUzytkownikaRekurencyjnie(imie, nazwisko, uzytkownicy);
@@ -191,13 +191,13 @@ public class BinarySearch implements Search {
 
         znalezieni.add(uzytkownicy.get(pierwszyTraf));
         for (int i = pierwszyTraf + 1; i < uzytkownicy.size(); i++) {
-            if (uzytkownicy.get(i).getImie().equalsIgnoreCase(imie) &&
+            if (uzytkownicy.get(i).getFirstName().equalsIgnoreCase(imie) &&
                     uzytkownicy.get(i).getLastName().equalsIgnoreCase(nazwisko)) znalezieni.add(uzytkownicy.get(i));
             else break;
         }
 
         for (int i = pierwszyTraf - 1 ; i >= 0; i--) {
-            if (uzytkownicy.get(i).getImie().equalsIgnoreCase(imie) &&
+            if (uzytkownicy.get(i).getFirstName().equalsIgnoreCase(imie) &&
                     uzytkownicy.get(i).getLastName().equalsIgnoreCase(nazwisko)) znalezieni.add(uzytkownicy.get(i));
             else break;
         }
@@ -216,10 +216,10 @@ public class BinarySearch implements Search {
         int szukanaLiczba;
         int index = uzytkownicy.size() / 2;
 
-        if ( uzytkownicy.get(index).getImie().equalsIgnoreCase(imie)
+        if ( uzytkownicy.get(index).getFirstName().equalsIgnoreCase(imie)
                 &&  uzytkownicy.get(index).getLastName().equalsIgnoreCase(nazwisko)) {
             return index;
-        } else if ( uzytkownicy.get(index).getImie().compareToIgnoreCase(imie) > 0 ) {
+        } else if ( uzytkownicy.get(index).getFirstName().compareToIgnoreCase(imie) > 0 ) {
             List<User> lewa = new ArrayList<>();
 
             for (int i = 0; i < index ; i++) {

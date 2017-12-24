@@ -18,7 +18,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import javax.xml.bind.JAXBException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -27,8 +26,6 @@ import java.util.stream.Collectors;
 
 public class GUIController {
 
-    private static Library library;
-    private static LibraryManagement lm;
     private static Backup backup;
     private static BinarySearch search;
     private static QuickSort quickSort;
@@ -88,27 +85,25 @@ public class GUIController {
 
 
     public GUIController() {
-        library = new Library();
-        lm = new LibraryManagement(library);
-        search = new BinarySearch(library);
+        search = new BinarySearch(LibraryManagement.getLibrary());
         quickSort = new QuickSort();
         backup = new Backup();
-        try {
-            backup.readBooksFromFile(library);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-        try {
-            backup.readUsersFromFile(library);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-        try {
-            backup.readRegistryFromFile(library);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-//        lm.displayBooksList();
+//        try {
+//            backup.readBooksFromFile(library);
+//        } catch (JAXBException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            backup.readUsersFromFile(library);
+//        } catch (JAXBException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            backup.readRegistryFromFile(library);
+//        } catch (JAXBException e) {
+//            e.printStackTrace();
+//        }
+//        LibraryManagement.displayBooksList();
 //        dropDown.getItems().addAll(Gender.values());
     }
 
@@ -116,14 +111,14 @@ public class GUIController {
    private void searchForTitle(){
 
        String title = tfTitle.getText();
-       displayResult(lm.searchByTitle(title));
+       displayResult(LibraryManagement.searchByTitle(title));
    }
 
     @FXML
     private void searchForAuthor(){
         String firstName = tfAuthorFirstName.getText();
         String lastName = tfAuthorLastName.getText();
-        displayResult(lm.searchByAuthor(firstName, lastName));
+        displayResult(LibraryManagement.searchByAuthor(firstName, lastName));
     }
 
 
@@ -163,7 +158,7 @@ public class GUIController {
         User user = new User(tfUserFirstName.getText().trim(),
                                                 tfUserLastName.getText().trim(),
                                                 Gender.valueOf(comboBox.getValue().toUpperCase()));
-        library.addUser(user);
+        LibraryManagement.getLibrary().addUser(user);
 
         tfUserFirstName.setText("");
         tfUserLastName.setText("");
@@ -183,21 +178,21 @@ public class GUIController {
     }
 
     private void changeBookStatus(Book book) {
-        List<Book> searchedBook = library.getAllBooks().stream()
+        List<Book> searchedBook = LibraryManagement.getLibrary().getAllBooks().stream()
                                         .filter(b -> b.getID().equals(b.getID())).collect(Collectors.toList());
         searchedBook.get(0).setAvailable(true);
     }
 
     @FXML
     public void searchForBorrowedByUser() {
-        List<RegEntry> borrowedByUser = lm.getBorrowedByUser(tfFirstNameBorrower.getText(),
+        List<RegEntry> borrowedByUser = LibraryManagement.getBorrowedByUser(tfFirstNameBorrower.getText(),
                 tfLastNameBorrower.getText());
         if( borrowedByUser!= null) fillInBorrowed(borrowedByUser);
     }
 
     @FXML
     public void searchForBorrowed() {
-        fillInBorrowed(lm.getBorrowedBooks());
+        fillInBorrowed(LibraryManagement.getBorrowedBooks());
 
     }
 
@@ -225,9 +220,9 @@ public class GUIController {
     }
 
     public void shutdown() {
-        backup.saveRegistryToFile(library);
-        backup.saveUsersToFile(library);
-        backup.saveBooksToFile(library);
+        backup.saveRegistryToFile(LibraryManagement.getLibrary());
+        backup.saveUsersToFile(LibraryManagement.getLibrary());
+        backup.saveBooksToFile(LibraryManagement.getLibrary());
         Platform.exit();
     }
 
@@ -236,7 +231,7 @@ public class GUIController {
         Book bk = tblSearch.getSelectionModel().getSelectedItem();
         System.out.println();
 
-        lm.borrowBook(bk, us);
+        LibraryManagement.borrowBook(bk, us);
         System.out.println("Borrowed!!!");
 
     }
@@ -252,7 +247,7 @@ public class GUIController {
     }
 
     public void findAllUsers() {
-        List<User> users = library.getUsersList();
+        List<User> users = LibraryManagement.getLibrary().getUsersList();
 
         fillInUsers(users);
     }

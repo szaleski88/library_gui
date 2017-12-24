@@ -1,5 +1,6 @@
 package com.sda.gui;
 
+import com.sda.controller.LibraryManagement;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ public class GUI extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        LibraryManagement.initLibrary();
         Parent root = null;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("BibliotekaGUI.fxml"));

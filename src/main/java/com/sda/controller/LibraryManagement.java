@@ -3,7 +3,6 @@ package com.sda.controller;
 import com.sda.model.*;
 import com.sda.search.BinarySearch;
 
-import javax.xml.bind.JAXBException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -14,9 +13,20 @@ public class LibraryManagement {
     private static Library library;
 
 
-    public LibraryManagement(Library library){
+    public static Library getLibrary() {
+        return library;
+    }
 
-        library = library;
+
+    public static void initLibrary(){
+        library = new Library();
+        try{
+            Backup.readBooksFromFile(library);
+            Backup.readUsersFromFile(library);
+            Backup.readRegistryFromFile(library);
+        }catch(Exception e ){
+            System.out.println(e.getMessage());
+        }
     }
 
     private void addBookToLibrary(Book book){
@@ -28,7 +38,7 @@ public class LibraryManagement {
         return library.getAllBooks().stream().map(book -> book.getTitle()).collect(Collectors.toList());
     }
 
-    public void borrowBook(Book book, User user){
+    public static void borrowBook(Book book, User user){
         book.setAvailable(false);
         RegEntry regEntry = new RegEntry(book, user, LocalDate.now(), null);
         library.getRegistry().add(regEntry);
@@ -55,13 +65,13 @@ public class LibraryManagement {
         }
     }
 
-    public List<Book> searchByTitle(String title){
+    public static List<Book> searchByTitle(String title){
         BinarySearch bs = new BinarySearch(library);
         return bs.searchByTitle(title);
 
     }
 
-    public List<Book> searchByAuthor(String firstName, String lastName){
+    public static List<Book> searchByAuthor(String firstName, String lastName){
         BinarySearch bs = new BinarySearch(library);
         return bs.szukajAutora(firstName, lastName);
     }
@@ -100,18 +110,18 @@ public class LibraryManagement {
             System.out.println(i+". " + borrowedByUser.get(i));
         }
     }
-    public List<RegEntry> getBorrowedBooks() {
+    public static List<RegEntry> getBorrowedBooks() {
 
         return library.getRegistry().stream()
                 .filter(logEntry -> !logEntry.getBook().getAvailable())
                 .collect(Collectors.toList());
     }
 
-    public List<RegEntry> getBorrowedByUser(String firstName, String lastName){
+    public static List<RegEntry> getBorrowedByUser(String firstName, String lastName){
 
         List<RegEntry> registry = library.getRegistry();
 
-        List<RegEntry> borrowedBooks =  registry.stream().filter(logEntry -> logEntry.getUser().getImie().equalsIgnoreCase(firstName) &&
+        List<RegEntry> borrowedBooks =  registry.stream().filter(logEntry -> logEntry.getUser().getFirstName().equalsIgnoreCase(firstName) &&
                 logEntry.getUser().getLastName().equalsIgnoreCase(lastName) && !logEntry.getBook().getAvailable())
                 .collect(Collectors.toList());
 
