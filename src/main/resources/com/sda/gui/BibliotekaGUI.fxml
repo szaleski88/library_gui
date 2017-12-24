@@ -12,7 +12,7 @@
    <children>
       <TabPane layoutX="14.0" layoutY="14.0" prefHeight="619.0" prefWidth="928.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Szukaj i Wypozycz">
+          <Tab text="Search &amp; Borrow">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -37,35 +37,35 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Button id="buttonSzukajTytulu" fx:id="btnSearchForTitle" mnemonicParsing="false" onAction="#searchForTitle" prefHeight="25.0" prefWidth="150.0" text="Szukaj Tytulu" GridPane.columnIndex="5" />
-                              <Button id="buttonSzukajAutora" fx:id="btnSearchForAuthor" mnemonicParsing="false" onAction="#searchForAuthor" prefHeight="25.0" prefWidth="150.0" text="Szukaj Autora" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="88.0" text="Tytuł:" GridPane.halignment="RIGHT" />
-                              <TextField id="textLineTytulKsiazki" fx:id="tfTitle" prefHeight="25.0" prefWidth="613.0" promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.columnSpan="3" />
-                              <TextField id="textLineImieAutora" fx:id="tfAuthorFirstName" prefHeight="25.0" prefWidth="311.0" promptText="Imie Autora" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <TextField id="textLineNazwiskoAutora" fx:id="tfAuthorLastName" promptText="Nazwisko Autora" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="98.0" text="Autor:" GridPane.rowIndex="1" />
+                              <Button id="buttonSzukajTytulu" fx:id="btnSearchForTitle" mnemonicParsing="false" onAction="#searchForTitle" prefHeight="25.0" prefWidth="150.0" text="Search for Title" GridPane.columnIndex="5" />
+                              <Button id="buttonSzukajAutora" fx:id="btnSearchForAuthor" mnemonicParsing="false" onAction="#searchForAuthor" prefHeight="25.0" prefWidth="150.0" text="Search for Author" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                              <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="88.0" text="Title:" GridPane.halignment="RIGHT" />
+                              <TextField id="textLineTytulKsiazki" fx:id="tfTitle" prefHeight="25.0" prefWidth="613.0" promptText="Title" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+                              <TextField id="textLineImieAutora" fx:id="tfAuthorFirstName" prefHeight="25.0" prefWidth="311.0" promptText="Author's First Name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField id="textLineNazwiskoAutora" fx:id="tfAuthorLastName" promptText="Author's Last Name" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <Label alignment="TOP_CENTER" prefHeight="17.0" prefWidth="98.0" text="Author:" GridPane.rowIndex="1" />
                               <TableView fx:id="tblSearch" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="2">
                                 <columns>
-                                  <TableColumn fx:id="colTitle" prefWidth="150.0" text="Tytul" />
-                                  <TableColumn fx:id="colAuthor" minWidth="0.0" prefWidth="151.0" text="Autor" />
-                                    <TableColumn fx:id="colGenre" minWidth="0.0" prefWidth="156.0" text="Gatunek" />
-                                    <TableColumn fx:id="colReleaseDate" prefWidth="106.0" text="Rok Wydania" />
+                                  <TableColumn fx:id="colTitle" prefWidth="150.0" text="Title" />
+                                  <TableColumn fx:id="colAuthor" minWidth="0.0" prefWidth="151.0" text="Author" />
+                                    <TableColumn fx:id="colGenre" minWidth="0.0" prefWidth="156.0" text="Genre" />
+                                    <TableColumn fx:id="colReleaseDate" prefWidth="106.0" text="Release Date" />
                                     <TableColumn fx:id="colStatus" prefWidth="74.0" text="Status" />
                                 </columns>
                               </TableView>
                               <TableView fx:id="tblUsers" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.rowIndex="5">
                                  <columns>
-                                    <TableColumn fx:id="colUserFirstName" prefWidth="168.0" text="Imię" />
-                                    <TableColumn fx:id="colUserLastName" minWidth="0.0" prefWidth="304.0" text="Nazwisko" />
-                                    <TableColumn fx:id="colUserGender" minWidth="0.0" prefWidth="88.0" text="Plec" />
+                                    <TableColumn fx:id="colUserFirstName" prefWidth="168.0" text="First Name" />
+                                    <TableColumn fx:id="colUserLastName" minWidth="0.0" prefWidth="304.0" text="Last Name" />
+                                    <TableColumn fx:id="colUserGender" minWidth="0.0" prefWidth="88.0" text="Gender" />
                                  </columns>
                               </TableView>
-                              <Button fx:id="buttonWypozycz" mnemonicParsing="false" onAction="#borrowBook" prefWidth="150.0" text="WYPOŻYCZ" GridPane.columnIndex="5" GridPane.rowIndex="8" />
-                              <Button fx:id="buttonSzukajUzytkownika" mnemonicParsing="false" onAction="#findUser" prefWidth="900.0" text="Szukaj Uzytkownika" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                              <TextField fx:id="tfSearchUserFirstName" promptText="Imię użytkownika" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <TextField fx:id="tfSearchUserLastName" promptText="Nazwisko Użytkownika" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                              <Button fx:id="buttonWszyscyUzytkownicy" mnemonicParsing="false" onAction="#findAllUsers" prefWidth="900.0" text="Wszyscy UZ" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                              <Label text="Uzytkownicy:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Button fx:id="buttonWypozycz" mnemonicParsing="false" onAction="#borrowBook" prefWidth="150.0" text="BORROW SELECTED" GridPane.columnIndex="5" GridPane.rowIndex="8" />
+                              <Button fx:id="buttonSzukajUzytkownika" mnemonicParsing="false" onAction="#findUser" prefWidth="900.0" text="Search for User" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                              <TextField fx:id="tfSearchUserFirstName" promptText="User's First Name" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="tfSearchUserLastName" promptText="User's Last Name" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                              <Button fx:id="buttonWszyscyUzytkownicy" mnemonicParsing="false" onAction="#findAllUsers" prefWidth="900.0" text="ALL USERS" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                              <Label text="Users" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                               <Separator prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
@@ -73,7 +73,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Zwroc">
+            <Tab text="Return">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -100,23 +100,23 @@
                            <children>
                               <TableView fx:id="tblBorrowed" prefHeight="377.0" prefWidth="706.0" GridPane.columnSpan="6" GridPane.rowIndex="1" GridPane.rowSpan="6">
                                 <columns>
-                                  <TableColumn fx:id="colBorrowedUser" prefWidth="231.0" text="Uzytkownik" />
-                                    <TableColumn fx:id="colBorrowedAuthor" minWidth="0.0" prefWidth="183.0" text="Autor" />
-                                    <TableColumn fx:id="colBorrowedTitle" prefWidth="219.0" text="Tytul" />
-                                  <TableColumn fx:id="colBorrowDate" prefWidth="113.0" text="Data Wypozyczenia" />
+                                  <TableColumn fx:id="colBorrowedUser" prefWidth="231.0" text="User" />
+                                    <TableColumn fx:id="colBorrowedAuthor" minWidth="0.0" prefWidth="183.0" text="Author" />
+                                    <TableColumn fx:id="colBorrowedTitle" prefWidth="219.0" text="Title" />
+                                  <TableColumn fx:id="colBorrowDate" prefWidth="113.0" text="Borrowed Date" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="buttonZwrocKsiazki" mnemonicParsing="false" onAction="#returnBorrowedBooks" prefHeight="25.0" prefWidth="200.0" text="Zwróć Zaznaczone" GridPane.columnIndex="5" GridPane.rowIndex="7" />
-                              <Button fx:id="buttonWypozyczoneUzytkownika" mnemonicParsing="false" onAction="#searchForBorrowedByUser" text="Szukaj po uzytkowniku" GridPane.columnIndex="3" />
-                              <TextField fx:id="tfFirstNameBorrower" promptText="Imię użytkownika" />
-                              <TextField fx:id="tfLastNameBorrower" prefHeight="25.0" prefWidth="196.0" promptText="Nazwisko Uzytkownika" GridPane.columnIndex="2" />
-                              <Button fx:id="buttonWszystkieWypozyczone" mnemonicParsing="false" onAction="#searchForBorrowed" prefWidth="200.0" text="WSZYSTKIE WYPOZYCZONE" GridPane.columnIndex="5" />
+                              <Button fx:id="buttonZwrocKsiazki" mnemonicParsing="false" onAction="#returnBorrowedBooks" prefHeight="25.0" prefWidth="200.0" text="Retrun Selected" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                              <Button fx:id="buttonWypozyczoneUzytkownika" mnemonicParsing="false" onAction="#searchForBorrowedByUser" prefHeight="25.0" prefWidth="153.0" text="Search By User" GridPane.columnIndex="3" />
+                              <TextField fx:id="tfFirstNameBorrower" promptText="User's First Name" />
+                              <TextField fx:id="tfLastNameBorrower" prefHeight="25.0" prefWidth="196.0" promptText="User's Last Name" GridPane.columnIndex="2" />
+                              <Button fx:id="buttonWszystkieWypozyczone" mnemonicParsing="false" onAction="#searchForBorrowed" prefWidth="200.0" text="ALL BORROWED" GridPane.columnIndex="5" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
                </content>
             </Tab>
-            <Tab text="Zarzadzaj Biblioteką">
+            <Tab text="Manage">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -140,9 +140,9 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="153.0" text="Dane użytkownika:" GridPane.columnIndex="1" />
-                              <TextField fx:id="tfUserFirstName" promptText="Imie" GridPane.columnIndex="3" />
-                              <TextField fx:id="tfUserLastName" promptText="Nazwisko" GridPane.columnIndex="5" />
+                              <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="153.0" text="User's data:" GridPane.columnIndex="1" />
+                              <TextField fx:id="tfUserFirstName" promptText="First Name" GridPane.columnIndex="3" />
+                              <TextField fx:id="tfUserLastName" promptText="Last Name" GridPane.columnIndex="5" />
                               <Button fx:id="btnAddUser" mnemonicParsing="false" onAction="#addUser" prefWidth="150.0" text="ADD" GridPane.columnIndex="8" />
                               <ComboBox fx:id="comboBox" prefWidth="150.0" promptText="gender:" GridPane.columnIndex="6">
                                <items>
@@ -152,33 +152,32 @@
                                    </FXCollections>
                                </items>
                               </ComboBox>
-                              <Button mnemonicParsing="false" onAction="#openAddUserWindow" prefWidth="150.0" text="DODAJ" GridPane.columnIndex="8" GridPane.rowIndex="2" />
-                              <TextField promptText="Tytul Ksiazki" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <TextField promptText="Imię Autora" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                              <ComboBox prefWidth="150.0" promptText="Gatunek" GridPane.columnIndex="6" GridPane.rowIndex="2">
+                              <Button mnemonicParsing="false" onAction="#openAddUserWindow" prefWidth="150.0" text="ADD" GridPane.columnIndex="8" GridPane.rowIndex="2" />
+                              <TextField promptText="Title" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField promptText="Author's First Name" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <ComboBox prefWidth="150.0" promptText="Genre" GridPane.columnIndex="6" GridPane.rowIndex="2">
                                <items>
                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="BAJKA" />
-                                       <String fx:value="BIOGRAFIA" />
-                                       <String fx:value="DRAMAT" />
-                                       <String fx:value="HISTORYCZNA" />
+                                       <String fx:value="ADVENTURE" />
+                                       <String fx:value="BIOGRAPHY" />
+                                       <String fx:value="CLASSIC" />
+                                       <String fx:value="COMIC" />
+                                       <String fx:value="DRAMA" />
+                                       <String fx:value="HISTORIC" />
                                        <String fx:value="HORROR" />
-                                       <String fx:value="KLASYKA" />
-                                       <String fx:value="KOMIKS" />
-                                       <String fx:value="OBYCZAJ" />
-                                       <String fx:value="POEZJA" />
-                                       <String fx:value="POZOSTALE" />
-                                       <String fx:value="PRZYGODA" />
-                                       <String fx:value="ROMANS" />
-                                       <String fx:value="SATYRA" />
+                                       <String fx:value="POETRY" />
+                                       <String fx:value="ROMANCE" />
+                                       <String fx:value="SATIRE" />
                                        <String fx:value="SCIFI" />
+                                       <String fx:value="SCIENTIFIC" />
                                        <String fx:value="THRILLER" />
+                                       <String fx:value="OTHER" />
                                    </FXCollections>
                                </items>
                                </ComboBox>
-                              <TextField promptText="Nazwisko Autora" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                              <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="83.0" text="Ksiazka:" GridPane.rowIndex="2" />
-                              <TextField promptText="rok Wydania" GridPane.columnIndex="7" GridPane.rowIndex="2" />
+                              <TextField promptText="Author's Last Name" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                              <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="83.0" text="Book" GridPane.rowIndex="2" />
+                              <TextField promptText="year" GridPane.columnIndex="7" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                      </children>
