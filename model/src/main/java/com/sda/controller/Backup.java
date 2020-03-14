@@ -18,9 +18,15 @@ import com.sda.model.User;
 
 public class Backup {
 
-    public static void readUsersFromFile(Library library) throws JAXBException {
+    ClassLoader classLoader;
 
-        File file = new File("./allUsers.xml");
+    public Backup() {
+        this.classLoader = Backup.class.getClassLoader();
+    }
+
+    public void readUsersFromFile(Library library) throws JAXBException {
+
+        File file = new File(classLoader.getResource("allUsers.xml").getFile());
         createFile(file);
 
         JAXBContext jaxbContext = JAXBContext.newInstance(AllUsers.class);
@@ -33,38 +39,44 @@ public class Backup {
         }
     }
 
-    public static void readBooksFromFile(Library library) throws JAXBException {
+    public void readBooksFromFile(Library library) throws JAXBException {
+        try {
+            File file = new File(classLoader.getResource("allBooks.xml").getFile());
+            createFile(file);
 
-        File file = new File("./allBooks.xml");
-        createFile(file);
+            JAXBContext jaxbContext = JAXBContext.newInstance(AllBooks.class);
 
-        JAXBContext jaxbContext = JAXBContext.newInstance(AllBooks.class);
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            AllBooks allBooks = (AllBooks) jaxbUnmarshaller.unmarshal(file);
 
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        AllBooks allBooks = (AllBooks) jaxbUnmarshaller.unmarshal(file);
-
-        for (Book book : allBooks.getBooks()) {
-            library.addBook(book);
-        }
-
-    }
-
-    public static void readRegistryFromFile(Library library) throws JAXBException {
-
-        File file = new File("./registry.xml");
-        createFile(file);
-        JAXBContext jaxbContext = JAXBContext.newInstance(Registry.class);
-
-        Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Registry registry = (Registry) jaxbUnmarshaller.unmarshal(file);
-        if (registry.getRegEntries().size() > 0) {
-            for (RegEntry le : registry.getRegEntries()) {
-                library.addRegEntry(le);
+            for (Book book : allBooks.getBooks()) {
+                library.addBook(book);
             }
+        } catch (Exception e) {
+            throw new IllegalStateException("Unable to load Books from file", e);
         }
     }
 
-    private static void createFile(File file) {
+    public void readRegistryFromFile(Library library) throws JAXBException {
+        try {
+            File file = new File(classLoader.getResource("registry.xml").getFile());
+            createFile(file);
+            JAXBContext jaxbContext = JAXBContext.newInstance(Registry.class);
+
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            Registry registry = (Registry) jaxbUnmarshaller.unmarshal(file);
+            if (!registry.getRegEntries().isEmpty()) {
+                for (RegEntry le : registry.getRegEntries()) {
+                    library.addRegEntry(le);
+                }
+            }
+        } catch (Exception e) {
+            throw new IllegalStateException("Unable to load Registry from file", e);
+        }
+    }
+
+    private void createFile(File file) {
+
         if (!file.exists())
             try {
                 file.getParentFile().mkdirs();
@@ -80,7 +92,7 @@ public class Backup {
 
         try {
             saveToFile(allUsers);
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -91,7 +103,7 @@ public class Backup {
 
         try {
             saveToFile(registry);
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -102,12 +114,12 @@ public class Backup {
 
         try {
             saveToFile(allBooks);
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void saveToFile(Object o) throws JAXBException {
+    private void saveToFile(Object o) {
         String[] parts = o.getClass().toString().toLowerCase().split("\\.");
 
         File file = new File(String.format(".\\%s.xml", parts[parts.length - 1]));
@@ -117,10 +129,9 @@ public class Backup {
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             jaxbMarshaller.marshal(o, file);
 
-        } catch (JAXBException e) {
+        } catch (Exception e) {
+
             e.printStackTrace();
         }
-
     }
-
 }

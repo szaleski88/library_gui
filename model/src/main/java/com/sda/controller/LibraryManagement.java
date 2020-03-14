@@ -16,6 +16,7 @@ import com.sda.search.BinarySearch;
 public class LibraryManagement {
 
     private static Library library;
+    private static Backup backup= new Backup();
 
     public static Library getLibrary() {
         return library;
@@ -24,11 +25,11 @@ public class LibraryManagement {
     public static void initLibrary() {
         library = new Library();
         try {
-            Backup.readBooksFromFile(library);
-            Backup.readUsersFromFile(library);
-            Backup.readRegistryFromFile(library);
+            backup.readBooksFromFile(library);
+            backup.readUsersFromFile(library);
+            backup.readRegistryFromFile(library);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
     }
 

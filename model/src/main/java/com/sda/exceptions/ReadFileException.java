@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class ReadFileException extends IOException {
 
-    private String fileName;
+    private final String fileName;
 
     public ReadFileException(String fileName) {
         this.fileName = fileName;
